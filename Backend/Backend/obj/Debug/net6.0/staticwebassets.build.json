@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "n5xgAQ6zUIaWw0GRiBAnxS+iKccCeaRf+F00sBYdNq4=",
-  "Source": "Backend",
-  "BasePath": "_content/Backend",
+  "Hash": "xMPgI6/j5CWBiXEHssiP581xt8abmUSNXAYtRvS6fNc=",
+  "Source": "WepAPI",
+  "BasePath": "_content/WepAPI",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],

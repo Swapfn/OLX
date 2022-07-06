@@ -213,9 +213,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\ITI\\.NET\\OLX\\Backend\\Backend\\Backend.csproj",
-      "projectName": "Backend",
-      "projectPath": "E:\\ITI\\.NET\\OLX\\Backend\\Backend\\Backend.csproj",
+      "projectUniqueName": "E:\\ITI\\.NET\\OLX\\Backend\\Backend\\WepAPI.csproj",
+      "projectName": "WepAPI",
+      "projectPath": "E:\\ITI\\.NET\\OLX\\Backend\\Backend\\WepAPI.csproj",
       "packagesPath": "C:\\Users\\safwa\\.nuget\\packages\\",
       "outputPath": "E:\\ITI\\.NET\\OLX\\Backend\\Backend\\obj\\",
       "projectStyle": "PackageReference",
