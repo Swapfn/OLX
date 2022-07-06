@@ -4,5 +4,5 @@ Backend/Backend/obj/Debug/net6.0/Backend.assets.cache
 ################################################################################
 
 /.vs
-/Backend/.vs
+/Backend/.vs/*
 /Frontend/.vscode
