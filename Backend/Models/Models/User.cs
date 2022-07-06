@@ -19,7 +19,7 @@ namespace Models.Models
         public int RoleId { set; get; }
         public Role Role { get; set; }
         [ForeignKey("Location")]
-        public Location LocationId { set; get; }
+        public int LocationId { set; get; }
         public Location Location { get; set; }
     }
 }
