@@ -13,8 +13,14 @@ namespace Models.Models
         public string LName { set; get; }
         public int Phone { set; get; }
         public string Email { set; get; }
-        [PasswordPropertyText(true)]
-        public string Password { set; get; }
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
+        [Compare("Password")]
+        [NotMapped]
+        public string ConfirmPassword { get; set; }
         [ForeignKey("Role")]
         public int RoleId { set; get; }
         public Role Role { get; set; }
