@@ -5,10 +5,10 @@ namespace Models.Models
 {
     public class Role
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[Key]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RoleId { set; get; }
-        public string Name { set; get; }
+        public string RoleName { set; get; }
         public List<User> Users { get; set; }
 
         public Role()

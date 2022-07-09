@@ -5,13 +5,24 @@ namespace Models.Models
 {
     public class Post
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[Key]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PostId { set; get; }
-        public List<Image> Images { set; get; }
+        public string Title { set; get; }
+        public string Description { set; get; }
+        public DateTime CreatedAt { set; get; }
+        public double Price { set; get; }
+        public bool IsNew { set; get; }
+        public int? SubCategoryId { set; get; }
+        public SubCategory SubCategory { set; get; }
+        public int? UserID { set; get; }
+        public User User { set; get; }
+        public int? LocationId { set; get; }
+        public Location Location { set; get; }
+        public List<PostImage> PostImages { set; get; }
         public Post()
         {
-            Images = new List<Image>();
+            PostImages = new List<PostImage>();
         }
 
     }

@@ -13,7 +13,7 @@ namespace Data
         public DbSet<Role> Roles { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
-        public DbSet<Image> Images { get; set; }
+        public DbSet<PostImage> Images { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Post> Posts { get; set; }
     }

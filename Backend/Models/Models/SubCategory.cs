@@ -10,11 +10,11 @@ namespace Models.Models
 {
     public class SubCategory
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[Key]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SubCategoryID { get; set; }
         public string SubCategoryName { get; set; }
-        [ForeignKey("Category")]
+        //[ForeignKey("Category")]
         public int CategoryID { get; set; }
         public Category Category { get; set; }
 

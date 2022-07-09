@@ -5,8 +5,8 @@ namespace Models.Models
 {
     public class Category
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[Key]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }
         public List<SubCategory> SubCategories { get; set; }
