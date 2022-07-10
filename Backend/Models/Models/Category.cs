@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models.Models
 {
-    public class Category
+    public class Category : BaseModel
     {
         //[Key]
         //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
