@@ -4,9 +4,9 @@ using Models.Models;
 
 namespace Data
 {
-    public class DBEntities : DbContext
+    public class ApplicationDbContext : DbContext
     {
-        public DBEntities(DbContextOptions options) : base(options)
+        public ApplicationDbContext(DbContextOptions options) : base(options)
         {
         }
 
