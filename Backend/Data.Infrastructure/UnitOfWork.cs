@@ -3,14 +3,14 @@
     public class UnitOfWork : IUnitOfWork
     {
         private readonly IDbFactory dbFactory;
-        private DBEntities dbContext;
+        private ApplicationDbContext dbContext;
 
         public UnitOfWork(IDbFactory dbFactory)
         {
             this.dbFactory = dbFactory;
         }
 
-        public DBEntities DbContext
+        public ApplicationDbContext DbContext
         {
             get { return dbContext ?? (dbContext = dbFactory.Init()); }
         }

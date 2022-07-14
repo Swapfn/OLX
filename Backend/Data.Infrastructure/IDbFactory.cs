@@ -2,6 +2,6 @@
 {
     public interface IDbFactory : IDisposable
     {
-        DBEntities Init();
+        ApplicationDbContext Init();
     }
 }

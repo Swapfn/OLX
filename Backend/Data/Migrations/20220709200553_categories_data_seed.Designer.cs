@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Migrations
 {
-    [DbContext(typeof(DBEntities))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20220709200553_categories_data_seed")]
     partial class categories_data_seed
     {

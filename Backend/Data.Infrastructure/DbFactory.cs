@@ -5,14 +5,14 @@ namespace Data.Infrastructure
 {
     public class DbFactory : Disposable, IDbFactory
     {
-        DBEntities dbContext;
+        ApplicationDbContext dbContext;
         private readonly IConfiguration Config;
 
         public DbFactory(IConfiguration configuration)
         {
             Config = configuration;
         }
-        public DBEntities Init()
+        public ApplicationDbContext Init()
         {
             return dbContext ?? (dbContext = CreateDbContext());
         }
@@ -23,15 +23,15 @@ namespace Data.Infrastructure
                 dbContext.Dispose();
         }
 
-        public DBEntities CreateDbContext()
+        public ApplicationDbContext CreateDbContext()
         {
-            var optionsBuilder = new DbContextOptionsBuilder<DBEntities>();
+            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
             string connectionString = Config.GetConnectionString("OLXDbConnectionStrings");
 
             optionsBuilder.UseSqlServer(connectionString);
 
 
-            return new DBEntities(optionsBuilder.Options);
+            return new ApplicationDbContext(optionsBuilder.Options);
         }
     }
 }

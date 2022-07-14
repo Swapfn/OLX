@@ -5,7 +5,7 @@ namespace Data.Infrastructure
     public abstract class BaseRepository<T> where T : BaseModel
     {
         #region Properties
-        private DBEntities dataContext;
+        private ApplicationDbContext dataContext;
         private readonly DbSet<T> dbSet;
 
         protected IDbFactory DbFactory
@@ -14,7 +14,7 @@ namespace Data.Infrastructure
             private set;
         }
 
-        protected DBEntities DbContext
+        protected ApplicationDbContext DbContext
         {
             get { return dataContext ?? (dataContext = DbFactory.Init()); }
         }
