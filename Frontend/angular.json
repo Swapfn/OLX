@@ -5,7 +5,11 @@
   "projects": {
     "Frontend": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -23,6 +27,8 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -62,6 +68,11 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "ssl": true,
+            "sslCert": "./ssl/server.crt",
+            "sslKey": "./ssl/server.key"
+          },
           "configurations": {
             "production": {
               "browserTarget": "Frontend:build:production"
@@ -97,5 +108,6 @@
         }
       }
     }
-  }
+  },
+  "defaultProject": "Frontend"
 }
