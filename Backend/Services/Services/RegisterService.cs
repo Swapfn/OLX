@@ -25,7 +25,10 @@ namespace Services
                 UserName = model.Username,
                 Email = model.Email,
                 // snapshot of current user credientials, if they change, security stamp will change
-                SecurityStamp = Guid.NewGuid().ToString()
+                SecurityStamp = Guid.NewGuid().ToString(),
+                FName = model.FName,
+                LName = model.LName
+                
             };
 
             // bind user and role

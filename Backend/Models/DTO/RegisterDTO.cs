@@ -13,5 +13,11 @@ namespace Models.DTO
 
         [Required(ErrorMessage = "Password is required")]
         public string? Password { get; set; }
+
+        [Required(ErrorMessage = "First Name is required")]
+        public string? FName { get; set; }
+
+        [Required(ErrorMessage = "Last Name is required")]
+        public string? LName { get; set; }
     }
 }
