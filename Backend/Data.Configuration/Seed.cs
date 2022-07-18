@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Models.Models;
-using Data;
 
 
 namespace Data.Configuration
@@ -13,11 +12,15 @@ namespace Data.Configuration
            RoleManager<ApplicationRole> roleManager)
         {
 
+            // check if contents in the user table, if not continue
+
             if (await userManager.Users.AnyAsync()) return;
             
-            // to be changed later
+            // to be changed later, seed the categories if no users exists
             CategoryConfigration categories = new();
 
+
+            // create roles
             var roles = new List<ApplicationRole>
             {
                 new ApplicationRole
@@ -32,6 +35,8 @@ namespace Data.Configuration
                 },
             };
 
+
+            // create roles
             var users = new List<ApplicationUser>
             {
                 new ApplicationUser
@@ -57,11 +62,14 @@ namespace Data.Configuration
             };
 
 
+            // save roles to db
             foreach (var role in roles)
             {
                 await roleManager.CreateAsync(role);
             }
 
+
+            // save users to db and append roles to them
             foreach (var user in users)
             {
                     user.UserName = user.UserName.ToLower();
