@@ -10,7 +10,8 @@ namespace WebAPI
         /// <param name="servicesCollection"></param>
         public static void RegisterRepositories(IServiceCollection servicesCollection)
         {
-            List<Type> repoAssemblyTypes = Assembly.Load("Data.Repositories").ExportedTypes.Where(a => a.Name.ToLower().EndsWith("repository")).ToList();
+            List<Type> repoAssemblyTypes = Assembly.Load("Data.Repositories").ExportedTypes.Where(a 
+                => a.Name.ToLower().EndsWith("repository")).ToList();
             //get service interfaces
             List<Type> repoInterfaces = repoAssemblyTypes.Where(a => a.IsInterface).ToList();
             //get service implementation
@@ -24,7 +25,8 @@ namespace WebAPI
         /// <param name="servicesCollection"></param>
         public static void RegisterServices(IServiceCollection servicesCollection)
         {
-            List<Type> serviceAssemblyTypes = Assembly.Load("Services").ExportedTypes.Where(a => a.Name.ToLower().EndsWith("service")).ToList();
+            List<Type> serviceAssemblyTypes = Assembly.Load("Services").ExportedTypes.Where(a 
+                => a.Name.ToLower().EndsWith("service")).ToList();
             //get service interfaces
             List<Type> serviceInterfaces = serviceAssemblyTypes.Where(a => a.IsInterface).ToList();
             //get service implementation
@@ -40,7 +42,8 @@ namespace WebAPI
         /// <param name="servicesCollection"></param>
         public static void RegisterMappers(IServiceCollection servicesCollection)
         {
-            List<Type> mapperAssemblyTypes = Assembly.Load("Mapper").ExportedTypes.Where(a => a.Name.ToLower().EndsWith("mapper")).ToList();
+            List<Type> mapperAssemblyTypes = Assembly.Load("Mapper").ExportedTypes.Where(a 
+                => a.Name.ToLower().EndsWith("mapper")).ToList();
             //get service interfaces
             List<Type> mapperInterfaces = mapperAssemblyTypes.Where(a => a.IsInterface).ToList();
             //get service implementation
