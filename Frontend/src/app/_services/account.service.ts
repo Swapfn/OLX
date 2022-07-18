@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, ReplaySubject } from 'rxjs';
+import { map, Observable, ReplaySubject } from 'rxjs';
 import { User } from '../_models/user';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class AccountService {
 
   constructor(private http : HttpClient) { }
 
-  login(model : any) {
+  login(model : any) :Observable<User>{
     return this.http.post(this.baseUrl + 'login',model).pipe(
       map((response : User) => {
         const user = response;
@@ -21,6 +21,7 @@ export class AccountService {
           localStorage.setItem("user",JSON.stringify(user));
           this.currentUserSource.next(user);
         }
+        return user;
       })
     )
   }
