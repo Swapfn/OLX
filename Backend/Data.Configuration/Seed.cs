@@ -1,16 +1,22 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Models.Models;
+using Data;
 
 
 namespace Data.Configuration
 {
     public class Seed
     {
+
         public static async Task SeedUsers(UserManager<ApplicationUser> userManager,
            RoleManager<ApplicationRole> roleManager)
         {
+
             if (await userManager.Users.AnyAsync()) return;
+            
+            // to be changed later
+            CategoryConfigration categories = new();
 
             var roles = new List<ApplicationRole>
             {
