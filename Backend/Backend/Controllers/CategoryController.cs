@@ -4,7 +4,7 @@ using Models.DTO;
 
 namespace WepAPI.Controllers
 {
-    public class CategoryController : Controller
+    public class CategoryController : BaseController
     {
         private readonly ICategoryService _categoryService;
         public CategoryController(ICategoryService categoryService)
@@ -25,7 +25,7 @@ namespace WepAPI.Controllers
         }
         [HttpPost]
         [Route("/categories")]
-        public IActionResult Add([FromBody] CategoryDTO categoryDTO)
+        public IActionResult Add(CategoryDTO categoryDTO)
         {
             _categoryService.Add(categoryDTO);
             _categoryService.SaveCategory();
@@ -33,7 +33,7 @@ namespace WepAPI.Controllers
         }
         [HttpPut]
         [Route("/categories/{id}")]
-        public IActionResult Update([FromRoute] int id, [FromBody] CategoryDTO categoryDTO)
+        public IActionResult Update(int id, CategoryDTO categoryDTO)
         {
             _categoryService.Update(id, categoryDTO);
             _categoryService.SaveCategory();
@@ -41,7 +41,7 @@ namespace WepAPI.Controllers
         }
         [HttpDelete]
         [Route("/categories/{id}")]
-        public IActionResult Delete([FromRoute] int id)
+        public IActionResult Delete(int id)
         {
             _categoryService.Delete(id);
             _categoryService.SaveCategory();
