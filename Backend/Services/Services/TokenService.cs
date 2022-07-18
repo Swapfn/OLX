@@ -1,9 +1,7 @@
-﻿
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Models.Models;
-using System.Collections;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -28,7 +26,6 @@ namespace Services
         /// </summary>
         /// <param name="user"></param>
         /// <param name="roles"></param>
-        /// <param name="userManager"></param>
         /// <param name="roleManager"></param>
         /// <returns></returns>
         public async Task<SecurityToken> CreateToken(ApplicationUser user, IList<string> roles,

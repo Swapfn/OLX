@@ -25,7 +25,6 @@ namespace Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new CategoryConfigration());
-            //modelBuilder.ApplyConfiguration(new RolesConfiguration());
 
             base.OnModelCreating(modelBuilder);
 
@@ -41,12 +40,6 @@ namespace Data
                 .WithOne(u => u.Role)
                 .HasForeignKey(ur => ur.RoleId)
                 .IsRequired();
-
-            //modelBuilder.Entity<ApplicationUserRole>()
-            //    .HasMany(ur => ur.UserId)
-            //    .WithOne(u => u.Role)
-            //    .HasForeignKey(ur => ur.RoleId)
-            //    .IsRequired();
 
         }
         public void Commit()

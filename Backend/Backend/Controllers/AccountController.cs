@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Models.DTO;
 using Models.Models;
@@ -11,19 +10,17 @@ namespace WepAPI.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
-        private readonly IConfiguration _configuration;
-        private IRegisterService _reg;
-        private ITokenService _token;
-        private ILoginService _login;
+        private readonly IRegisterService _reg;
+        private readonly ITokenService _token;
+        private readonly ILoginService _login;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             RoleManager<ApplicationRole> roleManager,
-            IConfiguration configuration, IRegisterService reg, ITokenService token, ILoginService login)
+            IRegisterService reg, ITokenService token, ILoginService login)
         {
             _userManager = userManager;
             _roleManager = roleManager;
-            _configuration = configuration;
             _reg = reg;
             _token = token;
             _login = login;
@@ -41,7 +38,7 @@ namespace WepAPI.Controllers
 
         [HttpPost]
         [Route("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterDTO model)
+        public async Task<IActionResult> Register(RegisterDTO model)
         {
             return await _reg.RegisterAsync(model, _userManager);
 
