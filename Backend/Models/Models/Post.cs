@@ -16,7 +16,7 @@ namespace Models.Models
         public int? SubCategoryId { set; get; }
         public SubCategory SubCategory { set; get; }
         public int? UserID { set; get; }
-        public User User { set; get; }
+        public ApplicationUser User { set; get; }
         public int? LocationId { set; get; }
         public Location Location { set; get; }
         public List<PostImage> PostImages { set; get; }

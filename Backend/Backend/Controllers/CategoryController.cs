@@ -12,19 +12,19 @@ namespace WepAPI.Controllers
             _categoryService = categoryService;
         }
         [HttpGet]
-        [Route("api/categories")]
+        [Route("/categories")]
         public IEnumerable<CategoryDTO> GetAll()
         {
             return _categoryService.GetAll();
         }
         [HttpGet]
-        [Route("api/categories/{id}")]
+        [Route("/categories/{id}")]
         public CategoryDTO GetById(int id)
         {
             return _categoryService.GetById(id);
         }
         [HttpPost]
-        [Route("api/categories")]
+        [Route("/categories")]
         public IActionResult Add([FromBody] CategoryDTO categoryDTO)
         {
             _categoryService.Add(categoryDTO);
@@ -32,7 +32,7 @@ namespace WepAPI.Controllers
             return Ok(categoryDTO);
         }
         [HttpPut]
-        [Route("api/categories/{id}")]
+        [Route("/categories/{id}")]
         public IActionResult Update([FromRoute] int id, [FromBody] CategoryDTO categoryDTO)
         {
             _categoryService.Update(id, categoryDTO);
@@ -40,7 +40,7 @@ namespace WepAPI.Controllers
             return Ok(categoryDTO);
         }
         [HttpDelete]
-        [Route("api/categories/{id}")]
+        [Route("/categories/{id}")]
         public IActionResult Delete([FromRoute] int id)
         {
             _categoryService.Delete(id);
