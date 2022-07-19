@@ -16,7 +16,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api",
+      //"launchUrl": "api",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -24,7 +24,7 @@
     "backend": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api",
+      //"launchUrl": "api",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
@@ -33,7 +33,7 @@
     "WebAPI": {
       "commandName": "IIS",
       "launchBrowser": true,
-      "launchUrl": "api",
+      //"launchUrl": "api",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

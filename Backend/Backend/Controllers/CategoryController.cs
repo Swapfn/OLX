@@ -4,7 +4,7 @@ using Models.DTO;
 
 namespace WepAPI.Controllers
 {
-    public class CategoryController : Controller
+    public class CategoryController : BaseController
     {
         private readonly ICategoryService _categoryService;
         public CategoryController(ICategoryService categoryService)
@@ -12,36 +12,36 @@ namespace WepAPI.Controllers
             _categoryService = categoryService;
         }
         [HttpGet]
-        [Route("api/categories")]
+        [Route("/categories")]
         public IEnumerable<CategoryDTO> GetAll()
         {
             return _categoryService.GetAll();
         }
         [HttpGet]
-        [Route("api/categories/{id}")]
+        [Route("/categories/{id}")]
         public CategoryDTO GetById(int id)
         {
             return _categoryService.GetById(id);
         }
         [HttpPost]
-        [Route("api/categories")]
-        public IActionResult Add([FromBody] CategoryDTO categoryDTO)
+        [Route("/categories")]
+        public IActionResult Add(CategoryDTO categoryDTO)
         {
             _categoryService.Add(categoryDTO);
             _categoryService.SaveCategory();
             return Ok(categoryDTO);
         }
         [HttpPut]
-        [Route("api/categories/{id}")]
-        public IActionResult Update([FromRoute] int id, [FromBody] CategoryDTO categoryDTO)
+        [Route("/categories/{id}")]
+        public IActionResult Update(int id, CategoryDTO categoryDTO)
         {
             _categoryService.Update(id, categoryDTO);
             _categoryService.SaveCategory();
             return Ok(categoryDTO);
         }
         [HttpDelete]
-        [Route("api/categories/{id}")]
-        public IActionResult Delete([FromRoute] int id)
+        [Route("/categories/{id}")]
+        public IActionResult Delete(int id)
         {
             _categoryService.Delete(id);
             _categoryService.SaveCategory();
