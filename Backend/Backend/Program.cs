@@ -26,10 +26,13 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContextPool<ApplicationDbContext>(option
     => option.UseSqlServer(builder.Configuration.GetConnectionString("OLXDbConnectionStrings")));
 
-
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
+
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 //General
 builder.Services.AddScoped<DbContext, ApplicationDbContext>();
@@ -56,6 +59,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 ConfigureService.RegisterRepositories(builder.Services);
 ConfigureService.RegisterServices(builder.Services);
 ConfigureService.RegisterMappers(builder.Services);
+
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
