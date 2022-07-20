@@ -12,13 +12,17 @@ using WebAPI;
 var builder = WebApplication.CreateBuilder(args);
 
 // Configuration
-ConfigurationManager configuration = builder.Configuration;
+//ConfigurationManager configuration = builder.Configuration;
 
 // Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerDocument();
+
+
+// DbContext
 builder.Services.AddDbContextPool<ApplicationDbContext>(option
     => option.UseSqlServer(builder.Configuration.GetConnectionString("OLXDbConnectionStrings")));
 
@@ -40,11 +44,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"])),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"])),
         ValidateIssuer = true,
         ValidateAudience = true,
-        ValidIssuer = configuration["JWT:ValidIssuer"],
-        ValidAudience = configuration["JWT:ValidAudiance"]
+        ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
+        ValidAudience = builder.Configuration["JWT:ValidAudiance"]
     };
 });
 
@@ -58,6 +62,8 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
+    app.UseOpenApi();
+    app.UseSwaggerUi3();
 }
 
 app.UseHttpsRedirection();
