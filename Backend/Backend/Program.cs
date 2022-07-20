@@ -22,10 +22,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddDbContextPool<ApplicationDbContext>(option
     => option.UseSqlServer(builder.Configuration.GetConnectionString("OLXDbConnectionStrings")));
 
-
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
+
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 //General
 builder.Services.AddScoped<DbContext, ApplicationDbContext>();
@@ -52,6 +55,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 ConfigureService.RegisterRepositories(builder.Services);
 ConfigureService.RegisterServices(builder.Services);
 ConfigureService.RegisterMappers(builder.Services);
+
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerDocument(o => o.Title = "API");
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -59,6 +67,10 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
+
+// Add your NSwag Extension here
+app.UseOpenApi();
+app.UseSwaggerUi3();
 
 app.UseHttpsRedirection();
 
