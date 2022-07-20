@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { FormsModule } from '@angular/forms';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -12,6 +14,9 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { RegisterComponent } from './register/register.component';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { NavComponent } from './nav/nav.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { LocationFilterComponent } from './location-filter/location-filter.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +25,9 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     NavComponent,
     RegisterComponent,
     ProfileEditComponent
+    NavComponent,
+    HomePageComponent,
+    LocationFilterComponent
   ],
   imports: [
     BrowserModule,
@@ -29,6 +37,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     FormsModule,
     BsDropdownModule.forRoot(),
     ModalModule.forRoot()
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
