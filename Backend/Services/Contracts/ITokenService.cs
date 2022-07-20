@@ -9,5 +9,8 @@ namespace Services
     {
         public Task<SecurityToken> CreateToken(ApplicationUser user, IList<string> roles,
             RoleManager<ApplicationRole> rolemanager);
+
+        public int VerifyToken(string token);
+
     }
 }

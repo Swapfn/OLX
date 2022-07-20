@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Models.Models;
@@ -67,5 +68,25 @@ namespace Services
             // return written token
             return token;
         }
-    }
+
+
+        public int VerifyToken(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            tokenHandler.ValidateToken(token, new TokenValidationParameters
+            {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = _key,
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ClockSkew = TimeSpan.Zero
+            }, out SecurityToken validatedToken);
+
+            var jwtToken = (JwtSecurityToken)validatedToken;
+            var userId = int.Parse(jwtToken.Claims.First(x => x.Type == "nameid").Value);
+
+
+            return userId;
+        }
+}
 }
