@@ -1,87 +1,47 @@
-<!-- <div class="global">
-  <app-nav (locationselect)="onLocationChange($event)" (searchText)="OnsearchTextChange($event)"></app-nav>
+<div class="global">
+  <app-nav (locationselect)="onLocationChange($event)" 
+  (searchText)="OnsearchTextChange($event)">
+</app-nav>
 
 
-</div> -->
+</div>
 
 
-<div class="row row-cols-2 row-cols-md-4 g-4 m-3">
+<div class=" global row row-cols-2 row-cols-md-4 g-4 m-3">
 
-  <ng-container *ngFor="let i of Items">
+  <!-- <ng-container *ngFor="let i of Items">
 
-    <ng-container *ngIf="searchText === ''|| i.title.toLowerCase().includes(searchText)">
+    <ng-container *ngIf="searchText === ''|| i.title.toLowerCase().includes(searchText)"> -->
 
-      <div *ngIf="locationchanged === 'Egypt'|| locationchanged===i.city">
+      <!-- <div *ngIf="locationchanged === 'Egypt'|| locationchanged===i.city"> -->
 
-        <div class="col" >
-          <div class="card" style="height:100%;">
-            <img src="{{i.photo[0].src}}" class="card-img-top" style="height:300px;" alt={{i.title}}>
+        <div  *ngFor="let i of Items" class="col" >
+          <div class="card h-100">
+            <img src="{{i.photo[0].src}}" class="card-img-top" alt={{i.title}}>
+            <div></div>
             <div class="card-body">
-              <p class="card-text">{{i.title}}</p>
+              <div class="d-flex align-items-start">
+                <p class="card-text">{{i.title}}</p>
+                <div (click)="favorite(i)" class="m-1">
+                  <i [ngClass]="Fav ? 'fa-solid fa-heart fa-lg' : 'fa-regular fa-heart fa-lg'"></i>
+                </div>
+              </div>
               <div class="d-flex align-items-center">
                 <h4 class="card-title">{{i.price}} EGP</h4>
                 <small class="card-text text-muted mx-2" *ngIf="i.nego_Price">negotaitable</small>
               </div>
               <p class="card-text"><small class="text-muted">{{i.area+" , "+i.city}}</small></p>
-              <a href="#" class=" stretched-link"></a>
+              <!-- <a href="#" class=" stretched-link"></a> -->
             </div>
           </div>
         </div>
 
-      </div>
+      <!-- </div> -->
 
-    </ng-container>
+    <!-- </ng-container>
 
-  </ng-container>
+  </ng-container> -->
 
 </div>
 
-
-
-
-
-
-
-<!-- 
-<div class="row row-cols-2 row-cols-md-4 g-4 m-3">
-
-
-
-
-
-  <div class="col">
-    <div class="card h-100">
-      <img  src="/assets/images/id1/airfryer.jpg" class="card-img-top">
-      <div class="card-body">
-        <p class="card-text">jhgdcsbdjsbducgbsudf</p>
-        <div class="d-flex align-items-center">
-          <h4 class="card-title">45677 EGP</h4>
-          <small class="card-text text-muted mx-2" >negotaitable</small>
-        </div>
-        <p class="card-text"><small class="text-muted">cairo, egypt</small></p>
-        <a href="#" class=" stretched-link"></a>
-      </div>
-    </div>
-  </div>
-
-  <div class="col">
-    <div class="card h-100">
-      <img  src="/assets/images/id2/speakers.jpg" class="card-img-top">
-      <div class="card-body">
-        <p class="card-text">jhgdcsbdjsbducgbsudf</p>
-        <div class="d-flex align-items-center">
-          <h4 class="card-title">45677 EGP</h4>
-          <small class="card-text text-muted mx-2" >negotaitable</small>
-        </div>
-        <p class="card-text"><small class="text-muted">cairo, egypt</small></p>
-        <a href="#" class=" stretched-link"></a>
-      </div>
-    </div>
-  </div>
-
-
-
-
-
-
-</div> -->
+<i class="fa-regular fa-heart"></i>

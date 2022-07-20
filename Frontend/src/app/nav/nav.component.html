@@ -1,40 +1,5 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="#">Olx</a>
-        <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <ng-container *ngIf="(accountService.currentUser$ | async)">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link1</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link2</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link3</a>
-                </li>
-            </ng-container>
-        </ul>
+<!-- Nav bar -->
 
-        <div *ngIf="(accountService.currentUser$ | async) as user" class="dropdown" dropdown>
-            <a class="dropdown-toggle text-light" dropdownToggle>Welcome user</a>
-            <div class="dropdown-menu mt-3" *dropdownMenu>
-                <a class="dropdown-item" routerLink="/profile">Edit Profile</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" (click)="logout()">Logout</a>
-            </div>
-        </div>
-
-        <form *ngIf="(accountService.currentUser$ | async) === null" #loginForm="ngForm" class="d-flex"
-            (ngSubmit)="login()" autocomplete="off">
-            <input name="username" [(ngModel)]="model.username" class="form-control me-2" type="text"
-                placeholder="Username">
-            <input name="password" [(ngModel)]="model.password" class="form-control me-2" type="password"
-                placeholder="Password">
-            <button class="btn btn-outline-success" type="submit">Login</button>
-        </form>
-    </div>
-    <!-- Nav bar -->
-    <!-- 
 <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid mx-5 px-5">
 
@@ -43,10 +8,12 @@
         </a>
 
         <div>
+            <!-- <app-location-filter></app-location-filter> -->
             <select  class="form-select input-group mx-2" aria-label="Default select example"
                 [(ngModel)]="locationSelectedValue" (change)="onlocationSelect($event.target)">
                 <option value="Egypt" hidden> Egypt </option>
-                <option value="Egypt"selected>See Ads in all Egypt </option>
+                <option value="Current location"> Current location</option>
+                <option value="Egypt">See Ads in all Egypt </option>
                 <hr class="dropdown-divider">
                 <option value={{C}} *ngFor="let C of EgyCities">{{C}}</option>
             </select>
@@ -94,4 +61,4 @@
 
     </div>
 
-</nav> -->
+</nav>

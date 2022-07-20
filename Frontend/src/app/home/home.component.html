@@ -1,48 +1,18 @@
-<div class="global">
-    <app-nav (locationselect)="onLocationChange($event)" 
-    (searchText)="OnsearchTextChange($event)">
-  </app-nav>
-  
-  
-  </div>
-  
-  
-  <div class=" global row row-cols-2 row-cols-md-4 g-4 m-3">
-  
-    <!-- <ng-container *ngFor="let i of Items">
-  
-      <ng-container *ngIf="searchText === ''|| i.title.toLowerCase().includes(searchText)"> -->
-  
-        <!-- <div *ngIf="locationchanged === 'Egypt'|| locationchanged===i.city"> -->
-  
-          <div  *ngFor="let i of Items" class="col" >
-            <div class="card h-100">
-              <img src="{{i.photo[0].src}}" class="card-img-top" alt={{i.title}}>
-              <div></div>
-              <div class="card-body">
-                <div class="d-flex align-items-start">
-                  <p class="card-text">{{i.title}}</p>
-                  <div (click)="favorite(i)" class="m-1">
-                    <i [ngClass]="Fav ? 'fa-solid fa-heart fa-lg' : 'fa-regular fa-heart fa-lg'"></i>
-                  </div>
-                </div>
-                <div class="d-flex align-items-center">
-                  <h4 class="card-title">{{i.price}} EGP</h4>
-                  <small class="card-text text-muted mx-2" *ngIf="i.nego_Price">negotaitable</small>
-                </div>
-                <p class="card-text"><small class="text-muted">{{i.area+" , "+i.city}}</small></p>
-                <!-- <a href="#" class=" stretched-link"></a> -->
-              </div>
+<div class="container mt-5">
+    <div *ngIf="!registerMode" style="text-align: center;">
+        <h1>Begin your trading journey..</h1>
+        <p class="lead">Come on in sell or buy anything in mind... all you need is to sign up!</p>
+        <div class="text-center">
+            <button (click)="registerToggle()" class="btn btn-primary btn-lg mr-2 mx-2">Register</button>
+            <button class="btn btn-info btn-lg">Learn more..</button>
+        </div>
+    </div>
+
+    <div *ngIf="registerMode" class="container">
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <app-register (cancelRegister)="cancelRegisterMode($event)" ></app-register>
             </div>
-          </div>
-  
-        <!-- </div> -->
-  
-      <!-- </ng-container>
-  
-    </ng-container> -->
-  
-  </div>
-  
-  <i class="fa-regular fa-heart"></i>
-  
+        </div>
+    </div>
+</div>

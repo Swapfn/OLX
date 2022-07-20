@@ -74,6 +74,18 @@ export class HomePageComponent implements OnInit {
 
   }
 
+  //_______________________favorite post____________________________
+
+  Fav:boolean=false;
+
+  FavPosts:object[]=[];
+
+
+  favorite(i:object){
+    this.Fav=!this.Fav;
+    this.FavPosts.push(i)
+  }
+
 
 }
 
