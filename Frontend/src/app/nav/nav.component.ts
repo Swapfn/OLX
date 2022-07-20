@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { User } from '../_models/user';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../_services/account.service';
-import { outputAst } from '@angular/compiler';
-import { Component, OnInit ,Input,EventEmitter, Output} from '@angular/core';
 
 @Component({
   selector: 'app-nav',
@@ -13,7 +11,7 @@ import { Component, OnInit ,Input,EventEmitter, Output} from '@angular/core';
 export class NavComponent implements OnInit {
   model: any = {};
 
-  constructor(public accountService: AccountService) { }
+  constructor(public accountService: AccountService, private router: Router, private toast: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -22,51 +20,56 @@ export class NavComponent implements OnInit {
     this.accountService.login(this.model).subscribe({
       next: response => {
         console.log(response);
+        this.router.navigateByUrl("/home");
       },
-      error: error => console.log(error)
+      error: error => {
+        console.log(error);
+        this.toast.error(error.error);
+      }
     })
   }
 
   logout() {
     this.accountService.logout();
+    this.router.navigateByUrl("/");
   }
 
 
-  constructor() { }
+  // constructor() { }
 
-  ngOnInit(): void {
-  }
-  //______________________Location Filter_________________________________________
-  EgyCities=["Alexandria","Awan","Asyut","Beheira","Beni Suef","Cairo","Dakahlia","Damietta",
-  "Faiyum","Gharbia","Giza","Ismailia","Kafr El Sheikh","Luxor","Matruh","Minya","Monufia","New Valley",
-  "North Sinai","Port Said","Qalyubia","Qena","Red Sea","Sharqia","Sohag","South Sinai","Suez"]
+  // ngOnInit(): void {
+  // }
+  // //______________________Location Filter_________________________________________
+  // EgyCities=["Alexandria","Awan","Asyut","Beheira","Beni Suef","Cairo","Dakahlia","Damietta",
+  // "Faiyum","Gharbia","Giza","Ismailia","Kafr El Sheikh","Luxor","Matruh","Minya","Monufia","New Valley",
+  // "North Sinai","Port Said","Qalyubia","Qena","Red Sea","Sharqia","Sohag","South Sinai","Suez"]
 
-  locationSelectedValue:string="Egypt";
+  // locationSelectedValue:string="Egypt";
 
-  @Output()
-  locationselect:EventEmitter<string> = new EventEmitter<string>();
-  
-  onlocationSelect(e:any){
-    this.locationselect.emit(this.locationSelectedValue)
-    //console.log(this.locationSelectedValue);
-  }
+  // @Output()
+  // locationselect:EventEmitter<string> = new EventEmitter<string>();
 
-
-  //________________________________Search___________________________________________
-
-  searchValue:string="";
-  
-  @Output()
-  searchText:EventEmitter<string>= new EventEmitter<string>();
-
-  OnsearchText(){
-    this.searchText.emit(this.searchValue);
-    
-  }
+  // onlocationSelect(e:any){
+  //   this.locationselect.emit(this.locationSelectedValue)
+  //   //console.log(this.locationSelectedValue);
+  // }
 
 
+  // //________________________________Search___________________________________________
+
+  // searchValue:string="";
+
+  // @Output()
+  // searchText:EventEmitter<string>= new EventEmitter<string>();
+
+  // OnsearchText(){
+  //   this.searchText.emit(this.searchValue);
+
+  // }
 
 
 
-  
+
+
+
 }
