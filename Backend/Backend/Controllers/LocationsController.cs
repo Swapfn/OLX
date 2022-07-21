@@ -34,7 +34,7 @@ namespace WepAPI.Controllers
         {
             LocationDTO locationDTO = _locationService.GetById(id);
 
-            if (locationDTO == null)
+            if (!LocationExists(id))
             {
                 return NotFound();
             }
