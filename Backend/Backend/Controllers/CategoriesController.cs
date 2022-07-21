@@ -54,9 +54,9 @@ namespace WepAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            _categoryService.Add(categoryDTO);
+            CategoryDTO result = _categoryService.Add(categoryDTO);
             _categoryService.SaveCategory();
-            return Ok(categoryDTO);
+            return Ok(result);
         }
 
         // PUT api/Categories/1
@@ -97,7 +97,7 @@ namespace WepAPI.Controllers
 
             _categoryService.Delete(id);
             _categoryService.SaveCategory();
-            return Ok();
+            return Ok("Category deleted");
         }
 
         private bool CategoryExists(int id)
