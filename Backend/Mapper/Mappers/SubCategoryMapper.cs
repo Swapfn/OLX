@@ -9,7 +9,7 @@ namespace Mapper.Mappers
         public SubCategory MapFromDTO(SubCategoryDTO subCategoryDTO)
         {
             SubCategory subCategory = new SubCategory();
-            subCategoryDTO.SubCategoryID = subCategory.SubCategoryID;
+            subCategory.SubCategoryID = subCategoryDTO.SubCategoryID;
             subCategory.SubCategoryName = subCategoryDTO.SubCategoryName;
             subCategory.CategoryID = subCategoryDTO.CategoryID;
             return subCategory;
