@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, ReplaySubject } from 'rxjs';
+import { Profile } from '../_models/profile';
 import { User } from '../_models/user';
 
 @Injectable({
@@ -44,5 +45,9 @@ export class AccountService {
   logout() {
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
+  }
+
+  update(model : Profile) {
+    return this.http.post(this.baseUrl + 'edit',model).subscribe();
   }
 }
