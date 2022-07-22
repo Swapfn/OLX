@@ -15,9 +15,9 @@ namespace Data.Configuration
             // check if contents in the user table, if not continue
 
             if (await userManager.Users.AnyAsync()) return;
-            
+
             // to be changed later, seed the categories if no users exists
-            CategoryConfigration categories = new();
+            //CategoryConfigration categories = new();
 
 
             // create roles

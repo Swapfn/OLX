@@ -15,8 +15,8 @@ namespace Models.Models
         //public int UserId { set; get; }
         public string FName { set; get; }
         public string LName { set; get; }
-        public int Phone { set; get; }
-        public string Email { set; get; }
+        //public int Phone { set; get; }
+        //public string Email { set; get; }
         //[Required]
         //[DataType(DataType.Password)]
         //public string Password { get; set; }
