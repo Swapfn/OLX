@@ -16,5 +16,16 @@ namespace Data.Repositories.Repositories
             IEnumerable<Category> result = this.DbContext.Categories.Include(x => x.SubCategories);
             return result;
         }
+
+        public Category GetCategory(int id)
+        {
+            Category result = this.DbContext.Categories.Include(x => x.SubCategories).Select(category => category).FirstOrDefault(category => category.CategoryID == id);
+            return result;
+        }
+
+        public bool IsExist(int id)
+        {
+            return this.DbContext.Categories.Any(category => category.CategoryID == id);
+        }
     }
 }

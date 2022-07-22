@@ -7,10 +7,10 @@ namespace Services
     {
         IEnumerable<CategoryDTO> GetAll();
         CategoryDTO GetById(int id);
-        Category GetCategoryById(int id);
         CategoryDTO Add(CategoryDTO categoryDTO);
         void Update(int id, CategoryDTO categoryDTO);
         void Delete(int id);
+        bool CategoryExists(int id);
         void SaveCategory();
     }
 }

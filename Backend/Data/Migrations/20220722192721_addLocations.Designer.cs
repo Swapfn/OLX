@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220718085829_usersseed_init")]
-    partial class usersseed_init
+    [Migration("20220722192721_addLocations")]
+    partial class addLocations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -331,6 +331,143 @@ namespace Data.Migrations
                     b.HasKey("LocationId");
 
                     b.ToTable("Locations");
+
+                    b.HasData(
+                        new
+                        {
+                            LocationId = 1,
+                            CityName = "Alexandria"
+                        },
+                        new
+                        {
+                            LocationId = 2,
+                            CityName = "Aswan"
+                        },
+                        new
+                        {
+                            LocationId = 3,
+                            CityName = "Asyut"
+                        },
+                        new
+                        {
+                            LocationId = 4,
+                            CityName = "Beheira"
+                        },
+                        new
+                        {
+                            LocationId = 5,
+                            CityName = "Beni Suef"
+                        },
+                        new
+                        {
+                            LocationId = 6,
+                            CityName = "Cairo"
+                        },
+                        new
+                        {
+                            LocationId = 7,
+                            CityName = "Dakahlia"
+                        },
+                        new
+                        {
+                            LocationId = 8,
+                            CityName = "Damietta"
+                        },
+                        new
+                        {
+                            LocationId = 9,
+                            CityName = "Faiyum"
+                        },
+                        new
+                        {
+                            LocationId = 10,
+                            CityName = "Gharbia"
+                        },
+                        new
+                        {
+                            LocationId = 11,
+                            CityName = "Giza"
+                        },
+                        new
+                        {
+                            LocationId = 12,
+                            CityName = "Ismailia"
+                        },
+                        new
+                        {
+                            LocationId = 13,
+                            CityName = "Kafr El Sheikh"
+                        },
+                        new
+                        {
+                            LocationId = 14,
+                            CityName = "Luxor"
+                        },
+                        new
+                        {
+                            LocationId = 15,
+                            CityName = "Matruh"
+                        },
+                        new
+                        {
+                            LocationId = 16,
+                            CityName = "Minya"
+                        },
+                        new
+                        {
+                            LocationId = 17,
+                            CityName = "Monufia"
+                        },
+                        new
+                        {
+                            LocationId = 18,
+                            CityName = "New Valley"
+                        },
+                        new
+                        {
+                            LocationId = 19,
+                            CityName = "North Sinai"
+                        },
+                        new
+                        {
+                            LocationId = 20,
+                            CityName = "Port Said"
+                        },
+                        new
+                        {
+                            LocationId = 21,
+                            CityName = "Qalyubia"
+                        },
+                        new
+                        {
+                            LocationId = 22,
+                            CityName = "Qena"
+                        },
+                        new
+                        {
+                            LocationId = 23,
+                            CityName = "Red Sea"
+                        },
+                        new
+                        {
+                            LocationId = 24,
+                            CityName = "Sharqia"
+                        },
+                        new
+                        {
+                            LocationId = 25,
+                            CityName = "Sohag"
+                        },
+                        new
+                        {
+                            LocationId = 26,
+                            CityName = "South Sinai"
+                        },
+                        new
+                        {
+                            LocationId = 27,
+                            CityName = "Suez"
+                        });
                 });
 
             modelBuilder.Entity("Models.Models.Post", b =>
