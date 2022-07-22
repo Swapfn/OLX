@@ -7,5 +7,6 @@ namespace Data.Repositories.Contracts
     {
         IEnumerable<Category> GetAllCategories();
         Category GetCategory(int id);
+        bool IsExist(int id);
     }
 }

@@ -90,7 +90,7 @@ namespace WepAPI.Controllers
             }
             _locationService.Delete(id);
             _locationService.SaveLocation();
-            return Ok();
+            return Ok("Location deleted");
         }
     }
 }

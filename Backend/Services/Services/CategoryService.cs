@@ -74,8 +74,7 @@ namespace Services
 
         public bool CategoryExists(int id)
         {
-            var category = _categoryRepository.GetById(id);
-            return category != null;
+            return _categoryRepository.IsExist(id);
         }
 
         public void SaveCategory()

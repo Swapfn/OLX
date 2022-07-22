@@ -22,5 +22,10 @@ namespace Data.Repositories.Repositories
             Category result = this.DbContext.Categories.Include(x => x.SubCategories).Select(category => category).FirstOrDefault(category => category.CategoryID == id);
             return result;
         }
+
+        public bool IsExist(int id)
+        {
+            return this.DbContext.Categories.Any(category => category.CategoryID == id);
+        }
     }
 }

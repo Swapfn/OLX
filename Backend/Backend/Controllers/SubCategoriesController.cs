@@ -13,10 +13,12 @@ namespace WepAPI.Controllers
     public class SubCategoriesController : BaseController
     {
         private readonly ISubCategoryService _subCategoryService;
+        private readonly ICategoryService _categoryService;
 
-        public SubCategoriesController(ISubCategoryService subCategoryService)
+        public SubCategoriesController(ISubCategoryService subCategoryService, ICategoryService categoryService)
         {
             _subCategoryService = subCategoryService;
+            _categoryService = categoryService;
         }
 
         // GET api/SubCategories/getByCategoryId/1
@@ -24,6 +26,11 @@ namespace WepAPI.Controllers
         [Route("getByCategoryId/{id}")]
         public IActionResult GetAllByCategoryId(int id)
         {
+            if (!_categoryService.CategoryExists(id))
+            {
+                return NotFound();
+            }
+
             IEnumerable<SubCategoryDTO> result = _subCategoryService.GetAllByCategoryId(id);
             return Ok(result);
         }
@@ -53,6 +60,11 @@ namespace WepAPI.Controllers
                 return BadRequest(ModelState);
             }
 
+            if (!_categoryService.CategoryExists(subCategoryDTO.CategoryID))
+            {
+                return NotFound();
+            }
+
             SubCategoryDTO result = _subCategoryService.Add(subCategoryDTO);
             _subCategoryService.SaveSubCategory();
             return Ok(result);
@@ -72,6 +84,11 @@ namespace WepAPI.Controllers
             if (id != subCategoryDTO.SubCategoryID)
             {
                 return BadRequest();
+            }
+
+            if (!_categoryService.CategoryExists(subCategoryDTO.CategoryID))
+            {
+                return NotFound();
             }
 
             if (!_subCategoryService.SubCategoryExists(id))
