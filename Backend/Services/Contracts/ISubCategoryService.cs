@@ -11,6 +11,7 @@ namespace Services
         SubCategoryDTO Add(SubCategoryDTO subCategoryDTO);
         void Update(int id, SubCategoryDTO subCategoryDTO);
         void Delete(int id);
+        bool SubCategoryExists(int id);
         void SaveSubCategory();
     }
 }

@@ -11,11 +11,10 @@ namespace WepAPI.Controllers
     public class LocationsController : ControllerBase
     {
         private readonly ILocationService _locationService;
-        private readonly ILocationMapper _locationMapper;
-        public LocationsController(ILocationService locationService, ILocationMapper locationMapper)
+
+        public LocationsController(ILocationService locationService)
         {
             _locationService = locationService;
-            _locationMapper = locationMapper;
         }
 
         // GET api/Locations
@@ -32,13 +31,12 @@ namespace WepAPI.Controllers
         [Route("{id}")]
         public IActionResult GetById(int id)
         {
-            LocationDTO locationDTO = _locationService.GetById(id);
-
-            if (!LocationExists(id))
+            if (!_locationService.LocationExists(id))
             {
                 return NotFound();
             }
 
+            LocationDTO locationDTO = _locationService.GetById(id);
             return Ok(locationDTO);
         }
 
@@ -71,7 +69,7 @@ namespace WepAPI.Controllers
                 return BadRequest();
             }
 
-            if (!LocationExists(id))
+            if (!_locationService.LocationExists(id))
             {
                 return NotFound();
             }
@@ -86,20 +84,13 @@ namespace WepAPI.Controllers
         [Route("{id}")]
         public IActionResult Delete(int id)
         {
-            if (!LocationExists(id))
+            if (!_locationService.LocationExists(id))
             {
                 return NotFound();
             }
             _locationService.Delete(id);
             _locationService.SaveLocation();
             return Ok();
-        }
-
-
-        private bool LocationExists(int id)
-        {
-            LocationDTO locationDTO = _locationService.GetById(id);
-            return locationDTO != null;
         }
     }
 }

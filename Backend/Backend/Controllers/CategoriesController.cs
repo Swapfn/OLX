@@ -11,14 +11,10 @@ namespace WepAPI.Controllers
     public class CategoriesController : BaseController
     {
         private readonly ICategoryService _categoryService;
-        private readonly ICategoryMapper _categoryMapper;
-        private readonly ICategoryRepository _categoryRepository;
 
-        public CategoriesController(ICategoryService categoryService, ICategoryMapper categoryMapper, ICategoryRepository categoryRepository)
+        public CategoriesController(ICategoryService categoryService)
         {
             _categoryService = categoryService;
-            _categoryMapper = categoryMapper;
-            _categoryRepository = categoryRepository;
         }
 
         // GET api/Categories
@@ -35,7 +31,7 @@ namespace WepAPI.Controllers
         [Route("{id}")]
         public IActionResult GetById(int id)
         {
-            if (!CategoryExists(id))
+            if (!_categoryService.CategoryExists(id))
             {
                 return NotFound();
             }
@@ -74,7 +70,7 @@ namespace WepAPI.Controllers
                 return BadRequest();
             }
 
-            if (!CategoryExists(id))
+            if (!_categoryService.CategoryExists(id))
             {
                 return NotFound();
             }
@@ -90,7 +86,7 @@ namespace WepAPI.Controllers
         [Route("{id}")]
         public IActionResult Delete(int id)
         {
-            if (!CategoryExists(id))
+            if (!_categoryService.CategoryExists(id))
             {
                 return NotFound();
             }
@@ -100,10 +96,5 @@ namespace WepAPI.Controllers
             return Ok("Category deleted");
         }
 
-        private bool CategoryExists(int id)
-        {
-            var category = _categoryRepository.GetById(id);
-            return category != null;
-        }
     }
 }

@@ -13,12 +13,10 @@ namespace WepAPI.Controllers
     public class SubCategoriesController : BaseController
     {
         private readonly ISubCategoryService _subCategoryService;
-        private readonly ISubCategoryRepository _subCategoryRepository;
 
-        public SubCategoriesController(ISubCategoryService subCategoryService, ISubCategoryRepository subCategoryRepository)
+        public SubCategoriesController(ISubCategoryService subCategoryService)
         {
             _subCategoryService = subCategoryService;
-            _subCategoryRepository = subCategoryRepository;
         }
 
         // GET api/SubCategories/getByCategoryId/1
@@ -35,7 +33,7 @@ namespace WepAPI.Controllers
         [Route("{id}")]
         public IActionResult GetById(int id)
         {
-            if (!SubCategoryExists(id))
+            if (!_subCategoryService.SubCategoryExists(id))
             {
                 return NotFound();
             }
@@ -76,7 +74,7 @@ namespace WepAPI.Controllers
                 return BadRequest();
             }
 
-            if (!SubCategoryExists(id))
+            if (!_subCategoryService.SubCategoryExists(id))
             {
                 return NotFound();
             }
@@ -93,7 +91,7 @@ namespace WepAPI.Controllers
         [Route("{id}")]
         public IActionResult DeleteSubCategory(int id)
         {
-            if (!SubCategoryExists(id))
+            if (!_subCategoryService.SubCategoryExists(id))
             {
                 return NotFound();
             }
@@ -102,11 +100,6 @@ namespace WepAPI.Controllers
             _subCategoryService.SaveSubCategory();
             return Ok("SubCategory deleted");
 
-        }
-        private bool SubCategoryExists(int id)
-        {
-            SubCategory subCategory = _subCategoryRepository.GetById(id);
-            return subCategory != null;
         }
     }
 }

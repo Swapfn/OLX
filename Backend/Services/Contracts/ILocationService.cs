@@ -9,6 +9,7 @@ namespace Services
         LocationDTO Add(LocationDTO locationDTO);
         void Update(int id, LocationDTO locationDTO);
         void Delete(int id);
+        bool LocationExists(int id);
         void SaveLocation();
     }
 }

@@ -72,6 +72,12 @@ namespace Services
             _categoryRepository.Delete(category);
         }
 
+        public bool CategoryExists(int id)
+        {
+            var category = _categoryRepository.GetById(id);
+            return category != null;
+        }
+
         public void SaveCategory()
         {
             unitOfWork.Commit();

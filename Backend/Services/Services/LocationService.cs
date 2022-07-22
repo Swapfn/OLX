@@ -52,6 +52,11 @@ namespace Services.Services
             Location location = _locationRepository.GetById(id);
             _locationRepository.Delete(location);
         }
+        public bool LocationExists(int id)
+        {
+            Location location = _locationRepository.GetById(id);
+            return location != null;
+        }
         public void SaveLocation()
         {
             _unitOfWork.Commit();

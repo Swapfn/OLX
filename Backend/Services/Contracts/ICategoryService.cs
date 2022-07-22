@@ -10,6 +10,7 @@ namespace Services
         CategoryDTO Add(CategoryDTO categoryDTO);
         void Update(int id, CategoryDTO categoryDTO);
         void Delete(int id);
+        bool CategoryExists(int id);
         void SaveCategory();
     }
 }
