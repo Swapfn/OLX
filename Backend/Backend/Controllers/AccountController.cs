@@ -1,6 +1,8 @@
 ﻿using Mapper.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
 using Models.DTO;
 using Models.Models;
 using Services;
@@ -55,15 +57,32 @@ namespace WepAPI.Controllers
 
         }
 
-
-        [HttpPost]
+        // 1 refer to admin role
+        [Authorize(Roles = "1")]
+        [HttpGet]
         [Route("getuser")]
-        public async Task<IActionResult> GetUserDataAsync([FromBody]string token)
+        public async Task<IActionResult> GetUserDataAsync()
         {
-            int id = _token.VerifyToken(token);
-            var user = await _userManager.FindByIdAsync(id.ToString());
-            var userDTO = _mapper.Map(user);
-            return Ok(userDTO);
+            int userId = 0;
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            if (identity != null)
+            {
+                userId = int.Parse(identity.Claims.First(x => x.Type.Contains("nameidentifier")).Value);
+            }
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            if (user != null)
+            {
+                var userDTO = _mapper.Map(user);
+                return Ok(userDTO);
+            }
+            else
+            {
+                return Unauthorized();
+            }
+
+            //var token = Request.Headers[HeaderNames.Authorization];
+            
+            //int id = _token.VerifyToken(token);
 
         }
     }

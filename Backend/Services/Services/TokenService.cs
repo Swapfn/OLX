@@ -70,23 +70,26 @@ namespace Services
         }
 
 
-        public int VerifyToken(string token)
+        public int VerifyToken(string auth)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            tokenHandler.ValidateToken(token, new TokenValidationParameters
-            {
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = _key,
-            ValidateIssuer = false,
-            ValidateAudience = false,
-            ClockSkew = TimeSpan.Zero
-            }, out SecurityToken validatedToken);
+            //string token = auth.Substring(7);
+            //var tokenHandler = new JwtSecurityTokenHandler();
+            //tokenHandler.ValidateToken(token, new TokenValidationParameters
+            //{
+            //ValidateIssuerSigningKey = true,
+            //IssuerSigningKey = _key,
+            //ValidateIssuer = false,
+            //ValidateAudience = false,
+            //ClockSkew = TimeSpan.Zero,
 
-            var jwtToken = (JwtSecurityToken)validatedToken;
-            var userId = int.Parse(jwtToken.Claims.First(x => x.Type == "nameid").Value);
+            //}, out SecurityToken validatedToken);
 
+            //var jwtToken = (JwtSecurityToken)validatedToken;
 
-            return userId;
+            //var userId = int.Parse(jwtToken.Claims.First(x => x.Type == "nameid").Value);
+            //var roleId = int.Parse(jwtToken.Claims.First(x => x.Type == "role").Value);
+            //return userId;
+            return 0;
         }
 }
 }
