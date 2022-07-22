@@ -9,14 +9,18 @@ namespace Services
     public class PostService : IPostService
     {
         private readonly IPostRepository _postRepository;
-        private readonly ISubCategoryRepository _subCategoryRepository;
+        private readonly ISubCategoryService _subCategoryService;
+        private readonly ILocationRepository _locationRepository;
+        private readonly ILocationService _locationService;
         private readonly IPostMapper _postMapper;
         private readonly IUnitOfWork unitOfWork;
 
-        public PostService(IPostRepository postRepository, ISubCategoryRepository subCategoryRepository, IPostMapper postMapper, IUnitOfWork unitOfWork)
+        public PostService(IPostRepository postRepository, ISubCategoryService subCategoryService, ILocationRepository locationRepository, ILocationService locationService, IPostMapper postMapper, IUnitOfWork unitOfWork)
         {
             this._postRepository = postRepository;
-            this._subCategoryRepository = subCategoryRepository;
+            this._subCategoryService = subCategoryService;
+            this._locationRepository = locationRepository;
+            this._locationService = locationService;
             this._postMapper = postMapper;
             this.unitOfWork = unitOfWork;
         }
@@ -70,14 +74,15 @@ namespace Services
         public string Validate(PostDTO postDTO)
         {
             string error = "";
-            if (postDTO.Title == null)
+            if (!_locationService.LocationExists(postDTO.LocationId))
             {
-                error += "Title is required";
+                error = "Location is required";
             }
-            if (postDTO.Description == null)
+            if (!_subCategoryService.SubCategoryExists(postDTO.SubCategoryId))
             {
-                error += "Description  is required";
+                error = "SubCategory is required";
             }
+
             return error;
         }
     }
