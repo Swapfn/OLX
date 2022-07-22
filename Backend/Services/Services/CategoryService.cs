@@ -22,12 +22,11 @@ namespace Services
             this._subCategoryMapper = subCategoryMapper;
             this.unitOfWork = unitOfWork;
         }
+
         public IEnumerable<CategoryDTO> GetAll()
         {
             IEnumerable<Category> categories = _categoryRepository.GetAllCategories();
-
             List<CategoryDTO> categoryDTOs = new List<CategoryDTO>();
-
             foreach (var category in categories)
             {
                 CategoryDTO categoryDTO = _categoryMapper.MapToDTO(category);
@@ -35,24 +34,33 @@ namespace Services
                 categoryDTO.SubCategories = subCategories;
                 categoryDTOs.Add(categoryDTO);
             }
+
             return categoryDTOs;
         }
+
         public CategoryDTO GetById(int id)
         {
-            return _categoryMapper.MapToDTO(_categoryRepository.GetById(id));
+            Category category = _categoryRepository.GetCategory(id);
+            CategoryDTO categoryDTO = _categoryMapper.MapToDTO(category);
+            categoryDTO.SubCategories = category.SubCategories.Select(subCategory => _subCategoryMapper.MapToDTO(subCategory)).ToList();
+
+            return categoryDTO;
         }
-        public Category GetCategoryById(int id)
-        {
-            return _categoryRepository.GetById(id);
-        }
+
         public CategoryDTO Add(CategoryDTO categoryDTO)
         {
-            return _categoryMapper.MapToDTO(_categoryRepository.Add(_categoryMapper.MapFromDTO(categoryDTO)));
+            Category category = _categoryMapper.MapFromDTO(categoryDTO);
+            Category addedCategory = _categoryRepository.Add(category);
+            CategoryDTO result = _categoryMapper.MapToDTO(addedCategory);
+            return result;
         }
+
         public void Update(int id, CategoryDTO categoryDTO)
         {
-            _categoryRepository.Update(id, _categoryMapper.MapFromDTO(categoryDTO));
+            Category category = _categoryMapper.MapFromDTO(categoryDTO);
+            _categoryRepository.Update(id, category);
         }
+
         public void Delete(int id)
         {
             Category category = _categoryRepository.GetById(id);
@@ -63,6 +71,12 @@ namespace Services
             }
             _categoryRepository.Delete(category);
         }
+
+        public bool CategoryExists(int id)
+        {
+            return _categoryRepository.IsExist(id);
+        }
+
         public void SaveCategory()
         {
             unitOfWork.Commit();
