@@ -25,6 +25,7 @@ namespace Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new CategoryConfigration());
+            modelBuilder.ApplyConfiguration(new LocationConfigration());
 
             base.OnModelCreating(modelBuilder);
 
