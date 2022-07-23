@@ -8,9 +8,7 @@ using Services;
 
 namespace WepAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class SubCategoriesController : BaseController
+    public class SubCategoriesController : APIBaseController
     {
         private readonly ISubCategoryService _subCategoryService;
         private readonly ICategoryService _categoryService;
@@ -21,7 +19,7 @@ namespace WepAPI.Controllers
             _categoryService = categoryService;
         }
 
-        // GET api/SubCategories/getByCategoryId/1
+        // GET SubCategories/getByCategoryId/1
         [HttpGet]
         [Route("getByCategoryId/{id}")]
         public IActionResult GetAllByCategoryId(int id)
@@ -35,7 +33,7 @@ namespace WepAPI.Controllers
             return Ok(result);
         }
 
-        // GET api/SubCategories/1
+        // GET SubCategories/1
         [HttpGet]
         [Route("{id}")]
         public IActionResult GetById(int id)
@@ -50,7 +48,7 @@ namespace WepAPI.Controllers
 
         }
 
-        // POST api/Subcategories
+        // POST Subcategories
         [HttpPost]
         [Route("")]
         public IActionResult Add(SubCategoryDTO subCategoryDTO)
@@ -71,7 +69,7 @@ namespace WepAPI.Controllers
         }
 
 
-        // PUT api/Subcategories/1
+        // PUT Subcategories/1
         [HttpPut]
         [Route("{id}")]
         public IActionResult Update(int id, SubCategoryDTO subCategoryDTO)
@@ -103,7 +101,7 @@ namespace WepAPI.Controllers
             return Ok(result);
         }
 
-        // DELETE api/subcategories/1
+        // DELETE subcategories/1
         [HttpDelete]
         [Route("{id}")]
         public IActionResult DeleteSubCategory(int id)

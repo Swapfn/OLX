@@ -6,9 +6,7 @@ using Services;
 
 namespace WepAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class LocationsController : ControllerBase
+    public class LocationsController : APIBaseController
     {
         private readonly ILocationService _locationService;
 
@@ -17,7 +15,7 @@ namespace WepAPI.Controllers
             _locationService = locationService;
         }
 
-        // GET api/Locations
+        // GET Locations
         [HttpGet]
         [Route("")]
         public IActionResult GetAll()
@@ -26,7 +24,7 @@ namespace WepAPI.Controllers
             return Ok(locationsDTO);
         }
 
-        // GET api/Locations/1
+        // GET Locations/1
         [HttpGet]
         [Route("{id}")]
         public IActionResult GetById(int id)
@@ -40,7 +38,7 @@ namespace WepAPI.Controllers
             return Ok(locationDTO);
         }
 
-        // POST api/Locations
+        // POST Locations
         [HttpPost]
         [Route("")]
         public IActionResult Add(LocationDTO locationDTO)
@@ -54,7 +52,7 @@ namespace WepAPI.Controllers
             return Ok(locationDTO);
         }
 
-        // PUT api/Locations/1
+        // PUT Locations/1
         [HttpPut]
         [Route("{id}")]
         public IActionResult Update(int id, LocationDTO locationDTO)
@@ -79,7 +77,7 @@ namespace WepAPI.Controllers
             return Ok(locationDTO);
         }
 
-        // DELETE api/Location/1
+        // DELETE Location/1
         [HttpDelete]
         [Route("{id}")]
         public IActionResult Delete(int id)

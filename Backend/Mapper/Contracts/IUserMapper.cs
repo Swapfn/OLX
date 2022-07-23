@@ -6,7 +6,7 @@ namespace Mapper.Contracts
 {
     public interface IUserMapper
     {
-        ApplicationUser Map(UserDTO userDTO);
-        UserDTO Map(ApplicationUser user);
+        ApplicationUser MapFromDTO(UserDTO userDTO);
+        UserDTO MapToDTO(ApplicationUser user);
     }
 }

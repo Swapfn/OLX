@@ -8,7 +8,7 @@ namespace Mapper.Mappers
 {
     public class UserMapper : IUserMapper
     {
-        public ApplicationUser Map(UserDTO userDTO)
+        public ApplicationUser MapFromDTO(UserDTO userDTO)
         {
             ApplicationUser user = new();
             user.UserName = userDTO.UserName;
@@ -18,7 +18,7 @@ namespace Mapper.Mappers
             return user;
         }
 
-        public UserDTO Map(ApplicationUser user)
+        public UserDTO MapToDTO(ApplicationUser user)
         {
             UserDTO userDTO = new();
             userDTO.UserName = user.UserName;

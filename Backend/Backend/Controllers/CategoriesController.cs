@@ -6,9 +6,7 @@ using Data.Repositories.Contracts;
 
 namespace WepAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CategoriesController : BaseController
+    public class CategoriesController : APIBaseController
     {
         private readonly ICategoryService _categoryService;
 
@@ -17,7 +15,7 @@ namespace WepAPI.Controllers
             _categoryService = categoryService;
         }
 
-        // GET api/Categories
+        // GET Categories
         [HttpGet]
         [Route("")]
         public IActionResult GetAll()
@@ -26,7 +24,7 @@ namespace WepAPI.Controllers
             return Ok(categoriesDTO);
         }
 
-        // GET api/Categories/1
+        // GET Categories/1
         [HttpGet]
         [Route("{id}")]
         public IActionResult GetById(int id)
@@ -34,13 +32,13 @@ namespace WepAPI.Controllers
             if (!_categoryService.CategoryExists(id))
             {
                 return NotFound();
-            }
+            }   
 
             CategoryDTO categoryDTO = _categoryService.GetById(id);
             return Ok(categoryDTO);
         }
 
-        // POST api/Categories
+        // POST Categories
         [HttpPost]
         [Route("")]
         public IActionResult Add(CategoryDTO categoryDTO)
@@ -55,7 +53,7 @@ namespace WepAPI.Controllers
             return Ok(result);
         }
 
-        // PUT api/Categories/1
+        // PUT Categories/1
         [HttpPut]
         [Route("{id}")]
         public IActionResult Update(int id, CategoryDTO categoryDTO)
@@ -81,7 +79,7 @@ namespace WepAPI.Controllers
             return Ok(result);
         }
 
-        // DELETE api/Categories/1
+        // DELETE Categories/1
         [HttpDelete]
         [Route("{id}")]
         public IActionResult Delete(int id)
