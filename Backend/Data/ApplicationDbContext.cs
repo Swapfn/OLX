@@ -14,8 +14,6 @@ namespace Data
         {
         }
 
-        //public DbSet<User> Users { get; set; }
-        //public DbSet<Role> Roles { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
         public DbSet<PostImage> PostImages { get; set; }
@@ -24,9 +22,6 @@ namespace Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new CategoryConfigration());
-            modelBuilder.ApplyConfiguration(new LocationConfigration());
-
             base.OnModelCreating(modelBuilder);
 
             // identity config
@@ -42,6 +37,9 @@ namespace Data
                 .HasForeignKey(ur => ur.RoleId)
                 .IsRequired();
 
+
+            modelBuilder.ApplyConfiguration(new CategoryConfigration());
+            modelBuilder.ApplyConfiguration(new RolesConfiguration());
         }
         public void Commit()
         {
