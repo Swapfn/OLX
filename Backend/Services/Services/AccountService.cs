@@ -22,7 +22,7 @@ namespace Services
             var userCheck = await userManager.FindByNameAsync(model.Username);
             if (userCheck != null)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, new ResponseDTO() 
+                return StatusCode(StatusCodes.Status500InternalServerError, new
                 { Status = "Error", Message = "User Already Exists" });
             }
 
@@ -34,8 +34,9 @@ namespace Services
                 // snapshot of current user credientials, if they change, security stamp will change
                 SecurityStamp = Guid.NewGuid().ToString(),
                 FName = model.FName,
-                LName = model.LName
-                
+                LName = model.LName,
+                AboutMe = model.AboutMe,
+                PhoneNumber = model.Phone
             };
 
             // bind user and role
@@ -45,12 +46,12 @@ namespace Services
             // if fail
             if (!resultRole.Succeeded && !resultUser.Succeeded)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, new ResponseDTO()
+                return StatusCode(StatusCodes.Status500InternalServerError, new 
                 { Status = "Error", Message = "User creation failed! Please check user details and try again." });
             }
 
             // if succeeded
-            return Ok(new ResponseDTO { Status = "Success", Message = "User created successfully!" });
+            return Ok(new { Status = "Success", Message = "User created successfully!" });
         }
 
 

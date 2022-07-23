@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220722221348_ConfigurationFixes")]
-    partial class ConfigurationFixes
+    [Migration("20220723154708_ApplicationUserEntityFix")]
+    partial class ApplicationUserEntityFix
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -145,14 +145,14 @@ namespace Data.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "a342b166-26e0-481e-888b-562904b18251",
+                            ConcurrencyStamp = "d87828db-8de6-4e84-9a7b-df8806715c8a",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "818e7b83-b040-4292-9471-043d0cbe730e",
+                            ConcurrencyStamp = "e1f25146-9fa1-4d72-b073-fdbabb67a876",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -165,6 +165,10 @@ namespace Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AboutMe")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
