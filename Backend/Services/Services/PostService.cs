@@ -85,5 +85,17 @@ namespace Services
 
             return error;
         }
+
+        public IEnumerable<PostDTO> GetAll(FilterDTO filterObject)
+        {
+            IEnumerable<Post> posts = _postRepository.GetAll(filterObject);
+            List<PostDTO> postDTOs = new List<PostDTO>();
+            foreach (var post in posts)
+            {
+                PostDTO postDTO = _postMapper.MapToDTO(post);
+                postDTOs.Add(postDTO);
+            }
+            return postDTOs;
+        }
     }
 }

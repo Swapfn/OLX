@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
 {
-    public partial class ApplicationUserEntityFix : Migration
+    public partial class filter : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -216,9 +216,9 @@ namespace Data.Migrations
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     IsNew = table.Column<bool>(type: "bit", nullable: false),
-                    SubCategoryId = table.Column<int>(type: "int", nullable: true),
-                    UserID = table.Column<int>(type: "int", nullable: true),
-                    LocationId = table.Column<int>(type: "int", nullable: true)
+                    SubCategoryId = table.Column<int>(type: "int", nullable: false),
+                    UserID = table.Column<int>(type: "int", nullable: false),
+                    LocationId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -227,17 +227,20 @@ namespace Data.Migrations
                         name: "FK_Posts_AspNetUsers_UserID",
                         column: x => x.UserID,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Posts_Locations_LocationId",
                         column: x => x.LocationId,
                         principalTable: "Locations",
-                        principalColumn: "LocationId");
+                        principalColumn: "LocationId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Posts_SubCategories_SubCategoryId",
                         column: x => x.SubCategoryId,
                         principalTable: "SubCategories",
-                        principalColumn: "SubCategoryID");
+                        principalColumn: "SubCategoryID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -265,8 +268,8 @@ namespace Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "d87828db-8de6-4e84-9a7b-df8806715c8a", "Admin", "ADMIN" },
-                    { 2, "e1f25146-9fa1-4d72-b073-fdbabb67a876", "User", "USER" }
+                    { 1, "7f13a416-7f3b-4378-9efd-b29ea25f32b4", "Admin", "ADMIN" },
+                    { 2, "482adf81-4cde-45b4-af01-7b86b6cd87b9", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(

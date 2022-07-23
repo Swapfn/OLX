@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220722192721_addLocations")]
-    partial class addLocations
+    [Migration("20220723225438_filter")]
+    partial class filter
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -140,6 +140,22 @@ namespace Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ConcurrencyStamp = "7f13a416-7f3b-4378-9efd-b29ea25f32b4",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ConcurrencyStamp = "482adf81-4cde-45b4-af01-7b86b6cd87b9",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Models.Models.ApplicationUser", b =>
@@ -150,6 +166,10 @@ namespace Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("AboutMe")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
@@ -158,7 +178,6 @@ namespace Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
@@ -189,9 +208,6 @@ namespace Data.Migrations
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Phone")
-                        .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
@@ -331,143 +347,6 @@ namespace Data.Migrations
                     b.HasKey("LocationId");
 
                     b.ToTable("Locations");
-
-                    b.HasData(
-                        new
-                        {
-                            LocationId = 1,
-                            CityName = "Alexandria"
-                        },
-                        new
-                        {
-                            LocationId = 2,
-                            CityName = "Aswan"
-                        },
-                        new
-                        {
-                            LocationId = 3,
-                            CityName = "Asyut"
-                        },
-                        new
-                        {
-                            LocationId = 4,
-                            CityName = "Beheira"
-                        },
-                        new
-                        {
-                            LocationId = 5,
-                            CityName = "Beni Suef"
-                        },
-                        new
-                        {
-                            LocationId = 6,
-                            CityName = "Cairo"
-                        },
-                        new
-                        {
-                            LocationId = 7,
-                            CityName = "Dakahlia"
-                        },
-                        new
-                        {
-                            LocationId = 8,
-                            CityName = "Damietta"
-                        },
-                        new
-                        {
-                            LocationId = 9,
-                            CityName = "Faiyum"
-                        },
-                        new
-                        {
-                            LocationId = 10,
-                            CityName = "Gharbia"
-                        },
-                        new
-                        {
-                            LocationId = 11,
-                            CityName = "Giza"
-                        },
-                        new
-                        {
-                            LocationId = 12,
-                            CityName = "Ismailia"
-                        },
-                        new
-                        {
-                            LocationId = 13,
-                            CityName = "Kafr El Sheikh"
-                        },
-                        new
-                        {
-                            LocationId = 14,
-                            CityName = "Luxor"
-                        },
-                        new
-                        {
-                            LocationId = 15,
-                            CityName = "Matruh"
-                        },
-                        new
-                        {
-                            LocationId = 16,
-                            CityName = "Minya"
-                        },
-                        new
-                        {
-                            LocationId = 17,
-                            CityName = "Monufia"
-                        },
-                        new
-                        {
-                            LocationId = 18,
-                            CityName = "New Valley"
-                        },
-                        new
-                        {
-                            LocationId = 19,
-                            CityName = "North Sinai"
-                        },
-                        new
-                        {
-                            LocationId = 20,
-                            CityName = "Port Said"
-                        },
-                        new
-                        {
-                            LocationId = 21,
-                            CityName = "Qalyubia"
-                        },
-                        new
-                        {
-                            LocationId = 22,
-                            CityName = "Qena"
-                        },
-                        new
-                        {
-                            LocationId = 23,
-                            CityName = "Red Sea"
-                        },
-                        new
-                        {
-                            LocationId = 24,
-                            CityName = "Sharqia"
-                        },
-                        new
-                        {
-                            LocationId = 25,
-                            CityName = "Sohag"
-                        },
-                        new
-                        {
-                            LocationId = 26,
-                            CityName = "South Sinai"
-                        },
-                        new
-                        {
-                            LocationId = 27,
-                            CityName = "Suez"
-                        });
                 });
 
             modelBuilder.Entity("Models.Models.Post", b =>
@@ -488,20 +367,20 @@ namespace Data.Migrations
                     b.Property<bool>("IsNew")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("LocationId")
+                    b.Property<int>("LocationId")
                         .HasColumnType("int");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int?>("SubCategoryId")
+                    b.Property<int>("SubCategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserID")
+                    b.Property<int>("UserID")
                         .HasColumnType("int");
 
                     b.HasKey("PostId");
@@ -618,15 +497,21 @@ namespace Data.Migrations
                 {
                     b.HasOne("Models.Models.Location", "Location")
                         .WithMany("Posts")
-                        .HasForeignKey("LocationId");
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Models.Models.SubCategory", "SubCategory")
                         .WithMany()
-                        .HasForeignKey("SubCategoryId");
+                        .HasForeignKey("SubCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Models.Models.ApplicationUser", "User")
                         .WithMany("Posts")
-                        .HasForeignKey("UserID");
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Location");
 
