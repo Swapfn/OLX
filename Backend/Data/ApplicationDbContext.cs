@@ -39,6 +39,7 @@ namespace Data
 
 
             modelBuilder.ApplyConfiguration(new CategoryConfigration());
+            modelBuilder.ApplyConfiguration(new LocationConfigration());
             modelBuilder.ApplyConfiguration(new RolesConfiguration());
         }
         public void Commit()

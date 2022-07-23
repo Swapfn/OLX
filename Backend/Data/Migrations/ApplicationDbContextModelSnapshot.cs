@@ -143,14 +143,14 @@ namespace Data.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "d87828db-8de6-4e84-9a7b-df8806715c8a",
+                            ConcurrencyStamp = "8fe6f74f-6a70-48e6-9bb8-0a0a6144a27d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "e1f25146-9fa1-4d72-b073-fdbabb67a876",
+                            ConcurrencyStamp = "af3f9497-a05c-407c-bb65-65c2d1b6d73e",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -502,20 +502,20 @@ namespace Data.Migrations
                     b.Property<bool>("IsNew")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("LocationId")
+                    b.Property<int>("LocationId")
                         .HasColumnType("int");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int?>("SubCategoryId")
+                    b.Property<int>("SubCategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserID")
+                    b.Property<int>("UserID")
                         .HasColumnType("int");
 
                     b.HasKey("PostId");
@@ -632,15 +632,21 @@ namespace Data.Migrations
                 {
                     b.HasOne("Models.Models.Location", "Location")
                         .WithMany("Posts")
-                        .HasForeignKey("LocationId");
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Models.Models.SubCategory", "SubCategory")
                         .WithMany()
-                        .HasForeignKey("SubCategoryId");
+                        .HasForeignKey("SubCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Models.Models.ApplicationUser", "User")
                         .WithMany("Posts")
-                        .HasForeignKey("UserID");
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Location");
 
