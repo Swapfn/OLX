@@ -19,11 +19,11 @@ namespace WepAPI.Controllers
 
         // GET Posts
         [HttpGet]
-        [Route("")]
-        public IActionResult GetAll()
+        [Route("{PageNumber}/{PageSize}/{SortBy}/{SortDirection}")]
+        public IActionResult GetAll(int PageNumber, int PageSize, string SortBy, string SortDirection)
         {
-           IEnumerable<PostDTO> postDTO = _postService.GetAll();
-           return Ok(postDTO);
+            PagedResult<PostDTO> postDTO = _postService.GetAll(PageNumber, PageSize, SortBy, SortDirection);
+            return Ok(postDTO);
         }
 
         // GET Posts/1

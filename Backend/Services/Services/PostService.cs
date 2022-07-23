@@ -24,16 +24,18 @@ namespace Services
             this._postMapper = postMapper;
             this.unitOfWork = unitOfWork;
         }
-        public IEnumerable<PostDTO> GetAll()
+        public PagedResult<PostDTO> GetAll(int PageNumber, int PageSize, string SortBy = "", string SortDirection = "")
         {
-            IEnumerable<Post> posts = _postRepository.GetAll();
+            PagedResult<Post> posts = _postRepository.GetAll(PageNumber, PageSize, SortBy, SortDirection);
 
-            List<PostDTO> postDTOs = new List<PostDTO>();
-            foreach (var post in posts)
+            PagedResult<PostDTO> postDTOs = new PagedResult<PostDTO>();
+            foreach (var post in posts.Results)
             {
                 PostDTO postDTO = _postMapper.MapToDTO(post);
-                postDTOs.Add(postDTO);
+                postDTOs.Results.Add(postDTO);
             }
+            postDTOs.TotalRecords = posts.TotalRecords;
+
             return postDTOs;
         }
         public PostDTO GetById(int id)

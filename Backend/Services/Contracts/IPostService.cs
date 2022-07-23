@@ -5,7 +5,7 @@ namespace Services
 {
     public interface IPostService
     {
-        IEnumerable<PostDTO> GetAll();
+        PagedResult<PostDTO> GetAll(int PageNumber, int PageSize, string SortBy, string SortDirection);
         PostDTO GetById(int id);
         PostDTO Add(PostDTO postDTO);
         void Update(int id, PostDTO postDTO);
