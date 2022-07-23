@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
 {
-    public partial class fixApplicationUser : Migration
+    public partial class ConfigurationFixes : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -257,6 +257,15 @@ namespace Data.Migrations
                         principalTable: "Posts",
                         principalColumn: "PostId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { 1, "a342b166-26e0-481e-888b-562904b18251", "Admin", "ADMIN" },
+                    { 2, "818e7b83-b040-4292-9471-043d0cbe730e", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(

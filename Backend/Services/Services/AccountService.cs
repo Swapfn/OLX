@@ -66,13 +66,15 @@ namespace Services
         public async Task<IActionResult> LoginAsync(LoginDTO model, UserManager<ApplicationUser> userManager,
             RoleManager<ApplicationRole> roleManager, ITokenService _token)
         {
-            // get user and roles
+            // check if username exists
             var user = await userManager.FindByNameAsync(model.Username);
-            var roles = await userManager.GetRolesAsync(user);
+            if (user == null)
+                return NotFound(new { Status="Error", Message = "Username Doesn't Exist!!" });
 
-            // check if user exists
-            if (user != null && await userManager.CheckPasswordAsync(user, model.Password))
+            // check if passowrd is correct
+            if (await userManager.CheckPasswordAsync(user, model.Password))
             {
+                var roles = await userManager.GetRolesAsync(user);  
                 var token = await _token.CreateToken(user, roles, roleManager);
 
                 return Ok(new
@@ -81,7 +83,10 @@ namespace Services
                     expiration = token.ValidTo
                 });
             }
-            return Unauthorized();
+            return Unauthorized(new
+            {
+                Status = "Error", Message = "Incorrect Password"
+            });
         }
 
 
@@ -96,13 +101,15 @@ namespace Services
         public async Task<IActionResult> ChangePasswordAsync(ChangePasswordDTO model, UserManager<ApplicationUser> userManager,
             RoleManager<ApplicationRole> roleManager, ITokenService _token)
         {
-            // get user and roles
+            // check if username exists
             var user = await userManager.FindByNameAsync(model.Username);
-            var roles = await userManager.GetRolesAsync(user);
+            if (user == null)
+                return NotFound(new { Status = "Error", Message = "Username Doesn't Exist!!" });
 
             // check if user exists
-            if (user != null && await userManager.CheckPasswordAsync(user, model.CurrentPassword))
+            if (await userManager.CheckPasswordAsync(user, model.CurrentPassword))
             {
+                var roles = await userManager.GetRolesAsync(user);
                 // change password
                 if (model.NewPassword == model.ConfirmNewPassword)
                 {
@@ -117,7 +124,11 @@ namespace Services
                     expiration = token.ValidTo
                 });
             }
-            return Unauthorized();
+            return Unauthorized(new
+            {
+                Status = "Error",
+                Message = "Incorrect Password"
+            });
         }
     }
 }

@@ -57,33 +57,5 @@ namespace WepAPI.Controllers
 
         }
 
-        // 1 refer to admin role
-        [Authorize(Roles = "1")]
-        [HttpGet]
-        [Route("getuser")]
-        public async Task<IActionResult> GetUserDataAsync()
-        {
-            int userId = 0;
-            var identity = HttpContext.User.Identity as ClaimsIdentity;
-            if (identity != null)
-            {
-                userId = int.Parse(identity.Claims.First(x => x.Type.Contains("nameidentifier")).Value);
-            }
-            var user = await _userManager.FindByIdAsync(userId.ToString());
-            if (user != null)
-            {
-                var userDTO = _mapper.Map(user);
-                return Ok(userDTO);
-            }
-            else
-            {
-                return Unauthorized();
-            }
-
-            //var token = Request.Headers[HeaderNames.Authorization];
-            
-            //int id = _token.VerifyToken(token);
-
-        }
     }
 }

@@ -11,8 +11,6 @@ using WebAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuration
-//ConfigurationManager configuration = builder.Configuration;
 
 // Add services to the container.
 
@@ -26,10 +24,13 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContextPool<ApplicationDbContext>(option
     => option.UseSqlServer(builder.Configuration.GetConnectionString("OLXDbConnectionStrings")));
 
-builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
-    //{
-    //options.ClaimsIdentity.UserIdClaimType = jwtbea
-    //}) 
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(option =>
+{
+    option.SignIn.RequireConfirmedPhoneNumber = false;
+    option.Password.RequireUppercase = false;
+    option.Password.RequireNonAlphanumeric = false;
+    option.Password.RequireDigit = false;
+})
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
@@ -45,11 +46,8 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 // Adding Authentication & JWT bearer options
 builder.Services.AddAuthentication(options =>
     {
-        //options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        //options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
         options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        //options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
     })
     .AddJwtBearer(options =>
     {
@@ -64,21 +62,6 @@ builder.Services.AddAuthentication(options =>
             ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
             ValidAudience = builder.Configuration["JWT:ValidAudiance"]
         };
-        //options.Events = new JwtBearerEvents
-        //{
-        //    OnMessageReceived = context =>
-        //    {
-        //        var accessToken = context.Request.Query["access_token"];
-
-        //        var path = context.HttpContext.Request.Path;
-        //        if (!string.IsNullOrEmpty(accessToken))
-        //        {
-        //            context.Token = accessToken;
-        //        }
-
-        //        return Task.CompletedTask;
-        //    }
-        //};
     });
 
 // Registering Services
@@ -114,9 +97,10 @@ try
 {
     var dbContext = services.GetRequiredService<ApplicationDbContext>();
     var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-    var roleManager = services.GetRequiredService<RoleManager<ApplicationRole>>();
     await dbContext.Database.MigrateAsync();
-    await Seed.SeedUsers(userManager, roleManager);
+    // excute only if user table is empty
+    if (await userManager.Users.AnyAsync() == false)
+        await UserConfiguration.SeedUsers(userManager);
 }
 catch (Exception ex)
 {

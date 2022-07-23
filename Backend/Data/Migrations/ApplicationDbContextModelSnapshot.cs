@@ -138,6 +138,22 @@ namespace Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ConcurrencyStamp = "a342b166-26e0-481e-888b-562904b18251",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ConcurrencyStamp = "818e7b83-b040-4292-9471-043d0cbe730e",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Models.Models.ApplicationUser", b =>
@@ -245,7 +261,7 @@ namespace Data.Migrations
 
                     b.HasKey("CategoryID");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
 
                     b.HasData(
                         new
@@ -324,7 +340,7 @@ namespace Data.Migrations
 
                     b.HasKey("LocationId");
 
-                    b.ToTable("Locations");
+                    b.ToTable("Locations", (string)null);
                 });
 
             modelBuilder.Entity("Models.Models.Post", b =>
@@ -369,7 +385,7 @@ namespace Data.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Posts");
+                    b.ToTable("Posts", (string)null);
                 });
 
             modelBuilder.Entity("Models.Models.PostImage", b =>
@@ -391,7 +407,7 @@ namespace Data.Migrations
 
                     b.HasIndex("PostId");
 
-                    b.ToTable("PostImages");
+                    b.ToTable("PostImages", (string)null);
                 });
 
             modelBuilder.Entity("Models.Models.SubCategory", b =>
@@ -413,7 +429,7 @@ namespace Data.Migrations
 
                     b.HasIndex("CategoryID");
 
-                    b.ToTable("SubCategories");
+                    b.ToTable("SubCategories", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
