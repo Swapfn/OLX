@@ -18,7 +18,7 @@ namespace Services.Services
         /// <param name="userManager"></param>
         /// <param name="mapper"></param>
         /// <returns></returns>
-        async Task<IActionResult> IUserService.GetUserByIdAsync(ClaimsIdentity identity, 
+        async Task<IActionResult> IUserService.GetUserByIdAsync(ClaimsIdentity identity,
             UserManager<ApplicationUser> userManager, IUserMapper mapper)
         {
             int userId = 0;
@@ -37,7 +37,7 @@ namespace Services.Services
             if (user != null)
             {
                 // fix to return user only and return userDTO in controller
-                var userDTO = mapper.Map(user);
+                var userDTO = mapper.MapToDTO(user);
                 return Ok(userDTO);
             }
             else

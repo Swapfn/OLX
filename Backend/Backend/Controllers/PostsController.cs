@@ -6,9 +6,7 @@ using Services;
 
 namespace WepAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class PostsController : ControllerBase
+    public class PostsController : APIBaseController
     {
         private readonly IPostService _postService;
         private readonly IPostMapper _postMapper;
@@ -19,16 +17,16 @@ namespace WepAPI.Controllers
             _postMapper = postMapper;
         }
 
-        // GET api/Posts
+        // GET Posts
         [HttpGet]
         [Route("")]
         public IActionResult GetAll()
         {
-            IEnumerable<PostDTO> postDTO = _postService.GetAll();
-            return Ok(postDTO);
+           IEnumerable<PostDTO> postDTO = _postService.GetAll();
+           return Ok(postDTO);
         }
 
-        // GET api/Posts/1
+        // GET Posts/1
         [HttpGet]
         [Route("{id}")]
         public IActionResult GetById(int id)
@@ -42,7 +40,7 @@ namespace WepAPI.Controllers
             return Ok(postDTO);
         }
 
-        // POST api/Posts
+        // POST Posts
         [HttpPost]
         [Route("")]
         public IActionResult Add(PostDTO postDTO)
@@ -63,7 +61,7 @@ namespace WepAPI.Controllers
             return Ok(result);
         }
 
-        // PUT api/Posts/1
+        // PUT Posts/1
         [HttpPut]
         [Route("{id}")]
         public IActionResult Update(int id, PostDTO postDTO)
@@ -89,7 +87,7 @@ namespace WepAPI.Controllers
             return Ok(result);
         }
 
-        // DELETE api/Posts/1
+        // DELETE Posts/1
         [HttpDelete]
         [Route("{id}")]
         public IActionResult Delete(int id)

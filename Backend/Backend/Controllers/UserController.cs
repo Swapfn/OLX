@@ -10,7 +10,7 @@ using System.Security.Claims;
 namespace WepAPI.Controllers
 {
 
-    public class UserController : BaseController
+    public class UserController : APIBaseController
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
@@ -20,7 +20,7 @@ namespace WepAPI.Controllers
         public UserController(
             UserManager<ApplicationUser> userManager,
             RoleManager<ApplicationRole> roleManager,
-            IUserService user,IUserMapper mapper)
+            IUserService user, IUserMapper mapper)
         {
             _userManager = userManager;
             _roleManager = roleManager;
