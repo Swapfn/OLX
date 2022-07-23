@@ -1,19 +1,30 @@
 ﻿using Mapper.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Models.DTO;
+using Models.Models;
 using Services;
+using Services.Contracts;
+using System.Security.Claims;
 
 namespace WepAPI.Controllers
 {
     public class PostsController : APIBaseController
     {
         private readonly IPostService _postService;
+        private readonly IUserService _userService;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IUserMapper _userMapper;
         private readonly IPostMapper _postMapper;
 
-        public PostsController(IPostService postService, IPostMapper postMapper)
+        public PostsController(IPostService postService, IUserService userService, UserManager<ApplicationUser> userManager, IUserMapper userMapper, IPostMapper postMapper)
         {
             _postService = postService;
+            _userService = userService;
+            _userManager = userManager;
+            _userMapper = userMapper;
             _postMapper = postMapper;
         }
 
@@ -41,6 +52,7 @@ namespace WepAPI.Controllers
         }
 
         // POST Posts
+        [Authorize]
         [HttpPost]
         [Route("")]
         public IActionResult Add(PostDTO postDTO)
@@ -55,6 +67,10 @@ namespace WepAPI.Controllers
             {
                 return NotFound(ErrorMessage);
             }
+
+            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
+            Task<ApplicationUser> user = _userService.GetUserByIdAsync(identity, _userManager, _userMapper);
+            postDTO.UserID = user.Result.Id;
 
             PostDTO result = _postService.Add(postDTO);
             _postService.SavePost();
