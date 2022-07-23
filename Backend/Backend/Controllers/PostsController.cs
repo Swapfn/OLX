@@ -68,9 +68,9 @@ namespace WepAPI.Controllers
                 return NotFound(ErrorMessage);
             }
 
-            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
-            Task<ApplicationUser> user = _userService.GetUserByIdAsync(identity, _userManager, _userMapper);
-            postDTO.UserID = user.Result.Id;
+            //ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
+            //Task<ApplicationUser> user = _userService.GetUserByIdAsync(identity, _userManager, _userMapper);
+            //postDTO.UserID = user.Result.Id;
 
             PostDTO result = _postService.Add(postDTO);
             _postService.SavePost();
