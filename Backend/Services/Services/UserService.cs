@@ -37,7 +37,7 @@ namespace Services.Services
             if (user != null)
             {
                 // fix to return user only and return userDTO in controller
-                var userDTO = mapper.Map(user);
+                var userDTO = mapper.MapToDTO(user);
                 return Ok(userDTO);
             }
             else
