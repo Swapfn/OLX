@@ -31,11 +31,38 @@ namespace WepAPI.Controllers
 
         [Authorize]
         [HttpGet]
-        [Route("getuser")]
+        [Route("get")]
         public async Task<IActionResult> GetUserDataAsync()
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;
-            return await _user.GetUserByIdAsync(identity, _userManager, _mapper);
+            var user = await _user.GetUserByIdAsync(identity, _userManager);
+            if (user != null)
+            {
+                var userDTO = _mapper.MapToDTO(user);
+                return Ok(userDTO);
+            } else
+            {
+                return NotFound();    
+            }
+        }
+
+
+        [Authorize]
+        [HttpGet]
+        [Route("update")]
+        public async Task<IActionResult> UpdateUserDataAsync()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            var user = await _user.GetUserByIdAsync(identity, _userManager);
+            if (user != null)
+            {
+                var userDTO = _mapper.MapToDTO(user);
+                return Ok(userDTO);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }
