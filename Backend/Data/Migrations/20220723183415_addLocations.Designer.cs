@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220723154708_ApplicationUserEntityFix")]
-    partial class ApplicationUserEntityFix
+    [Migration("20220723183415_addLocations")]
+    partial class addLocations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -145,14 +145,14 @@ namespace Data.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "d87828db-8de6-4e84-9a7b-df8806715c8a",
+                            ConcurrencyStamp = "8fe6f74f-6a70-48e6-9bb8-0a0a6144a27d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "e1f25146-9fa1-4d72-b073-fdbabb67a876",
+                            ConcurrencyStamp = "af3f9497-a05c-407c-bb65-65c2d1b6d73e",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -347,6 +347,143 @@ namespace Data.Migrations
                     b.HasKey("LocationId");
 
                     b.ToTable("Locations");
+
+                    b.HasData(
+                        new
+                        {
+                            LocationId = 1,
+                            CityName = "Alexandria"
+                        },
+                        new
+                        {
+                            LocationId = 2,
+                            CityName = "Aswan"
+                        },
+                        new
+                        {
+                            LocationId = 3,
+                            CityName = "Asyut"
+                        },
+                        new
+                        {
+                            LocationId = 4,
+                            CityName = "Beheira"
+                        },
+                        new
+                        {
+                            LocationId = 5,
+                            CityName = "Beni Suef"
+                        },
+                        new
+                        {
+                            LocationId = 6,
+                            CityName = "Cairo"
+                        },
+                        new
+                        {
+                            LocationId = 7,
+                            CityName = "Dakahlia"
+                        },
+                        new
+                        {
+                            LocationId = 8,
+                            CityName = "Damietta"
+                        },
+                        new
+                        {
+                            LocationId = 9,
+                            CityName = "Faiyum"
+                        },
+                        new
+                        {
+                            LocationId = 10,
+                            CityName = "Gharbia"
+                        },
+                        new
+                        {
+                            LocationId = 11,
+                            CityName = "Giza"
+                        },
+                        new
+                        {
+                            LocationId = 12,
+                            CityName = "Ismailia"
+                        },
+                        new
+                        {
+                            LocationId = 13,
+                            CityName = "Kafr El Sheikh"
+                        },
+                        new
+                        {
+                            LocationId = 14,
+                            CityName = "Luxor"
+                        },
+                        new
+                        {
+                            LocationId = 15,
+                            CityName = "Matruh"
+                        },
+                        new
+                        {
+                            LocationId = 16,
+                            CityName = "Minya"
+                        },
+                        new
+                        {
+                            LocationId = 17,
+                            CityName = "Monufia"
+                        },
+                        new
+                        {
+                            LocationId = 18,
+                            CityName = "New Valley"
+                        },
+                        new
+                        {
+                            LocationId = 19,
+                            CityName = "North Sinai"
+                        },
+                        new
+                        {
+                            LocationId = 20,
+                            CityName = "Port Said"
+                        },
+                        new
+                        {
+                            LocationId = 21,
+                            CityName = "Qalyubia"
+                        },
+                        new
+                        {
+                            LocationId = 22,
+                            CityName = "Qena"
+                        },
+                        new
+                        {
+                            LocationId = 23,
+                            CityName = "Red Sea"
+                        },
+                        new
+                        {
+                            LocationId = 24,
+                            CityName = "Sharqia"
+                        },
+                        new
+                        {
+                            LocationId = 25,
+                            CityName = "Sohag"
+                        },
+                        new
+                        {
+                            LocationId = 26,
+                            CityName = "South Sinai"
+                        },
+                        new
+                        {
+                            LocationId = 27,
+                            CityName = "Suez"
+                        });
                 });
 
             modelBuilder.Entity("Models.Models.Post", b =>
@@ -367,20 +504,20 @@ namespace Data.Migrations
                     b.Property<bool>("IsNew")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("LocationId")
+                    b.Property<int>("LocationId")
                         .HasColumnType("int");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int?>("SubCategoryId")
+                    b.Property<int>("SubCategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserID")
+                    b.Property<int>("UserID")
                         .HasColumnType("int");
 
                     b.HasKey("PostId");
@@ -497,15 +634,21 @@ namespace Data.Migrations
                 {
                     b.HasOne("Models.Models.Location", "Location")
                         .WithMany("Posts")
-                        .HasForeignKey("LocationId");
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Models.Models.SubCategory", "SubCategory")
                         .WithMany()
-                        .HasForeignKey("SubCategoryId");
+                        .HasForeignKey("SubCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Models.Models.ApplicationUser", "User")
                         .WithMany("Posts")
-                        .HasForeignKey("UserID");
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Location");
 

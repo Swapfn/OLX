@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
 {
-    public partial class ApplicationUserEntityFix : Migration
+    public partial class addLocations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -216,9 +216,9 @@ namespace Data.Migrations
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     IsNew = table.Column<bool>(type: "bit", nullable: false),
-                    SubCategoryId = table.Column<int>(type: "int", nullable: true),
-                    UserID = table.Column<int>(type: "int", nullable: true),
-                    LocationId = table.Column<int>(type: "int", nullable: true)
+                    SubCategoryId = table.Column<int>(type: "int", nullable: false),
+                    UserID = table.Column<int>(type: "int", nullable: false),
+                    LocationId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -227,17 +227,20 @@ namespace Data.Migrations
                         name: "FK_Posts_AspNetUsers_UserID",
                         column: x => x.UserID,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Posts_Locations_LocationId",
                         column: x => x.LocationId,
                         principalTable: "Locations",
-                        principalColumn: "LocationId");
+                        principalColumn: "LocationId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Posts_SubCategories_SubCategoryId",
                         column: x => x.SubCategoryId,
                         principalTable: "SubCategories",
-                        principalColumn: "SubCategoryID");
+                        principalColumn: "SubCategoryID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -265,8 +268,8 @@ namespace Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "d87828db-8de6-4e84-9a7b-df8806715c8a", "Admin", "ADMIN" },
-                    { 2, "e1f25146-9fa1-4d72-b073-fdbabb67a876", "User", "USER" }
+                    { 1, "8fe6f74f-6a70-48e6-9bb8-0a0a6144a27d", "Admin", "ADMIN" },
+                    { 2, "af3f9497-a05c-407c-bb65-65c2d1b6d73e", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -286,6 +289,40 @@ namespace Data.Migrations
                     { 10, "Jobs" },
                     { 11, "Business - Industrial - Agriculture" },
                     { 12, "Services" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Locations",
+                columns: new[] { "LocationId", "CityName" },
+                values: new object[,]
+                {
+                    { 1, "Alexandria" },
+                    { 2, "Aswan" },
+                    { 3, "Asyut" },
+                    { 4, "Beheira" },
+                    { 5, "Beni Suef" },
+                    { 6, "Cairo" },
+                    { 7, "Dakahlia" },
+                    { 8, "Damietta" },
+                    { 9, "Faiyum" },
+                    { 10, "Gharbia" },
+                    { 11, "Giza" },
+                    { 12, "Ismailia" },
+                    { 13, "Kafr El Sheikh" },
+                    { 14, "Luxor" },
+                    { 15, "Matruh" },
+                    { 16, "Minya" },
+                    { 17, "Monufia" },
+                    { 18, "New Valley" },
+                    { 19, "North Sinai" },
+                    { 20, "Port Said" },
+                    { 21, "Qalyubia" },
+                    { 22, "Qena" },
+                    { 23, "Red Sea" },
+                    { 24, "Sharqia" },
+                    { 25, "Sohag" },
+                    { 26, "South Sinai" },
+                    { 27, "Suez" }
                 });
 
             migrationBuilder.CreateIndex(
