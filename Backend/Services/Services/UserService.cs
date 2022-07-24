@@ -1,7 +1,4 @@
-﻿using Mapper.Contracts;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
 using Models.DTO;
 using Models.Models;
 using Services.Contracts;
@@ -9,17 +6,16 @@ using System.Security.Claims;
 
 namespace Services.Services
 {
-    public class UserService : ControllerBase, IUserService
+    public class UserService : IUserService
     {
         /// <summary>
         /// Returns userDTO from token
         /// </summary>
         /// <param name="identity"></param>
         /// <param name="userManager"></param>
-        /// <param name="mapper"></param>
         /// <returns></returns>
-        async Task<IActionResult> IUserService.GetUserByIdAsync(ClaimsIdentity identity, 
-            UserManager<ApplicationUser> userManager, IUserMapper mapper)
+        public async Task<ApplicationUser> GetUserByIdAsync(ClaimsIdentity identity, 
+            UserManager<ApplicationUser> userManager)
         {
             int userId = 0;
 
@@ -37,13 +33,36 @@ namespace Services.Services
             if (user != null)
             {
                 // fix to return user only and return userDTO in controller
-                var userDTO = mapper.MapToDTO(user);
-                return Ok(userDTO);
+                return user;
             }
             else
             {
-                return NotFound();
+                return null;
             }
+        }
+
+
+        /// <summary>
+        /// Edit user
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="userManager"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+
+        public async Task<ApplicationUser> UpdateUserAsync(ClaimsIdentity identity, UserManager<ApplicationUser> userManager,
+            UserDTO model)
+        {
+            var user = await GetUserByIdAsync(identity, userManager);
+            //userManager.
+            return null;
+        }
+
+        public async Task DeleteUserAsync(ClaimsIdentity identity, UserManager<ApplicationUser> userManager)
+        {
+            var user = await GetUserByIdAsync(identity, userManager);
+            userManager.DeleteAsync(user);
+            // what http to send here ??
         }
     }
 }
