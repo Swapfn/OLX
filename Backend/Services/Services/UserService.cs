@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Models.DTO;
 using Models.Models;
 using Services.Contracts;
@@ -54,15 +55,38 @@ namespace Services.Services
             UserDTO model)
         {
             var user = await GetUserByIdAsync(identity, userManager);
-            //userManager.
-            return null;
+            //user.UserName = user.UserName;
+            user.AboutMe = model.AboutMe;
+            user.PhoneNumber = model.Phone;
+            user.FName = model.FirstName;
+            user.LName = model.LastName;
+            user.NormalizedEmail = model.Email.ToUpper();
+            user.Email = model.Email;
+
+
+            var result = await userManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                return user;
+            }
+            else
+            {
+                return null;
+            }
         }
 
-        public async Task DeleteUserAsync(ClaimsIdentity identity, UserManager<ApplicationUser> userManager)
+        public async Task<StatusCodeResult> DeleteUserAsync(ClaimsIdentity identity, UserManager<ApplicationUser> userManager)
         {
             var user = await GetUserByIdAsync(identity, userManager);
-            userManager.DeleteAsync(user);
-            // what http to send here ??
+            var result = await userManager.DeleteAsync(user);
+            if (result.Succeeded)
+            {
+                return new StatusCodeResult(204);
+            }
+            else
+            {
+                return new StatusCodeResult(400);
+            }
         }
     }
 }

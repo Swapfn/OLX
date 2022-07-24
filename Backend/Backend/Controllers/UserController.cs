@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Models.DTO;
 using Models.Models;
 using Services.Contracts;
 using System.Security.Claims;
@@ -48,16 +49,34 @@ namespace WepAPI.Controllers
 
 
         [Authorize]
-        [HttpGet]
+        [HttpPut]
         [Route("update")]
-        public async Task<IActionResult> UpdateUserDataAsync()
+        public async Task<IActionResult> UpdateUserDataAsync(UserDTO model)
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;
-            var user = await _user.GetUserByIdAsync(identity, _userManager);
+            var user = await _user.UpdateUserAsync(identity, _userManager, model);
             if (user != null)
             {
                 var userDTO = _mapper.MapToDTO(user);
-                return Ok(userDTO);
+                return Ok(new { userDTO, message="User Update Successfuly"});
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+
+        [Authorize]
+        [HttpDelete]
+        [Route("delete")]
+        public async Task<IActionResult> DeleteUserDataAsync()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            var result = await _user.DeleteUserAsync(identity, _userManager);
+            if (result.StatusCode == 204)
+            {
+                return Ok(new {Message = "Deleted Successfuly"});
             }
             else
             {
