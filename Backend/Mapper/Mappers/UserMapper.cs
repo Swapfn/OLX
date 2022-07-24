@@ -15,6 +15,8 @@ namespace Mapper.Mappers
             user.FName = userDTO.FirstName;
             user.LName = userDTO.LastName;
             user.Email = userDTO.Email;
+            user.PhoneNumber = userDTO.Phone;
+            user.AboutMe = userDTO.AboutMe;
             return user;
         }
 
@@ -25,6 +27,8 @@ namespace Mapper.Mappers
             userDTO.FirstName = user.FName;
             userDTO.LastName = user.LName;
             userDTO.Email = user.Email;
+            userDTO.AboutMe = user.AboutMe;
+            userDTO.Phone = user.PhoneNumber;
             return userDTO;
         }
     }

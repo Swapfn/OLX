@@ -1,4 +1,4 @@
-﻿using Mapper.Contracts;
+﻿
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -9,17 +9,21 @@ using System.Security.Claims;
 
 namespace Services.Services
 {
-    public class UserService : ControllerBase, IUserService
+    public class UserService : IUserService
     {
+        private readonly UserManager<ApplicationUser> _userManager;
+        public UserService(UserManager<ApplicationUser> userManager)
+        {
+            _userManager = userManager;
+        }
         /// <summary>
         /// Returns userDTO from token
         /// </summary>
         /// <param name="identity"></param>
         /// <param name="userManager"></param>
-        /// <param name="mapper"></param>
         /// <returns></returns>
-        async Task<IActionResult> IUserService.GetUserByIdAsync(ClaimsIdentity identity, 
-            UserManager<ApplicationUser> userManager, IUserMapper mapper)
+        public async Task<ApplicationUser> GetUserByIdAsync(ClaimsIdentity identity,
+            UserManager<ApplicationUser> userManager)
         {
             int userId = 0;
 
@@ -32,17 +36,58 @@ namespace Services.Services
 
             // find user by id
             var user = await userManager.FindByIdAsync(userId.ToString());
+            return user;
+        }
 
-            // map the user if exists
-            if (user != null)
+
+        /// <summary>
+        /// Edit user
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="userManager"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+
+        public async Task<ApplicationUser> UpdateUserAsync(ClaimsIdentity identity, UserManager<ApplicationUser> userManager,
+            UserDTO model)
+        {
+            var user = await GetUserByIdAsync(identity, userManager);
+            user.AboutMe = model.AboutMe;
+            user.PhoneNumber = model.Phone;
+            user.FName = model.FirstName;
+            user.LName = model.LastName;
+            user.NormalizedEmail = model.Email.ToUpper();
+            user.Email = model.Email;
+
+
+            var result = await userManager.UpdateAsync(user);
+            if (result.Succeeded)
             {
-                // fix to return user only and return userDTO in controller
-                var userDTO = mapper.Map(user);
-                return Ok(userDTO);
+                return user;
             }
             else
             {
-                return NotFound();
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Delete User 
+        /// </summary>
+        /// <param name="identity"></param>
+        /// <param name="userManager"></param>
+        /// <returns></returns>
+        public async Task<StatusCodeResult> DeleteUserAsync(ClaimsIdentity identity, UserManager<ApplicationUser> userManager)
+        {
+            var user = await GetUserByIdAsync(identity, userManager);
+            var result = await userManager.DeleteAsync(user);
+            if (result.Succeeded)
+            {
+                return new StatusCodeResult(204);
+            }
+            else
+            {
+                return new StatusCodeResult(400);
             }
         }
     }

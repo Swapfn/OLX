@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Models.DTO;
 using Models.Models;
+using Services.Contracts;
+using System.Security.Claims;
 
 namespace Services
 {
@@ -13,8 +15,8 @@ namespace Services
         public Task<IActionResult> LoginAsync(LoginDTO model, UserManager<ApplicationUser> usermanager,
             RoleManager<ApplicationRole> rolemanager, ITokenService token);
 
-        public Task<IActionResult> ChangePasswordAsync(ChangePasswordDTO model, UserManager<ApplicationUser> usermanager,
-            RoleManager<ApplicationRole> rolemanager, ITokenService token);
+        public Task<IActionResult> ChangePasswordAsync(ClaimsIdentity identity, ChangePasswordDTO model, UserManager<ApplicationUser> usermanager,
+            RoleManager<ApplicationRole> rolemanager, ITokenService token, IUserService user);
 
     }
 }
