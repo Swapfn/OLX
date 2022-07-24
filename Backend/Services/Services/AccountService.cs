@@ -54,12 +54,12 @@ namespace Services
             // if fail
             if (!resultRole.Succeeded && !resultUser.Succeeded)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, new 
+                return StatusCode(StatusCodes.Status500InternalServerError, new
                 { Status = "Error", Message = "User creation failed! Please check user details and try again." });
             }
 
             // if succeeded
-            return Created("",new { Status = "Success", Message = "User created successfully!" });
+            return Created("", new { Status = "Success", Message = "User created successfully!" });
         }
 
 
@@ -78,12 +78,12 @@ namespace Services
             // check if username exists
             var user = await userManager.FindByNameAsync(model.Username);
             if (user == null)
-                return NotFound(new { Status="Error", Message = "Username Doesn't Exist!!" });
+                return NotFound(new { Status = "Error", Message = "Username Doesn't Exist!!" });
 
             // check if passowrd is correct
             if (await userManager.CheckPasswordAsync(user, model.Password))
             {
-                var roles = await userManager.GetRolesAsync(user);  
+                var roles = await userManager.GetRolesAsync(user);
                 var token = await _token.CreateToken(user, roles, roleManager);
 
                 return Ok(new
@@ -95,7 +95,8 @@ namespace Services
             }
             return Unauthorized(new
             {
-                Status = "Error", Message = "Incorrect Password"
+                Status = "Error",
+                Message = "Incorrect Password"
             });
         }
 
@@ -129,7 +130,7 @@ namespace Services
 
                 return Ok(new
                 {
-                    message = "Password Changed Successfuly",
+                    message = "Password Changed Successfully",
                     token = new JwtSecurityTokenHandler().WriteToken(token),
                     expiration = token.ValidTo
                 });

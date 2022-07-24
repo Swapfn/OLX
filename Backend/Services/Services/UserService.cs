@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Models.DTO;
 using Models.Models;
@@ -9,13 +11,18 @@ namespace Services.Services
 {
     public class UserService : IUserService
     {
+        private readonly UserManager<ApplicationUser> _userManager;
+        public UserService(UserManager<ApplicationUser> userManager)
+        {
+            _userManager = userManager;
+        }
         /// <summary>
         /// Returns userDTO from token
         /// </summary>
         /// <param name="identity"></param>
         /// <param name="userManager"></param>
         /// <returns></returns>
-        public async Task<ApplicationUser> GetUserByIdAsync(ClaimsIdentity identity, 
+        public async Task<ApplicationUser> GetUserByIdAsync(ClaimsIdentity identity,
             UserManager<ApplicationUser> userManager)
         {
             int userId = 0;
@@ -29,17 +36,7 @@ namespace Services.Services
 
             // find user by id
             var user = await userManager.FindByIdAsync(userId.ToString());
-
-            // map the user if exists
-            if (user != null)
-            {
-                // fix to return user only and return userDTO in controller
-                return user;
-            }
-            else
-            {
-                return null;
-            }
+            return user;
         }
 
 
