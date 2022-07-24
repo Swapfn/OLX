@@ -58,7 +58,7 @@ namespace WepAPI.Controllers
             if (user != null)
             {
                 var userDTO = _mapper.MapToDTO(user);
-                return Ok(new { userDTO, message="User Update Successfuly"});
+                return StatusCode(StatusCodes.Status202Accepted ,new { userDTO, message = "User Update Successfuly" });
             }
             else
             {
@@ -76,7 +76,7 @@ namespace WepAPI.Controllers
             var result = await _user.DeleteUserAsync(identity, _userManager);
             if (result.StatusCode == 204)
             {
-                return Ok(new {Message = "Deleted Successfuly"});
+                return StatusCode(StatusCodes.Status204NoContent ,new {Message = "Deleted Successfuly"});
             }
             else
             {

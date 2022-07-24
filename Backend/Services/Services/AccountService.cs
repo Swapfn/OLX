@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Models.DTO;
 using Models.Models;
+using Services.Contracts;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace Services
 {
@@ -29,18 +31,24 @@ namespace Services
             // create user
             ApplicationUser user = new()
             {
-                UserName = model.Username,
-                Email = model.Email,
                 // snapshot of current user credientials, if they change, security stamp will change
                 SecurityStamp = Guid.NewGuid().ToString(),
+                // user fields
+                UserName = model.Username,
+                Email = model.Email,
                 FName = model.FName,
                 LName = model.LName,
                 AboutMe = model.AboutMe,
                 PhoneNumber = model.Phone
             };
 
+
             // bind user and role
             var resultUser = await userManager.CreateAsync(user, model.Password);
+            if (!resultUser.Succeeded)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Errors = resultUser.Errors });
+            }
             var resultRole = await userManager.AddToRoleAsync(user, "User");
 
             // if fail
@@ -51,7 +59,7 @@ namespace Services
             }
 
             // if succeeded
-            return Ok(new { Status = "Success", Message = "User created successfully!" });
+            return Created("",new { Status = "Success", Message = "User created successfully!" });
         }
 
 
@@ -80,8 +88,9 @@ namespace Services
 
                 return Ok(new
                 {
-                    token = new JwtSecurityTokenHandler().WriteToken(token),
-                    expiration = token.ValidTo
+                    Message = "Login Successful",
+                    Token = new JwtSecurityTokenHandler().WriteToken(token),
+                    Expiration = token.ValidTo
                 });
             }
             return Unauthorized(new
@@ -99,11 +108,11 @@ namespace Services
         /// <param name="roleManager"></param>
         /// <param name="_token"></param>
         /// <returns></returns>
-        public async Task<IActionResult> ChangePasswordAsync(ChangePasswordDTO model, UserManager<ApplicationUser> userManager,
-            RoleManager<ApplicationRole> roleManager, ITokenService _token)
+        public async Task<IActionResult> ChangePasswordAsync(ClaimsIdentity identity, ChangePasswordDTO model, UserManager<ApplicationUser> userManager,
+            RoleManager<ApplicationRole> roleManager, ITokenService _token, IUserService _user)
         {
             // check if username exists
-            var user = await userManager.FindByNameAsync(model.Username);
+            var user = await _user.GetUserByIdAsync(identity, userManager);
             if (user == null)
                 return NotFound(new { Status = "Error", Message = "Username Doesn't Exist!!" });
 

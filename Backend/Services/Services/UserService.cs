@@ -55,7 +55,6 @@ namespace Services.Services
             UserDTO model)
         {
             var user = await GetUserByIdAsync(identity, userManager);
-            //user.UserName = user.UserName;
             user.AboutMe = model.AboutMe;
             user.PhoneNumber = model.Phone;
             user.FName = model.FirstName;
@@ -75,6 +74,12 @@ namespace Services.Services
             }
         }
 
+        /// <summary>
+        /// Delete User 
+        /// </summary>
+        /// <param name="identity"></param>
+        /// <param name="userManager"></param>
+        /// <returns></returns>
         public async Task<StatusCodeResult> DeleteUserAsync(ClaimsIdentity identity, UserManager<ApplicationUser> userManager)
         {
             var user = await GetUserByIdAsync(identity, userManager);
