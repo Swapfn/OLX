@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Models.DTO;
 using Models.Models;
 using Services.Contracts;
 using System.Security.Claims;
@@ -13,19 +14,14 @@ namespace WepAPI.Controllers
     public class UserController : APIBaseController
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly RoleManager<ApplicationRole> _roleManager;
-        private readonly IUserMapper _mapper;
-        private readonly IUserService _user;
+        private readonly IUserMapper _userMapper;
+        private readonly IUserService _userService;
 
-        public UserController(
-            UserManager<ApplicationUser> userManager,
-            RoleManager<ApplicationRole> roleManager,
-            IUserService user, IUserMapper mapper)
+        public UserController(UserManager<ApplicationUser> userManager, IUserService userService, IUserMapper userMapper)
         {
             _userManager = userManager;
-            _roleManager = roleManager;
-            _mapper = mapper;
-            _user = user;
+            _userMapper = userMapper;
+            _userService = userService;
 
         }
 
@@ -35,29 +31,48 @@ namespace WepAPI.Controllers
         public async Task<IActionResult> GetUserDataAsync()
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;
-            var user = await _user.GetUserByIdAsync(identity, _userManager);
+            var user = await _userService.GetUserByIdAsync(identity, _userManager);
             if (user != null)
             {
-                var userDTO = _mapper.MapToDTO(user);
+                var userDTO = _userMapper.MapToDTO(user);
                 return Ok(userDTO);
-            } else
+            }
+            else
             {
-                return NotFound();    
+                return NotFound();
             }
         }
 
 
         [Authorize]
-        [HttpGet]
+        [HttpPut]
         [Route("update")]
-        public async Task<IActionResult> UpdateUserDataAsync()
+        public async Task<IActionResult> UpdateUserDataAsync(UserDTO model)
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;
-            var user = await _user.GetUserByIdAsync(identity, _userManager);
+            var user = await _userService.UpdateUserAsync(identity, _userManager, model);
             if (user != null)
             {
-                var userDTO = _mapper.MapToDTO(user);
-                return Ok(userDTO);
+                var userDTO = _userMapper.MapToDTO(user);
+                return StatusCode(StatusCodes.Status202Accepted, new { userDTO, message = "User Update Successfully" });
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+
+        [Authorize]
+        [HttpDelete]
+        [Route("delete")]
+        public async Task<IActionResult> DeleteUserDataAsync()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            var result = await _userService.DeleteUserAsync(identity, _userManager);
+            if (result.StatusCode == 204)
+            {
+                return StatusCode(StatusCodes.Status204NoContent, new { Message = "Deleted Successfully" });
             }
             else
             {

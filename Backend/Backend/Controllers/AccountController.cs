@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Models.DTO;
 using Models.Models;
 using Services;
+using Services.Contracts;
 using System.Security.Claims;
 
 namespace WepAPI.Controllers
@@ -16,13 +17,15 @@ namespace WepAPI.Controllers
         private readonly IAccountService _accountService;
         private readonly ITokenService _tokenService;
         private readonly IUserMapper _userMapper;
+        private readonly IUserService _user;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             RoleManager<ApplicationRole> roleManager,
             IAccountService accountService,
             ITokenService tokenService,
-            IUserMapper userMapper
+            IUserMapper userMapper,
+            IUserService user
             )
         {
             _userManager = userManager;
@@ -30,6 +33,7 @@ namespace WepAPI.Controllers
             _accountService = accountService;
             _tokenService = tokenService;
             _userMapper = userMapper;
+            _user = user;
 
         }
 
@@ -52,11 +56,13 @@ namespace WepAPI.Controllers
         }
 
         // POST changePassword
+        [Authorize]
         [HttpPost]
         [Route("changePassword")]
         public async Task<IActionResult> ChangePasswordAsync(ChangePasswordDTO model)
         {
-            return await _accountService.ChangePasswordAsync(model, _userManager, _roleManager, _tokenService);
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            return await _accountService.ChangePasswordAsync(identity, model, _userManager, _roleManager, _tokenService, _user);
 
         }
 
