@@ -14,11 +14,19 @@ namespace Data.Repositories.Repositories
 
         public IEnumerable<Post> GetAll(FilterDTO filterObject)
         {
-            IEnumerable<Post> postList= this.DbContext.Posts;
-            if (filterObject.locationId!=null)
-                postList= postList.Where(p => p.LocationId == filterObject.locationId);
-            if(filterObject.subCategoryId!=null)
+            IEnumerable<Post> postList = this.DbContext.Posts;
+
+            if (filterObject.locationId != null)
+                postList = postList.Where(p => p.LocationId == filterObject.locationId);
+            if (filterObject.subCategoryId != null)
                 postList = postList.Where(p => p.SubCategoryId == filterObject.subCategoryId);
+            if (filterObject.maxPrice != null)
+                postList = postList.Where(p => p.Price <= filterObject.maxPrice);
+            if (filterObject.minPrice != null)
+                postList = postList.Where(p => p.Price >= filterObject.minPrice);
+            /*if (filterObject.categoryId != null)
+                postList = postList.Where(p => p.SubCategory.CategoryID >= filterObject.categoryId);*/
+
             return postList;
         }
 

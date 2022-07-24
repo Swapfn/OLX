@@ -102,7 +102,7 @@ namespace WepAPI.Controllers
             return Ok("Post deleted");
         }
         [HttpPost]
-        [Route("")]
+        [Route("filter")]
         public IActionResult GetAll(FilterDTO filterObject)
         {
             IEnumerable<PostDTO> postDTO = _postService.GetAll(filterObject);
