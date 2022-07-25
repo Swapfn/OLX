@@ -1,15 +1,20 @@
-import { Photo } from "./photo";
+import { Photo } from "./Photo";
 
 export interface Post {
+    userId:number;
     id: number;
-    adTtitle: string;
+    adTitle: string;
     categoryId: number;
-    subCategoryId: number;
-    isNew: boolean;
+    subcategoryId:number;
+    subcategoryName:string
     description: string;
+    isNew:boolean;
     price: number;
-    negotiable: boolean;
+    negotiatable: boolean;
     photos: Photo[];
-    locationId: string;
+    location: string;
     createdAt: Date;
+    userFullname:string;
+    phoneNumber:number;
+    
 }
