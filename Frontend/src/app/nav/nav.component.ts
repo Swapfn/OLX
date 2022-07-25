@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
@@ -52,37 +52,13 @@ export class NavComponent implements OnInit {
   }
 
 
-  // constructor() { }
 
-  // ngOnInit(): void {
-  // }
-  // //______________________Location Filter_________________________________________
-  // EgyCities=["Alexandria","Awan","Asyut","Beheira","Beni Suef","Cairo","Dakahlia","Damietta",
-  // "Faiyum","Gharbia","Giza","Ismailia","Kafr El Sheikh","Luxor","Matruh","Minya","Monufia","New Valley",
-  // "North Sinai","Port Said","Qalyubia","Qena","Red Sea","Sharqia","Sohag","South Sinai","Suez"]
+  //________________________________Search___________________________________________
 
-  // locationSelectedValue:string="Egypt";
+  searchValue:string="";
 
-  // @Output()
-  // locationselect:EventEmitter<string> = new EventEmitter<string>();
-
-  // onlocationSelect(e:any){
-  //   this.locationselect.emit(this.locationSelectedValue)
-  //   //console.log(this.locationSelectedValue);
-  // }
-
-
-  // //________________________________Search___________________________________________
-
-  // searchValue:string="";
-
-  // @Output()
-  // searchText:EventEmitter<string>= new EventEmitter<string>();
-
-  // OnsearchText(){
-  //   this.searchText.emit(this.searchValue);
-
-  // }
+  OnsearchText(){ 
+  }
 
 
 
