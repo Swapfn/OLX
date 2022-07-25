@@ -95,6 +95,12 @@ namespace Data.Repositories.Repositories
         {
             return this.DbContext.Posts.Any(post => post.PostId == id);
         }
+
+        public IEnumerable<Post> GetAll(string title)
+        {
+            IEnumerable<Post> postList = this.DbContext.Posts;
+            return postList.Where(p => p.Title== title);
+        }
     }
 }
 

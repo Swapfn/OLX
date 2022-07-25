@@ -99,5 +99,17 @@ namespace Services
             }
             return postDTOs;
         }
+
+        public IEnumerable<PostDTO> GetAll(string title)
+        {
+            IEnumerable<Post> posts = _postRepository.GetAll(title);
+            List<PostDTO> postDTOs = new List<PostDTO>();
+            foreach (var post in posts)
+            {
+                PostDTO postDTO = _postMapper.MapToDTO(post);
+                postDTOs.Add(postDTO);
+            }
+            return postDTOs;
+        }
     }
 }

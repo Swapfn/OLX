@@ -10,5 +10,6 @@ namespace Data.Repositories.Contracts
         PagedResult<Post> GetAll(int PageNumber, int PageSize, string SortBy = "", string SortDirection = "");
         bool IsExist(int id);
         IEnumerable<Post> GetAll(FilterDTO filterObject);
+        IEnumerable<Post> GetAll(string titlet);
     }
 }

@@ -14,5 +14,6 @@ namespace Services
         void SavePost();
         string Validate(PostDTO postDTO);
         IEnumerable<PostDTO> GetAll(FilterDTO filterObject);
+        IEnumerable<PostDTO> GetAll(string title);
     }
 }

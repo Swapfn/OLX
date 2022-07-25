@@ -25,8 +25,8 @@ namespace WepAPI.Controllers
 
         // GET Posts
         [HttpGet]
-        [Route("{PageNumber}/{PageSize}/{SortBy}/{SortDirection}")]
-        public IActionResult GetAll(int PageNumber, int PageSize, string SortBy, string SortDirection)
+        [Route("{PageNumber}/{PageSize}/{SortBy?}/{SortDirection?}")]
+        public IActionResult GetAll(int PageNumber, int PageSize, string? SortBy, string? SortDirection)
         {
             PagedResult<PostDTO> postDTO = _postService.GetAll(PageNumber, PageSize, SortBy, SortDirection);
             return Ok(postDTO);
@@ -117,6 +117,13 @@ namespace WepAPI.Controllers
         public IActionResult GetAll(FilterDTO filterObject)
         {
             IEnumerable<PostDTO> postDTO = _postService.GetAll(filterObject);
+            return Ok(postDTO);
+        }
+        [HttpGet]
+        [Route("{title:alpha}")]
+        public IActionResult GetAll(string title)
+        {
+            IEnumerable<PostDTO> postDTO = _postService.GetAll(title);
             return Ok(postDTO);
         }
     }
