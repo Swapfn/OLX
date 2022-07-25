@@ -8,7 +8,15 @@ namespace Data.Repositories.Contracts
     {
         public Post GetById(int id);
         PagedResult<Post> GetAll(int PageNumber, int PageSize, string SortBy = "", string SortDirection = "");
-        bool IsExist(int id);
         IEnumerable<Post> GetAll(FilterDTO filterObject);
+        bool IsExist(int id);
+
+        /// <summary>
+        /// Get user posts by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        IEnumerable<Post> GetAvailablePostsByUser(int id);
+
     }
 }

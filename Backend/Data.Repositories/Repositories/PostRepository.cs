@@ -95,5 +95,19 @@ namespace Data.Repositories.Repositories
         {
             return this.DbContext.Posts.Any(post => post.PostId == id);
         }
+
+
+        /// <summary>
+        /// Get user posts by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public IEnumerable<Post> GetAvailablePostsByUser(int id)
+        {
+            return DbContext.Posts.Where(p => p.UserID == id && p.Available).ToList();
+        }
+
+        
     }
 }
