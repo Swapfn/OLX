@@ -13,7 +13,7 @@ const routes: Routes = [
     //canActivate: [AuthGuard],
     children: [
       { path: "profile", component: ProfileEditComponent },
-      { path: "home", component: HomePageComponent }
+      { path: "welcome", component: HomePageComponent }
     ]
   },
   { path: "**", component: HomeComponent, pathMatch: "full" }
