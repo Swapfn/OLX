@@ -12,6 +12,26 @@ namespace Data.Repositories.Repositories
         {
         }
 
+        public IEnumerable<Post> GetAll(FilterDTO filterObject)
+        {
+            IEnumerable<Post> postList = this.DbContext.Posts;
+
+            if (filterObject.locationId != null)
+                postList = postList.Where(p => p.LocationId == filterObject.locationId);
+            if (filterObject.subCategoryId != null)
+                postList = postList.Where(p => p.SubCategoryId == filterObject.subCategoryId);
+            if (filterObject.maxPrice != null)
+                postList = postList.Where(p => p.Price <= filterObject.maxPrice);
+            if (filterObject.minPrice != null)
+                postList = postList.Where(p => p.Price >= filterObject.minPrice);
+            /*if (filterObject.categoryId != null)
+                postList = postList.Where(p => p.SubCategory.CategoryID >= filterObject.categoryId);*/
+
+            return postList;
+        }
+
+        }
+
         public Post GetById(int id) => this.DbContext.Posts.Include(p => p.User).Include(l => l.Location).Include(s => s.SubCategory).FirstOrDefault(p => p.PostId == id);
 
         public PagedResult<Post> GetAll(int PageNumber, int PageSize, string SortBy = "CreatedAt", string SortDirection = "")

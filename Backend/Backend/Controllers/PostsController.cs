@@ -112,5 +112,12 @@ namespace WepAPI.Controllers
             _postService.SavePost();
             return Ok("Post deleted");
         }
+        [HttpPost]
+        [Route("filter")]
+        public IActionResult GetAll(FilterDTO filterObject)
+        {
+            IEnumerable<PostDTO> postDTO = _postService.GetAll(filterObject);
+            return Ok(postDTO);
+        }
     }
 }

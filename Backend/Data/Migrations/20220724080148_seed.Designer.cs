@@ -12,8 +12,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
+<<<<<<<< HEAD:Backend/Data/Migrations/20220724080148_seed.Designer.cs
     [Migration("20220724080148_seed")]
     partial class seed
+========
+    [Migration("20220723225438_filter")]
+    partial class filter
+>>>>>>>> origin/filter:Backend/Data/Migrations/20220723225438_filter.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -145,14 +150,22 @@ namespace Data.Migrations
                         new
                         {
                             Id = 1,
+<<<<<<<< HEAD:Backend/Data/Migrations/20220724080148_seed.Designer.cs
                             ConcurrencyStamp = "cbfac681-0e43-4bea-ac28-d6ce2de6a240",
+========
+                            ConcurrencyStamp = "7f13a416-7f3b-4378-9efd-b29ea25f32b4",
+>>>>>>>> origin/filter:Backend/Data/Migrations/20220723225438_filter.Designer.cs
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
+<<<<<<<< HEAD:Backend/Data/Migrations/20220724080148_seed.Designer.cs
                             ConcurrencyStamp = "7d41e944-89e2-485d-98ad-ce7ad260e24b",
+========
+                            ConcurrencyStamp = "482adf81-4cde-45b4-af01-7b86b6cd87b9",
+>>>>>>>> origin/filter:Backend/Data/Migrations/20220723225438_filter.Designer.cs
                             Name = "User",
                             NormalizedName = "USER"
                         });

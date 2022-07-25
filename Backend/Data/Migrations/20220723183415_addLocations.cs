@@ -5,7 +5,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
 {
+<<<<<<<< HEAD:Backend/Data/Migrations/20220723183415_addLocations.cs
     public partial class addLocations : Migration
+========
+    public partial class filter : Migration
+>>>>>>>> origin/filter:Backend/Data/Migrations/20220723225438_filter.cs
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -268,8 +272,13 @@ namespace Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
+<<<<<<<< HEAD:Backend/Data/Migrations/20220723183415_addLocations.cs
                     { 1, "8fe6f74f-6a70-48e6-9bb8-0a0a6144a27d", "Admin", "ADMIN" },
                     { 2, "af3f9497-a05c-407c-bb65-65c2d1b6d73e", "User", "USER" }
+========
+                    { 1, "7f13a416-7f3b-4378-9efd-b29ea25f32b4", "Admin", "ADMIN" },
+                    { 2, "482adf81-4cde-45b4-af01-7b86b6cd87b9", "User", "USER" }
+>>>>>>>> origin/filter:Backend/Data/Migrations/20220723225438_filter.cs
                 });
 
             migrationBuilder.InsertData(
