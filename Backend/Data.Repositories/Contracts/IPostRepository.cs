@@ -18,5 +18,12 @@ namespace Data.Repositories.Contracts
         /// <returns></returns>
         IEnumerable<Post> GetAvailablePostsByUser(int id);
 
+        /// <summary>
+        /// Get the unavailable user posts
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        IEnumerable<Post> GetUnavailablePostsByUser(int id);
+
     }
 }
