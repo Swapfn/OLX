@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Post } from '../_models/Post';
+import { PostService } from '../_services/post.service';
 
 @Component({
   selector: 'app-home-page',
@@ -7,10 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor() { }
+  AllPosts:Post[];
+
+  constructor(private PostService:PostService) { }
 
   ngOnInit(): void {
+    this.loadPosts();
   }
+
+  TotaPostsNumb(){
+    return this.AllPosts.length;
+  }
+
+  loadPosts(){
+    this.PostService.getAllPosts().subscribe(p=>{this.AllPosts=p;})
+  }
+
+
+ 
 
 
   Items=
@@ -51,28 +67,8 @@ export class HomePageComponent implements OnInit {
   ]
 
 
-  getTotalitems(){
-    return this.Items.length;
-  }
-
-
- //_______________________Location Filter____________________________
  
-  locationchanged:string="Egypt";
 
-  onLocationChange(city:string){
-    this.locationchanged=city;
-  }
-
- //_______________________Search____________________________
-
-  searchText:string="";
-
-  OnsearchTextChange(searchValue:string){
-    this.searchText=searchValue;
-    console.log(this.searchText);
-
-  }
 
   //_______________________favorite post____________________________
 
@@ -84,6 +80,7 @@ export class HomePageComponent implements OnInit {
   favorite(i:object){
     this.Fav=!this.Fav;
     this.FavPosts.push(i)
+    console.log(this.FavPosts);
   }
 
 

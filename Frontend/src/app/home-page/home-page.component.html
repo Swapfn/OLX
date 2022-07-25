@@ -1,47 +1,66 @@
-<div class="global">
+<!-- <div class="global">
   <app-nav (locationselect)="onLocationChange($event)" 
   (searchText)="OnsearchTextChange($event)">
 </app-nav>
+</div> -->
 
+<!-- ________________________Manually_________________________________ -->
 
-</div>
-
-
-<div class=" global row row-cols-2 row-cols-md-4 g-4 m-3">
-
-  <!-- <ng-container *ngFor="let i of Items">
-
-    <ng-container *ngIf="searchText === ''|| i.title.toLowerCase().includes(searchText)"> -->
-
-      <!-- <div *ngIf="locationchanged === 'Egypt'|| locationchanged===i.city"> -->
-
-        <div  *ngFor="let i of Items" class="col" >
-          <div class="card h-100">
-            <img src="{{i.photo[0].src}}" class="card-img-top" alt={{i.title}}>
-            <div></div>
-            <div class="card-body">
-              <div class="d-flex align-items-start">
-                <p class="card-text">{{i.title}}</p>
-                <div (click)="favorite(i)" class="m-1">
-                  <i [ngClass]="Fav ? 'fa-solid fa-heart fa-lg' : 'fa-regular fa-heart fa-lg'"></i>
-                </div>
-              </div>
-              <div class="d-flex align-items-center">
-                <h4 class="card-title">{{i.price}} EGP</h4>
-                <small class="card-text text-muted mx-2" *ngIf="i.nego_Price">negotaitable</small>
-              </div>
-              <p class="card-text"><small class="text-muted">{{i.area+" , "+i.city}}</small></p>
-              <!-- <a href="#" class=" stretched-link"></a> -->
-            </div>
+<div class="global row row-cols-2 row-cols-md-4 g-4 m-3">
+  <div *ngFor="let i of Items" class="col">
+    <div class="card h-100">
+      <img src="{{ i.photo[0].src }}" class="card-img-top" alt="{{ i.title }}" />
+      <div></div>
+      <div class="card-body">
+        <div class="d-flex align-items-start">
+          <p class="card-text">{{ i.title }}</p>
+          <div (click)="favorite(i)" class="m-1">
+            <i [ngClass]="
+                Fav ? 'fa-solid fa-heart fa-lg' : 'fa-regular fa-heart fa-lg'
+              "></i>
           </div>
         </div>
-
-      <!-- </div> -->
-
-    <!-- </ng-container>
-
-  </ng-container> -->
-
+        <div class="d-flex align-items-center">
+          <h4 class="card-title">{{ i.price }} EGP</h4>
+          <small class="card-text text-muted mx-2" *ngIf="i.nego_Price">negotaitable</small>
+        </div>
+        <p class="card-text">
+          <small class="text-muted">{{ i.area + " , " + i.city }}</small>
+        </p>
+        <a href="#" routerLink="/Postdetails/{{i.Id}}" class=" stretched-link"></a>
+      </div>
+    </div>
+  </div>
 </div>
 
-<i class="fa-regular fa-heart"></i>
+
+
+<!-- ________________________Using API_________________________________ -->
+
+<div class="global row row-cols-2 row-cols-md-4 g-4 m-3">
+  <div *ngFor="let post of AllPosts" class="col">
+    <div class="card h-100">
+      <div class="card-img-wrapper">
+        <img src="{{ post.photos[0].photoUrl }}" class="card-img-top" alt="{{ post.adTitle}}" />
+      </div>
+      <div class="card-body">
+        <div class="d-flex align-items-start">
+          <p class="card-text">{{ post.adTitle }}</p>
+          <div (click)="favorite(post)" class="m-1">
+            <i [ngClass]="
+                Fav ? 'fa-solid fa-heart fa-lg' : 'fa-regular fa-heart fa-lg'
+              "></i>
+          </div>
+        </div>
+        <div class="d-flex align-items-center">
+          <h4 class="card-title">{{ post.price }} EGP</h4>
+          <small class="card-text text-muted mx-2" *ngIf="post.negotiatable">negotaitable</small>
+        </div>
+        <p class="card-text">
+          <small class="text-muted">{{ post.location }}</small>
+        </p>
+         <a href="#" routerLink="/Postdetails/{{post.id}}"  class=" stretched-link"></a>
+      </div>
+    </div>
+  </div>
+</div>

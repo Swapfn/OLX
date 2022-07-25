@@ -25,9 +25,7 @@ export class PostDetailsComponent implements OnInit {
   loadPost(){
    this.PostService.getPost(this.id).subscribe(p=>{this.Post=p;});
   }
-  getUser(){
-    this.AccountService.
-  }
+ 
 
 
 

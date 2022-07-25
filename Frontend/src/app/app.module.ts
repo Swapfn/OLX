@@ -14,6 +14,11 @@ import { NavComponent } from './nav/nav.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { LocationFilterComponent } from './location-filter/location-filter.component';
 import { SharedModule } from './_modules/shared.module';
+import { MyPostsComponent } from './my-posts/my-posts.component';
+import { AddPostComponent } from './add-post/add-post.component';
+import { PostDetailsComponent } from './post-details/post-details.component';
+import { FooterComponent } from './footer/footer.component';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +29,11 @@ import { SharedModule } from './_modules/shared.module';
     ProfileEditComponent,
     NavComponent,
     HomePageComponent,
-    LocationFilterComponent
+    LocationFilterComponent,
+    MyPostsComponent,
+    AddPostComponent,
+    PostDetailsComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +41,8 @@ import { SharedModule } from './_modules/shared.module';
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+ 
   ],
   providers: [],
   bootstrap: [AppComponent]
