@@ -19,7 +19,6 @@ namespace Data
         public DbSet<PostImage> PostImages { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Post> Posts { get; set; }
-        public DbSet<UserPosts> UserPosts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -37,21 +36,6 @@ namespace Data
                 .WithOne(u => u.Role)
                 .HasForeignKey(ur => ur.RoleId)
                 .IsRequired();
-
-            // userposts
-            modelBuilder.Entity<ApplicationUser>()
-                .HasMany(up => up.UserPosts)
-                .WithOne(u => u.Users)
-                .HasForeignKey(up => up.UserId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.NoAction);
-
-            modelBuilder.Entity<Post>()
-                .HasMany(up => up.UserPosts)
-                .WithOne(u => u.Posts)
-                .HasForeignKey(up => up.PostsId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.NoAction);
 
 
             modelBuilder.ApplyConfiguration(new CategoryConfigration());

@@ -23,6 +23,5 @@ namespace Models.Models
         }
 
         public ICollection<ApplicationUserRole> UserRoles { get; set; }
-        public ICollection<UserPosts> UserPosts { get; set; }
     }
 }

@@ -22,7 +22,5 @@ namespace Models.Models
         {
             PostImages = new List<PostImage>();
         }
-        public ICollection<UserPosts> UserPosts { get; set; }
-
     }
 }
