@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { Token } from '../_models/token';
 import { AccountService } from '../_services/account.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { AccountService } from '../_services/account.service';
 export class NavComponent implements OnInit {
   model: any = {};
   loggedIn: boolean;
-  currentUser$: Observable<string>;
+  currentUser$: Observable<Token>;
 
   constructor(public accountService: AccountService, private router: Router, private toast: ToastrService) { }
 
