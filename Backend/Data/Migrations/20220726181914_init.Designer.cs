@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220726160813_init")]
+    [Migration("20220726181914_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -145,14 +145,14 @@ namespace Data.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "60398db5-0711-4a99-aed8-d4601d3fa1a5",
+                            ConcurrencyStamp = "2a151115-e577-4235-856c-b39d983472eb",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "aa61a04e-cca1-44d1-92bc-200b9bdf63ea",
+                            ConcurrencyStamp = "8875458a-d3e5-40e2-bc88-b2ae0c02c78c",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -573,6 +573,590 @@ namespace Data.Migrations
                     b.HasIndex("CategoryID");
 
                     b.ToTable("SubCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            SubCategoryID = 1,
+                            CategoryID = 1,
+                            SubCategoryName = "Cars for Sale"
+                        },
+                        new
+                        {
+                            SubCategoryID = 2,
+                            CategoryID = 1,
+                            SubCategoryName = "Tyres, Batteries, Oils, &Accessories"
+                        },
+                        new
+                        {
+                            SubCategoryID = 3,
+                            CategoryID = 1,
+                            SubCategoryName = "Car Spare Parts"
+                        },
+                        new
+                        {
+                            SubCategoryID = 4,
+                            CategoryID = 1,
+                            SubCategoryName = "Motorcycles & Accessories"
+                        },
+                        new
+                        {
+                            SubCategoryID = 5,
+                            CategoryID = 1,
+                            SubCategoryName = "Motorcycles & Accessories"
+                        },
+                        new
+                        {
+                            SubCategoryID = 6,
+                            CategoryID = 1,
+                            SubCategoryName = "Boats - Watercraft"
+                        },
+                        new
+                        {
+                            SubCategoryID = 7,
+                            CategoryID = 1,
+                            SubCategoryName = "Heavy Trucks, Buses & Other Vehicles"
+                        },
+                        new
+                        {
+                            SubCategoryID = 8,
+                            CategoryID = 2,
+                            SubCategoryName = "Apartments & Duplex for Sale"
+                        },
+                        new
+                        {
+                            SubCategoryID = 9,
+                            CategoryID = 2,
+                            SubCategoryName = "Apartments & Duplex for Rent"
+                        },
+                        new
+                        {
+                            SubCategoryID = 10,
+                            CategoryID = 2,
+                            SubCategoryName = "Villas For Sale"
+                        },
+                        new
+                        {
+                            SubCategoryID = 11,
+                            CategoryID = 2,
+                            SubCategoryName = "Villas For Rent"
+                        },
+                        new
+                        {
+                            SubCategoryID = 12,
+                            CategoryID = 2,
+                            SubCategoryName = "Vacation Homes for Sale"
+                        },
+                        new
+                        {
+                            SubCategoryID = 13,
+                            CategoryID = 2,
+                            SubCategoryName = "Commercial for Sale"
+                        },
+                        new
+                        {
+                            SubCategoryID = 14,
+                            CategoryID = 2,
+                            SubCategoryName = "Buildings & Lands"
+                        },
+                        new
+                        {
+                            SubCategoryID = 15,
+                            CategoryID = 3,
+                            SubCategoryName = "Mobile Phones"
+                        },
+                        new
+                        {
+                            SubCategoryID = 16,
+                            CategoryID = 3,
+                            SubCategoryName = "Tablets"
+                        },
+                        new
+                        {
+                            SubCategoryID = 17,
+                            CategoryID = 3,
+                            SubCategoryName = "Mobile & Tablet Accessories"
+                        },
+                        new
+                        {
+                            SubCategoryID = 18,
+                            CategoryID = 3,
+                            SubCategoryName = "Mobile Numbers"
+                        },
+                        new
+                        {
+                            SubCategoryID = 19,
+                            CategoryID = 4,
+                            SubCategoryName = "Electronics & Home Appliances"
+                        },
+                        new
+                        {
+                            SubCategoryID = 20,
+                            CategoryID = 4,
+                            SubCategoryName = "TV - Audio - Video"
+                        },
+                        new
+                        {
+                            SubCategoryID = 21,
+                            CategoryID = 4,
+                            SubCategoryName = "Computers - Accessories"
+                        },
+                        new
+                        {
+                            SubCategoryID = 22,
+                            CategoryID = 4,
+                            SubCategoryName = "Video games - Consoles"
+                        },
+                        new
+                        {
+                            SubCategoryID = 23,
+                            CategoryID = 4,
+                            SubCategoryName = "Cameras - Imaging"
+                        },
+                        new
+                        {
+                            SubCategoryID = 24,
+                            CategoryID = 4,
+                            SubCategoryName = "Home Appliance"
+                        },
+                        new
+                        {
+                            SubCategoryID = 25,
+                            CategoryID = 5,
+                            SubCategoryName = "Bathroom"
+                        },
+                        new
+                        {
+                            SubCategoryID = 26,
+                            CategoryID = 5,
+                            SubCategoryName = "Bedroom"
+                        },
+                        new
+                        {
+                            SubCategoryID = 27,
+                            CategoryID = 5,
+                            SubCategoryName = "Dining Room"
+                        },
+                        new
+                        {
+                            SubCategoryID = 28,
+                            CategoryID = 5,
+                            SubCategoryName = "Fabrics - Curtains - Carpets"
+                        },
+                        new
+                        {
+                            SubCategoryID = 29,
+                            CategoryID = 5,
+                            SubCategoryName = "Garden - Outdoor"
+                        },
+                        new
+                        {
+                            SubCategoryID = 30,
+                            CategoryID = 5,
+                            SubCategoryName = "Home Decoration"
+                        },
+                        new
+                        {
+                            SubCategoryID = 31,
+                            CategoryID = 5,
+                            SubCategoryName = "Kitchen - Kitchenware"
+                        },
+                        new
+                        {
+                            SubCategoryID = 32,
+                            CategoryID = 5,
+                            SubCategoryName = "Lighting Tools"
+                        },
+                        new
+                        {
+                            SubCategoryID = 33,
+                            CategoryID = 5,
+                            SubCategoryName = "Living Room"
+                        },
+                        new
+                        {
+                            SubCategoryID = 34,
+                            CategoryID = 5,
+                            SubCategoryName = "Multiple/Other Furniture"
+                        },
+                        new
+                        {
+                            SubCategoryID = 35,
+                            CategoryID = 6,
+                            SubCategoryName = "Women's Clothing"
+                        },
+                        new
+                        {
+                            SubCategoryID = 36,
+                            CategoryID = 6,
+                            SubCategoryName = "Men's Clothing"
+                        },
+                        new
+                        {
+                            SubCategoryID = 37,
+                            CategoryID = 6,
+                            SubCategoryName = "Women's Accessories - Cosmetics - Personal Care"
+                        },
+                        new
+                        {
+                            SubCategoryID = 38,
+                            CategoryID = 6,
+                            SubCategoryName = "Men's Accessories - Personal Care"
+                        },
+                        new
+                        {
+                            SubCategoryID = 39,
+                            CategoryID = 7,
+                            SubCategoryName = "Birds - Pigeons"
+                        },
+                        new
+                        {
+                            SubCategoryID = 40,
+                            CategoryID = 7,
+                            SubCategoryName = "Cats"
+                        },
+                        new
+                        {
+                            SubCategoryID = 41,
+                            CategoryID = 7,
+                            SubCategoryName = "Dogs"
+                        },
+                        new
+                        {
+                            SubCategoryID = 42,
+                            CategoryID = 7,
+                            SubCategoryName = "Other Pets & Animals"
+                        },
+                        new
+                        {
+                            SubCategoryID = 43,
+                            CategoryID = 7,
+                            SubCategoryName = "Accessories - Pet Care Products"
+                        },
+                        new
+                        {
+                            SubCategoryID = 44,
+                            CategoryID = 8,
+                            SubCategoryName = "Baby & Mom Healthcare"
+                        },
+                        new
+                        {
+                            SubCategoryID = 45,
+                            CategoryID = 8,
+                            SubCategoryName = "Baby Clothing"
+                        },
+                        new
+                        {
+                            SubCategoryID = 46,
+                            CategoryID = 8,
+                            SubCategoryName = "Baby Feeding Tools"
+                        },
+                        new
+                        {
+                            SubCategoryID = 47,
+                            CategoryID = 8,
+                            SubCategoryName = "Cribs - Strollers - Carriers"
+                        },
+                        new
+                        {
+                            SubCategoryID = 48,
+                            CategoryID = 8,
+                            SubCategoryName = "Toys"
+                        },
+                        new
+                        {
+                            SubCategoryID = 49,
+                            CategoryID = 8,
+                            SubCategoryName = "Other Baby Items"
+                        },
+                        new
+                        {
+                            SubCategoryID = 50,
+                            CategoryID = 9,
+                            SubCategoryName = "Antiques - Collectibles"
+                        },
+                        new
+                        {
+                            SubCategoryID = 51,
+                            CategoryID = 9,
+                            SubCategoryName = "Bicycles"
+                        },
+                        new
+                        {
+                            SubCategoryID = 52,
+                            CategoryID = 9,
+                            SubCategoryName = "Books"
+                        },
+                        new
+                        {
+                            SubCategoryID = 53,
+                            CategoryID = 9,
+                            SubCategoryName = "Board - Card Games"
+                        },
+                        new
+                        {
+                            SubCategoryID = 54,
+                            CategoryID = 9,
+                            SubCategoryName = "Movies - Music"
+                        },
+                        new
+                        {
+                            SubCategoryID = 55,
+                            CategoryID = 9,
+                            SubCategoryName = "Musical Instruments"
+                        },
+                        new
+                        {
+                            SubCategoryID = 56,
+                            CategoryID = 9,
+                            SubCategoryName = "Sports Equipment"
+                        },
+                        new
+                        {
+                            SubCategoryID = 57,
+                            CategoryID = 9,
+                            SubCategoryName = "Study Tools"
+                        },
+                        new
+                        {
+                            SubCategoryID = 58,
+                            CategoryID = 9,
+                            SubCategoryName = "Tickets - Vouchers"
+                        },
+                        new
+                        {
+                            SubCategoryID = 59,
+                            CategoryID = 9,
+                            SubCategoryName = "Luggage"
+                        },
+                        new
+                        {
+                            SubCategoryID = 60,
+                            CategoryID = 9,
+                            SubCategoryName = "Other Items"
+                        },
+                        new
+                        {
+                            SubCategoryID = 61,
+                            CategoryID = 10,
+                            SubCategoryName = "Accounting, Finance & Banking"
+                        },
+                        new
+                        {
+                            SubCategoryID = 62,
+                            CategoryID = 10,
+                            SubCategoryName = "Engineering"
+                        },
+                        new
+                        {
+                            SubCategoryID = 63,
+                            CategoryID = 10,
+                            SubCategoryName = "Designers"
+                        },
+                        new
+                        {
+                            SubCategoryID = 64,
+                            CategoryID = 10,
+                            SubCategoryName = "Customer Service & Call Center"
+                        },
+                        new
+                        {
+                            SubCategoryID = 65,
+                            CategoryID = 10,
+                            SubCategoryName = "Workers and Technicians"
+                        },
+                        new
+                        {
+                            SubCategoryID = 66,
+                            CategoryID = 10,
+                            SubCategoryName = "Management & Consulting"
+                        },
+                        new
+                        {
+                            SubCategoryID = 67,
+                            CategoryID = 10,
+                            SubCategoryName = "Drivers & Delivery"
+                        },
+                        new
+                        {
+                            SubCategoryID = 68,
+                            CategoryID = 10,
+                            SubCategoryName = "Education"
+                        },
+                        new
+                        {
+                            SubCategoryID = 69,
+                            CategoryID = 10,
+                            SubCategoryName = "HR"
+                        },
+                        new
+                        {
+                            SubCategoryID = 70,
+                            CategoryID = 10,
+                            SubCategoryName = "Tourism, Travel & Hospitality"
+                        },
+                        new
+                        {
+                            SubCategoryID = 71,
+                            CategoryID = 10,
+                            SubCategoryName = "IT - Telecom"
+                        },
+                        new
+                        {
+                            SubCategoryID = 72,
+                            CategoryID = 10,
+                            SubCategoryName = "Marketing and Public Relations"
+                        },
+                        new
+                        {
+                            SubCategoryID = 73,
+                            CategoryID = 10,
+                            SubCategoryName = "Medical, Healthcare, & Nursing"
+                        },
+                        new
+                        {
+                            SubCategoryID = 74,
+                            CategoryID = 10,
+                            SubCategoryName = "Sales"
+                        },
+                        new
+                        {
+                            SubCategoryID = 75,
+                            CategoryID = 10,
+                            SubCategoryName = "Secretarial"
+                        },
+                        new
+                        {
+                            SubCategoryID = 76,
+                            CategoryID = 10,
+                            SubCategoryName = "Guards and Security"
+                        },
+                        new
+                        {
+                            SubCategoryID = 77,
+                            CategoryID = 10,
+                            SubCategoryName = "Legal - Lawyers"
+                        },
+                        new
+                        {
+                            SubCategoryID = 78,
+                            CategoryID = 10,
+                            SubCategoryName = "Other Job"
+                        },
+                        new
+                        {
+                            SubCategoryID = 79,
+                            CategoryID = 11,
+                            SubCategoryName = "Agriculture"
+                        },
+                        new
+                        {
+                            SubCategoryID = 80,
+                            CategoryID = 11,
+                            SubCategoryName = "Construction"
+                        },
+                        new
+                        {
+                            SubCategoryID = 81,
+                            CategoryID = 11,
+                            SubCategoryName = "Industrial Equipment"
+                        },
+                        new
+                        {
+                            SubCategoryID = 82,
+                            CategoryID = 11,
+                            SubCategoryName = "Medical Equipment"
+                        },
+                        new
+                        {
+                            SubCategoryID = 83,
+                            CategoryID = 11,
+                            SubCategoryName = "Office Furniture & Equipment"
+                        },
+                        new
+                        {
+                            SubCategoryID = 84,
+                            CategoryID = 11,
+                            SubCategoryName = "Restaurants Equipment"
+                        },
+                        new
+                        {
+                            SubCategoryID = 85,
+                            CategoryID = 11,
+                            SubCategoryName = "Whole Business for Sale"
+                        },
+                        new
+                        {
+                            SubCategoryID = 86,
+                            CategoryID = 11,
+                            SubCategoryName = "Other Business, Industrial &"
+                        },
+                        new
+                        {
+                            SubCategoryID = 87,
+                            CategoryID = 11,
+                            SubCategoryName = "Agriculture"
+                        },
+                        new
+                        {
+                            SubCategoryID = 88,
+                            CategoryID = 12,
+                            SubCategoryName = "Business"
+                        },
+                        new
+                        {
+                            SubCategoryID = 89,
+                            CategoryID = 12,
+                            SubCategoryName = "Car"
+                        },
+                        new
+                        {
+                            SubCategoryID = 90,
+                            CategoryID = 12,
+                            SubCategoryName = "Events"
+                        },
+                        new
+                        {
+                            SubCategoryID = 91,
+                            CategoryID = 12,
+                            SubCategoryName = "Health & Beauty"
+                        },
+                        new
+                        {
+                            SubCategoryID = 92,
+                            CategoryID = 12,
+                            SubCategoryName = "Maintenance"
+                        },
+                        new
+                        {
+                            SubCategoryID = 93,
+                            CategoryID = 12,
+                            SubCategoryName = "Medical"
+                        },
+                        new
+                        {
+                            SubCategoryID = 94,
+                            CategoryID = 12,
+                            SubCategoryName = "Movers"
+                        },
+                        new
+                        {
+                            SubCategoryID = 95,
+                            CategoryID = 12,
+                            SubCategoryName = "Pets"
+                        },
+                        new
+                        {
+                            SubCategoryID = 96,
+                            CategoryID = 12,
+                            SubCategoryName = "Education"
+                        },
+                        new
+                        {
+                            SubCategoryID = 97,
+                            CategoryID = 12,
+                            SubCategoryName = "Other Service"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

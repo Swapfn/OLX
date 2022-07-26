@@ -268,8 +268,8 @@ namespace Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "60398db5-0711-4a99-aed8-d4601d3fa1a5", "Admin", "ADMIN" },
-                    { 2, "aa61a04e-cca1-44d1-92bc-200b9bdf63ea", "User", "USER" }
+                    { 1, "2a151115-e577-4235-856c-b39d983472eb", "Admin", "ADMIN" },
+                    { 2, "8875458a-d3e5-40e2-bc88-b2ae0c02c78c", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -323,6 +323,124 @@ namespace Data.Migrations
                     { 25, "Sohag" },
                     { 26, "South Sinai" },
                     { 27, "Suez" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SubCategories",
+                columns: new[] { "SubCategoryID", "CategoryID", "SubCategoryName" },
+                values: new object[,]
+                {
+                    { 1, 1, "Cars for Sale" },
+                    { 2, 1, "Tyres, Batteries, Oils, &Accessories" },
+                    { 3, 1, "Car Spare Parts" },
+                    { 4, 1, "Motorcycles & Accessories" },
+                    { 5, 1, "Motorcycles & Accessories" },
+                    { 6, 1, "Boats - Watercraft" },
+                    { 7, 1, "Heavy Trucks, Buses & Other Vehicles" },
+                    { 8, 2, "Apartments & Duplex for Sale" },
+                    { 9, 2, "Apartments & Duplex for Rent" },
+                    { 10, 2, "Villas For Sale" },
+                    { 11, 2, "Villas For Rent" },
+                    { 12, 2, "Vacation Homes for Sale" },
+                    { 13, 2, "Commercial for Sale" },
+                    { 14, 2, "Buildings & Lands" },
+                    { 15, 3, "Mobile Phones" },
+                    { 16, 3, "Tablets" },
+                    { 17, 3, "Mobile & Tablet Accessories" },
+                    { 18, 3, "Mobile Numbers" },
+                    { 19, 4, "Electronics & Home Appliances" },
+                    { 20, 4, "TV - Audio - Video" },
+                    { 21, 4, "Computers - Accessories" },
+                    { 22, 4, "Video games - Consoles" },
+                    { 23, 4, "Cameras - Imaging" },
+                    { 24, 4, "Home Appliance" },
+                    { 25, 5, "Bathroom" },
+                    { 26, 5, "Bedroom" },
+                    { 27, 5, "Dining Room" },
+                    { 28, 5, "Fabrics - Curtains - Carpets" },
+                    { 29, 5, "Garden - Outdoor" },
+                    { 30, 5, "Home Decoration" },
+                    { 31, 5, "Kitchen - Kitchenware" },
+                    { 32, 5, "Lighting Tools" },
+                    { 33, 5, "Living Room" },
+                    { 34, 5, "Multiple/Other Furniture" },
+                    { 35, 6, "Women's Clothing" },
+                    { 36, 6, "Men's Clothing" },
+                    { 37, 6, "Women's Accessories - Cosmetics - Personal Care" },
+                    { 38, 6, "Men's Accessories - Personal Care" },
+                    { 39, 7, "Birds - Pigeons" },
+                    { 40, 7, "Cats" },
+                    { 41, 7, "Dogs" },
+                    { 42, 7, "Other Pets & Animals" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SubCategories",
+                columns: new[] { "SubCategoryID", "CategoryID", "SubCategoryName" },
+                values: new object[,]
+                {
+                    { 43, 7, "Accessories - Pet Care Products" },
+                    { 44, 8, "Baby & Mom Healthcare" },
+                    { 45, 8, "Baby Clothing" },
+                    { 46, 8, "Baby Feeding Tools" },
+                    { 47, 8, "Cribs - Strollers - Carriers" },
+                    { 48, 8, "Toys" },
+                    { 49, 8, "Other Baby Items" },
+                    { 50, 9, "Antiques - Collectibles" },
+                    { 51, 9, "Bicycles" },
+                    { 52, 9, "Books" },
+                    { 53, 9, "Board - Card Games" },
+                    { 54, 9, "Movies - Music" },
+                    { 55, 9, "Musical Instruments" },
+                    { 56, 9, "Sports Equipment" },
+                    { 57, 9, "Study Tools" },
+                    { 58, 9, "Tickets - Vouchers" },
+                    { 59, 9, "Luggage" },
+                    { 60, 9, "Other Items" },
+                    { 61, 10, "Accounting, Finance & Banking" },
+                    { 62, 10, "Engineering" },
+                    { 63, 10, "Designers" },
+                    { 64, 10, "Customer Service & Call Center" },
+                    { 65, 10, "Workers and Technicians" },
+                    { 66, 10, "Management & Consulting" },
+                    { 67, 10, "Drivers & Delivery" },
+                    { 68, 10, "Education" },
+                    { 69, 10, "HR" },
+                    { 70, 10, "Tourism, Travel & Hospitality" },
+                    { 71, 10, "IT - Telecom" },
+                    { 72, 10, "Marketing and Public Relations" },
+                    { 73, 10, "Medical, Healthcare, & Nursing" },
+                    { 74, 10, "Sales" },
+                    { 75, 10, "Secretarial" },
+                    { 76, 10, "Guards and Security" },
+                    { 77, 10, "Legal - Lawyers" },
+                    { 78, 10, "Other Job" },
+                    { 79, 11, "Agriculture" },
+                    { 80, 11, "Construction" },
+                    { 81, 11, "Industrial Equipment" },
+                    { 82, 11, "Medical Equipment" },
+                    { 83, 11, "Office Furniture & Equipment" },
+                    { 84, 11, "Restaurants Equipment" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SubCategories",
+                columns: new[] { "SubCategoryID", "CategoryID", "SubCategoryName" },
+                values: new object[,]
+                {
+                    { 85, 11, "Whole Business for Sale" },
+                    { 86, 11, "Other Business, Industrial &" },
+                    { 87, 11, "Agriculture" },
+                    { 88, 12, "Business" },
+                    { 89, 12, "Car" },
+                    { 90, 12, "Events" },
+                    { 91, 12, "Health & Beauty" },
+                    { 92, 12, "Maintenance" },
+                    { 93, 12, "Medical" },
+                    { 94, 12, "Movers" },
+                    { 95, 12, "Pets" },
+                    { 96, 12, "Education" },
+                    { 97, 12, "Other Service" }
                 });
 
             migrationBuilder.CreateIndex(
