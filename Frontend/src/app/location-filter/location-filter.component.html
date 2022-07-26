@@ -1,5 +1,6 @@
-<select class="form-select input-group mx-2" aria-label="Default select example" [(ngModel)]="locationSelectedValue"
-  (change)="onlocationSelect($event.target)">
+<select class="form-select input-group mx-2" aria-label="Default select example" 
+  [(ngModel)]="locationSelectedValue" (change)="onlocationSelect($event.target)">
+  <option value="Current location"> Current location</option>
   <option selected>See Ads in all Egypt </option>
   <hr class="dropdown-divider">
   <option value={{C}} *ngFor="let C of EgyCities">{{C}}</option>
