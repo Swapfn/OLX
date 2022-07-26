@@ -16,7 +16,11 @@ export class AccountService {
   constructor(private http : HttpClient) { }
 
   login(model : any) :Observable<Token>{
+<<<<<<< HEAD
     return this.http.post(this.baseUrl + 'account/login',model).pipe(
+=======
+    return this.http.post(this.baseUrl + 'Account/login',model).pipe(
+>>>>>>> origin/Add-Post
       map((response : Token) => {
         const user = response;
         if(user) {
