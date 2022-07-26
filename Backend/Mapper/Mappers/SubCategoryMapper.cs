@@ -6,21 +6,21 @@ namespace Mapper.Mappers
 {
     public class SubCategoryMapper : ISubCategoryMapper
     {
-        public SubCategory Map(SubCategoryDTO categoryDTO)
+        public SubCategory MapFromDTO(SubCategoryDTO subCategoryDTO)
         {
             SubCategory subCategory = new SubCategory();
-            subCategory.SubCategoryID = categoryDTO.SubCategoryID;
-            subCategory.SubCategoryName = categoryDTO.SubCategoryName;
+            subCategory.SubCategoryID = subCategoryDTO.SubCategoryID;
+            subCategory.SubCategoryName = subCategoryDTO.SubCategoryName;
+            subCategory.CategoryID = subCategoryDTO.CategoryID;
             return subCategory;
         }
 
-        public SubCategoryDTO Map(SubCategory subCategory)
+        public SubCategoryDTO MapToDTO(SubCategory subCategory)
         {
             SubCategoryDTO subCategoryDTO = new SubCategoryDTO();
-            subCategoryDTO.CategoryID = subCategory.CategoryID;
-            subCategoryDTO.CategoryName = subCategory.Category?.CategoryName;
             subCategoryDTO.SubCategoryID = subCategory.SubCategoryID;
             subCategoryDTO.SubCategoryName = subCategory.SubCategoryName;
+            subCategoryDTO.CategoryID = subCategory.CategoryID;
             return subCategoryDTO;
         }
     }

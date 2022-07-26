@@ -9,8 +9,8 @@ namespace Models.DTO
 {
     public class ChangePasswordDTO
     {
-        [Required(ErrorMessage = "User Name is required")]
-        public string? Username { get; set; }
+        //[Required(ErrorMessage = "User Name is required")]
+        //public string? Username { get; set; }
 
         [Required(ErrorMessage = "Current Password is required")]
         public string? CurrentPassword { get; set; }

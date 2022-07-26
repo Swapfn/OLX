@@ -14,10 +14,19 @@ namespace Models.DTO
         [Required(ErrorMessage = "Password is required")]
         public string? Password { get; set; }
 
+        [Required(ErrorMessage = "Confirm Password"), Compare("Password")]
+        public string? ConfirmPassword { get; set; }
+
         [Required(ErrorMessage = "First Name is required")]
         public string? FName { get; set; }
 
         [Required(ErrorMessage = "Last Name is required")]
         public string? LName { get; set; }
+
+        [MaxLength(200)]
+        public string? AboutMe { get; set; }
+
+        [Required(ErrorMessage = "Phone Number is required"), MaxLength(11)]
+        public string? Phone { get; set; }
     }
 }

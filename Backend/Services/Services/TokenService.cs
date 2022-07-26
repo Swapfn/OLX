@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿    using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Models.Models;
@@ -67,5 +68,6 @@ namespace Services
             // return written token
             return token;
         }
-    }
+
+}
 }

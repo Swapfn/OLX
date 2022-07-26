@@ -5,7 +5,7 @@ namespace Mapper.Contracts
 {
     public interface ICategoryMapper
     {
-        Category Map(CategoryDTO categoryDTO);
-        CategoryDTO Map(Category category);
+        Category MapFromDTO(CategoryDTO categoryDTO);
+        CategoryDTO MapToDTO(Category category);
     }
 }
