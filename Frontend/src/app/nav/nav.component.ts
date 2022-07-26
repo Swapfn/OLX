@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { Token } from '../_models/token';
 import { AccountService } from '../_services/account.service';
 
 @Component({
@@ -11,20 +12,17 @@ import { AccountService } from '../_services/account.service';
 })
 export class NavComponent implements OnInit {
   model: any = {};
-  loggedIn: boolean;
-  currentUser$: Observable<string>;
+  currentUser$: Observable<Token>;
 
   constructor(public accountService: AccountService, private router: Router, private toast: ToastrService) { }
 
   ngOnInit(): void {
-    this.currentUser$ = this.accountService.currentUser$;
   }
 
   login() {
     this.accountService.login(this.model).subscribe({
-      next: response => {
-        console.log(response);
-        this.loggedIn = true;
+      next: (response: Token) => {
+        this.toast.success("Logged in successfully");
         this.router.navigateByUrl("/home");
       },
       error: error => {
@@ -36,20 +34,9 @@ export class NavComponent implements OnInit {
 
   logout() {
     this.accountService.logout();
-    this.loggedIn = false;
     this.router.navigateByUrl("/");
   }
 
-  getCurrentUser() {
-    this.accountService.currentUser$.subscribe({
-      next: response => {
-        this.loggedIn = !!response;
-      },
-      error: error => {
-        console.log(error);
-      }
-    })
-  }
 
 
 

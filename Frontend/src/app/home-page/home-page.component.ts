@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Post } from '../_models/Post';
+import { Post } from '../_models/post';
 import { PostService } from '../_services/post.service';
 
 @Component({
@@ -14,16 +14,16 @@ export class HomePageComponent implements OnInit {
   constructor(private PostService:PostService) { }
 
   ngOnInit(): void {
-    this.loadPosts();
+    // this.loadPosts();
   }
 
   TotaPostsNumb(){
     return this.AllPosts.length;
   }
 
-  loadPosts(){
-    this.PostService.getAllPosts().subscribe(p=>{this.AllPosts=p;})
-  }
+  // loadPosts(){
+  //   this.PostService.getAllPosts().subscribe(p=>{this.AllPosts=p;})
+  // }
 
 
  
