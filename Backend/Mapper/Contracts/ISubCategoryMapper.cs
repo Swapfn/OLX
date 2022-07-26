@@ -5,7 +5,7 @@ namespace Mapper.Contracts
 {
     public interface ISubCategoryMapper
     {
-        SubCategory Map(SubCategoryDTO categoryDTO);
-        SubCategoryDTO Map(SubCategory category);
+        SubCategory MapFromDTO(SubCategoryDTO categoryDTO);
+        SubCategoryDTO MapToDTO(SubCategory category);
     }
 }
