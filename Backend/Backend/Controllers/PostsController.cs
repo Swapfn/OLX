@@ -10,6 +10,7 @@ using System.Security.Claims;
 
 namespace WepAPI.Controllers
 {
+    [Authorize]
     public class PostsController : APIBaseController
     {
         private readonly IPostService _postService;

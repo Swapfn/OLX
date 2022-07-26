@@ -11,6 +11,7 @@ using System.Security.Claims;
 namespace WepAPI.Controllers
 {
 
+    [Authorize]
     public class UserController : APIBaseController
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -25,7 +26,6 @@ namespace WepAPI.Controllers
 
         }
 
-        [Authorize]
         [HttpGet]
         [Route("get")]
         public async Task<IActionResult> GetUserDataAsync()
@@ -44,7 +44,6 @@ namespace WepAPI.Controllers
         }
 
 
-        [Authorize]
         [HttpPut]
         [Route("update")]
         public async Task<IActionResult> UpdateUserDataAsync(UserDTO model)
@@ -63,7 +62,6 @@ namespace WepAPI.Controllers
         }
 
 
-        [Authorize]
         [HttpDelete]
         [Route("delete")]
         public async Task<IActionResult> DeleteUserDataAsync()
