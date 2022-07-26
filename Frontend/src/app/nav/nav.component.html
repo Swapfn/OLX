@@ -30,7 +30,7 @@
 <!-- _______________________________IF NOT USER___________________________ -->
 
 
-<div *ngIf="(accountService.currentUser$ | async)">
+<div *ngIf="(accountService.currentUser$ | async)===null">
 
     <nav class="navbar navbar-expand-lg bg-light">
 
@@ -63,7 +63,7 @@
 
 <!-- _______________________________IF USER___________________________ -->
 
-<div *ngIf="(accountService.currentUser$ | async)===null ">
+<div *ngIf="(accountService.currentUser$ | async) ">
 
     <nav class="navbar navbar-expand-lg bg-light">
 
