@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Models.DTO;
 using Models.Models;
+using Services.Contracts;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace Services
 {
@@ -22,35 +24,42 @@ namespace Services
             var userCheck = await userManager.FindByNameAsync(model.Username);
             if (userCheck != null)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, new ResponseDTO() 
+                return StatusCode(StatusCodes.Status500InternalServerError, new
                 { Status = "Error", Message = "User Already Exists" });
             }
 
             // create user
             ApplicationUser user = new()
             {
-                UserName = model.Username,
-                Email = model.Email,
                 // snapshot of current user credientials, if they change, security stamp will change
                 SecurityStamp = Guid.NewGuid().ToString(),
+                // user fields
+                UserName = model.Username,
+                Email = model.Email,
                 FName = model.FName,
-                LName = model.LName
-                
+                LName = model.LName,
+                AboutMe = model.AboutMe,
+                PhoneNumber = model.Phone
             };
+
 
             // bind user and role
             var resultUser = await userManager.CreateAsync(user, model.Password);
+            if (!resultUser.Succeeded)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Errors = resultUser.Errors });
+            }
             var resultRole = await userManager.AddToRoleAsync(user, "User");
 
             // if fail
             if (!resultRole.Succeeded && !resultUser.Succeeded)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, new ResponseDTO()
+                return StatusCode(StatusCodes.Status500InternalServerError, new
                 { Status = "Error", Message = "User creation failed! Please check user details and try again." });
             }
 
             // if succeeded
-            return Ok(new ResponseDTO { Status = "Success", Message = "User created successfully!" });
+            return Created("", new { Status = "Success", Message = "User created successfully!" });
         }
 
 
@@ -66,22 +75,29 @@ namespace Services
         public async Task<IActionResult> LoginAsync(LoginDTO model, UserManager<ApplicationUser> userManager,
             RoleManager<ApplicationRole> roleManager, ITokenService _token)
         {
-            // get user and roles
+            // check if username exists
             var user = await userManager.FindByNameAsync(model.Username);
-            var roles = await userManager.GetRolesAsync(user);
+            if (user == null)
+                return NotFound(new { Status = "Error", Message = "Username Doesn't Exist!!" });
 
-            // check if user exists
-            if (user != null && await userManager.CheckPasswordAsync(user, model.Password))
+            // check if passowrd is correct
+            if (await userManager.CheckPasswordAsync(user, model.Password))
             {
+                var roles = await userManager.GetRolesAsync(user);
                 var token = await _token.CreateToken(user, roles, roleManager);
 
                 return Ok(new
                 {
-                    token = new JwtSecurityTokenHandler().WriteToken(token),
-                    expiration = token.ValidTo
+                    Message = "Login Successful",
+                    Token = new JwtSecurityTokenHandler().WriteToken(token),
+                    Expiration = token.ValidTo
                 });
             }
-            return Unauthorized();
+            return Unauthorized(new
+            {
+                Status = "Error",
+                Message = "Incorrect Password"
+            });
         }
 
 
@@ -93,16 +109,18 @@ namespace Services
         /// <param name="roleManager"></param>
         /// <param name="_token"></param>
         /// <returns></returns>
-        public async Task<IActionResult> ChangePasswordAsync(ChangePasswordDTO model, UserManager<ApplicationUser> userManager,
-            RoleManager<ApplicationRole> roleManager, ITokenService _token)
+        public async Task<IActionResult> ChangePasswordAsync(ClaimsIdentity identity, ChangePasswordDTO model, UserManager<ApplicationUser> userManager,
+            RoleManager<ApplicationRole> roleManager, ITokenService _token, IUserService _user)
         {
-            // get user and roles
-            var user = await userManager.FindByNameAsync(model.Username);
-            var roles = await userManager.GetRolesAsync(user);
+            // check if username exists
+            var user = await _user.GetUserByIdAsync(identity, userManager);
+            if (user == null)
+                return NotFound(new { Status = "Error", Message = "Username Doesn't Exist!!" });
 
             // check if user exists
-            if (user != null && await userManager.CheckPasswordAsync(user, model.CurrentPassword))
+            if (await userManager.CheckPasswordAsync(user, model.CurrentPassword))
             {
+                var roles = await userManager.GetRolesAsync(user);
                 // change password
                 if (model.NewPassword == model.ConfirmNewPassword)
                 {
@@ -112,12 +130,16 @@ namespace Services
 
                 return Ok(new
                 {
-                    message = "Password Changed Successfuly",
+                    message = "Password Changed Successfully",
                     token = new JwtSecurityTokenHandler().WriteToken(token),
                     expiration = token.ValidTo
                 });
             }
-            return Unauthorized();
+            return Unauthorized(new
+            {
+                Status = "Error",
+                Message = "Incorrect Password"
+            });
         }
     }
 }
