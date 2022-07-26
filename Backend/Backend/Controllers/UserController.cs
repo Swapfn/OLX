@@ -14,16 +14,13 @@ namespace WepAPI.Controllers
     [Authorize]
     public class UserController : APIBaseController
     {
-        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IUserMapper _userMapper;
         private readonly IUserService _userService;
 
-        public UserController(UserManager<ApplicationUser> userManager, IUserService userService, IUserMapper userMapper)
+        public UserController(IUserService userService, IUserMapper userMapper)
         {
-            _userManager = userManager;
             _userMapper = userMapper;
             _userService = userService;
-
         }
 
         [HttpGet]
@@ -31,7 +28,7 @@ namespace WepAPI.Controllers
         public async Task<IActionResult> GetUserDataAsync()
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;
-            var user = await _userService.GetUserByIdAsync(identity, _userManager);
+            var user = await _userService.GetUserByIdAsync(identity);
             if (user != null)
             {
                 var userDTO = _userMapper.MapToDTO(user);
@@ -49,7 +46,7 @@ namespace WepAPI.Controllers
         public async Task<IActionResult> UpdateUserDataAsync(UserDTO model)
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;
-            var user = await _userService.UpdateUserAsync(identity, _userManager, model);
+            var user = await _userService.UpdateUserAsync(identity, model);
             if (user != null)
             {
                 var userDTO = _userMapper.MapToDTO(user);
@@ -67,7 +64,7 @@ namespace WepAPI.Controllers
         public async Task<IActionResult> DeleteUserDataAsync()
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;
-            var result = await _userService.DeleteUserAsync(identity, _userManager);
+            var result = await _userService.DeleteUserAsync(identity);
             if (result.StatusCode == 204)
             {
                 return StatusCode(StatusCodes.Status204NoContent, new { Message = "Deleted Successfully" });

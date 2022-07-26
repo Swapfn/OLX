@@ -28,7 +28,7 @@ namespace Services.Services
         /// <returns></returns>
         public async Task<List<Post>> GetUserAvailablePostsAsync(ClaimsIdentity identity)
         {
-            var user = await _user.GetUserByIdAsync(identity, _userManager);
+            var user = await _user.GetUserByIdAsync(identity);
             List<Post> posts = _posts.GetAvailablePostsByUser(user.Id).ToList();
             return posts;
         }
@@ -41,7 +41,7 @@ namespace Services.Services
         /// <returns></returns>
         public async Task<List<Post>> GetUserUnavailablePostsAsync(ClaimsIdentity identity)
         {
-            var user = await _user.GetUserByIdAsync(identity, _userManager);
+            var user = await _user.GetUserByIdAsync(identity);
             List<Post> posts = _posts.GetUnavailablePostsByUser(user.Id).ToList();
             return posts;
         }
