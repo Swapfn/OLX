@@ -1,22 +1,25 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
-import { NavComponent } from './nav/nav.component';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { RegisterComponent } from './register/register.component';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
-import { ModalModule } from 'ngx-bootstrap/modal';
 import { NavComponent } from './nav/nav.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { LocationFilterComponent } from './location-filter/location-filter.component';
+import { SharedModule } from './_modules/shared.module';
+import { JwtInterceptor } from './_interceptors/jwt.interceptor';
+import { MyPostsComponent } from './my-posts/my-posts.component';
+import { AddPostComponent } from './add-post/add-post.component';
+import { PostDetailsComponent } from './post-details/post-details.component';
+import { FooterComponent } from './footer/footer.component';
+
 
 @NgModule({
   declarations: [
@@ -24,10 +27,14 @@ import { LocationFilterComponent } from './location-filter/location-filter.compo
     HomeComponent,
     NavComponent,
     RegisterComponent,
-    ProfileEditComponent
+    ProfileEditComponent,
     NavComponent,
     HomePageComponent,
-    LocationFilterComponent
+    LocationFilterComponent,
+    MyPostsComponent,
+    AddPostComponent,
+    PostDetailsComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -35,11 +42,12 @@ import { LocationFilterComponent } from './location-filter/location-filter.compo
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    BsDropdownModule.forRoot(),
-    ModalModule.forRoot()
-    FormsModule
+    SharedModule,
+ 
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass:JwtInterceptor, multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
