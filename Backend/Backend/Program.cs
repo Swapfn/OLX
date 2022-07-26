@@ -11,8 +11,6 @@ using WebAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuration
-//ConfigurationManager configuration = builder.Configuration;
 
 // Add services to the container.
 
@@ -26,10 +24,19 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContextPool<ApplicationDbContext>(option
     => option.UseSqlServer(builder.Configuration.GetConnectionString("OLXDbConnectionStrings")));
 
-
-builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(option =>
+{
+    option.SignIn.RequireConfirmedPhoneNumber = false;
+    option.Password.RequireUppercase = false;
+    option.Password.RequireNonAlphanumeric = false;
+    option.Password.RequireDigit = false;
+})
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
+
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 //General
 builder.Services.AddScoped<DbContext, ApplicationDbContext>();
@@ -37,25 +44,43 @@ builder.Services.AddScoped<IDbFactory, DbFactory>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // Adding Authentication & JWT bearer options
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-{
-    options.SaveToken = true; // save token on the server
-    options.RequireHttpsMetadata = false; // default is enabled, disable for development
-    options.TokenValidationParameters = new TokenValidationParameters
+builder.Services.AddAuthentication(options =>
     {
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"])),
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
-        ValidAudience = builder.Configuration["JWT:ValidAudiance"]
-    };
-});
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.SaveToken = true; // save token on the server
+        options.RequireHttpsMetadata = false; // default is enabled, disable for development
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"])),
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
+            ValidAudience = builder.Configuration["JWT:ValidAudiance"]
+        };
+    });
 
 // Registering Services
 ConfigureService.RegisterRepositories(builder.Services);
 ConfigureService.RegisterServices(builder.Services);
 ConfigureService.RegisterMappers(builder.Services);
+
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+
+//Add Cross Origins Policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        policy => policy
+            .AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod());
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -66,6 +91,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseHttpsRedirection();
+
+// Use Cors
+app.UseCors("AllowAllOrigins");
 
 // Authentication & Authorization
 app.UseAuthentication();
@@ -81,9 +109,10 @@ try
 {
     var dbContext = services.GetRequiredService<ApplicationDbContext>();
     var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-    var roleManager = services.GetRequiredService<RoleManager<ApplicationRole>>();
     await dbContext.Database.MigrateAsync();
-    await Seed.SeedUsers(userManager, roleManager);
+    // excute only if user table is empty
+    if (await userManager.Users.AnyAsync() == false)
+        await UserConfiguration.SeedUsers(userManager);
 }
 catch (Exception ex)
 {

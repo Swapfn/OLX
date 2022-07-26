@@ -8,13 +8,10 @@ using System.Threading.Tasks;
 
 namespace Models.Models
 {
-    public class SubCategory
+    public class SubCategory : BaseModel
     {
-        //[Key]
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SubCategoryID { get; set; }
         public string SubCategoryName { get; set; }
-        //[ForeignKey("Category")]
         public int CategoryID { get; set; }
         public Category Category { get; set; }
 

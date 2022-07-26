@@ -1,55 +1,70 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Mapper.Contracts;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Models.DTO;
 using Models.Models;
 using Services;
+using Services.Contracts;
+using System.Security.Claims;
 
 namespace WepAPI.Controllers
 {
-    public class AccountController : BaseController
+    public class AccountController : APIBaseController
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
-        private readonly IAccountService _account;
-        private readonly ITokenService _token;
-
+        private readonly IAccountService _accountService;
+        private readonly ITokenService _tokenService;
+        private readonly IUserMapper _userMapper;
+        private readonly IUserService _user;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             RoleManager<ApplicationRole> roleManager,
-            IAccountService account, ITokenService token)
+            IAccountService accountService,
+            ITokenService tokenService,
+            IUserMapper userMapper,
+            IUserService user
+            )
         {
             _userManager = userManager;
             _roleManager = roleManager;
-            _account = account;
-            _token = token;
+            _accountService = accountService;
+            _tokenService = tokenService;
+            _userMapper = userMapper;
+            _user = user;
 
         }
 
-
+        // POST login
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> LoginAsync(LoginDTO model)
         {
-            return await _account.LoginAsync(model, _userManager, _roleManager, _token);
+            return await _accountService.LoginAsync(model, _userManager, _roleManager, _tokenService);
 
         }
 
-
+        // POST register
         [HttpPost]
         [Route("register")]
         public async Task<IActionResult> RegisterAsync(RegisterDTO model)
         {
-            return await _account.RegisterAsync(model, _userManager);
+            return await _accountService.RegisterAsync(model, _userManager);
 
         }
 
+        // POST changePassword
+        [Authorize]
         [HttpPost]
-        [Route("passwordchange")]
+        [Route("changePassword")]
         public async Task<IActionResult> ChangePasswordAsync(ChangePasswordDTO model)
         {
-            return await _account.ChangePasswordAsync(model, _userManager, _roleManager, _token);
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            return await _accountService.ChangePasswordAsync(identity, model, _userManager, _roleManager, _tokenService, _user);
 
         }
+
     }
 }

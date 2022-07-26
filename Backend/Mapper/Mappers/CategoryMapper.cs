@@ -6,7 +6,7 @@ namespace Mapper.Mappers
 {
     public class CategoryMapper : ICategoryMapper
     {
-        public Category Map(CategoryDTO categoryDTO)
+        public Category MapFromDTO(CategoryDTO categoryDTO)
         {
             Category category = new Category();
             category.CategoryID = categoryDTO.CategoryID;
@@ -14,7 +14,7 @@ namespace Mapper.Mappers
             return category;
         }
 
-        public CategoryDTO Map(Category category)
+        public CategoryDTO MapToDTO(Category category)
         {
             CategoryDTO categoryDTO = new CategoryDTO();
             categoryDTO.CategoryID = category.CategoryID;

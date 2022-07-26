@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WepAPI.Controllers
 {
-    //[Route("[controller]")]
+    [Route("[controller]")]
     [ApiController]
-    public class BaseController : ControllerBase
+    public class APIBaseController : ControllerBase
     {
     }
 }
