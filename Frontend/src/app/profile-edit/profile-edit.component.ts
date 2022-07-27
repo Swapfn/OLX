@@ -15,7 +15,11 @@ import { AccountService } from '../_services/account.service';
 export class ProfileEditComponent implements OnInit {
   //Token: string;
   @ViewChild("ProfileEditForm") editForm: NgForm;
-  model: User = { userName: "", firstName: "", lastName: "", aboutMe: "", phone: null, email: "" };  //The model containing data to be edited
+  model: User = {
+    userName: "", firstName: "", lastName: "", aboutMe: "", phone: null, email: "",
+    password: '',
+    confirmPassword: ''
+  };  //The model containing data to be edited
   modalRef?: BsModalRef; //for the ngx-bootstrap modal
   constructor(private modalService: BsModalService, private router: Router, private accountService: AccountService, private toast: ToastrService) {
     //this.accountService.currentUser$.pipe(take(1)).subscribe(token => this.Token=token);

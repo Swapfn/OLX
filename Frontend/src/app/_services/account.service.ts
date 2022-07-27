@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Register } from '../_models/register';
 import { Token } from '../_models/token';
 import { User } from '../_models/user';
 
@@ -10,7 +11,7 @@ import { User } from '../_models/user';
 })
 export class AccountService {
   baseUrl = environment.apiUrl;
-  private currentUserSource = new ReplaySubject<Token>(1);
+  private currentUserSource = new ReplaySubject<string>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
   constructor(private http : HttpClient) { }
@@ -21,25 +22,25 @@ export class AccountService {
         const user = response;
         if(user) {
           localStorage.setItem("user",JSON.stringify(user));
-          this.currentUserSource.next(user);
+          this.currentUserSource.next(user.token);
         }
         return user;
       })
     )
   }
 
-  register(model : any) {
-    return this.http.post(this.baseUrl + 'register',model).pipe(
+  register(model : Register) {
+    return this.http.post(this.baseUrl + 'account/register',model).pipe(
       map((user : Token) => {
         if (user) {
-          localStorage.setItem("user",JSON.stringify(user));
-          this.currentUserSource.next(user);
+          localStorage.setItem("user",JSON.stringify(user.token));
+          this.currentUserSource.next(user.token);
         }
       })
     )
   }
 
-  setCurrentUser(user : Token) {
+  setCurrentUser(user : string) {
     this.currentUserSource.next(user);
   }
 
@@ -49,7 +50,7 @@ export class AccountService {
   }
 
   update(model : User) {
-    return this.http.put(this.baseUrl + 'edit',model);
+    return this.http.put(this.baseUrl + 'User/update',model);
   }
 
   getUser() {
