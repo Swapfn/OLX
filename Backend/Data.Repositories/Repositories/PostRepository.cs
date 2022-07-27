@@ -30,7 +30,10 @@ namespace Data.Repositories.Repositories
             return postList;
         }
 
-        public Post GetById(int id) => this.DbContext.Posts.Include(p => p.User).Include(l => l.Location).Include(s => s.SubCategory).FirstOrDefault(p => p.PostId == id);
+        public Post GetById(int id) => this.DbContext.Posts.Include(p => p.User)
+            .Include(l => l.Location)
+            .Include(s => s.SubCategory)
+            .FirstOrDefault(p => p.PostId == id);
 
         public PagedResult<Post> GetAll(int PageNumber, int PageSize, string SortBy = "CreatedAt", string SortDirection = "")
         {
@@ -105,7 +108,7 @@ namespace Data.Repositories.Repositories
         /// <exception cref="NotImplementedException"></exception>
         public IEnumerable<Post> GetAvailablePostsByUser(int id)
         {
-            return DbContext.Posts.Where(p => p.UserID == id && p.Available).ToList();
+            return DbContext.Posts.Where(p => p.UserID == id && p.IsAvailable).ToList();
         }
 
         /// <summary>
@@ -116,7 +119,7 @@ namespace Data.Repositories.Repositories
         /// <exception cref="NotImplementedException"></exception>
         public IEnumerable<Post> GetUnavailablePostsByUser(int id)
         {
-            return DbContext.Posts.Where(p => p.UserID == id && p.Available == false).ToList();
+            return DbContext.Posts.Where(p => p.UserID == id && p.IsAvailable == false).ToList();
         }
     }
 }

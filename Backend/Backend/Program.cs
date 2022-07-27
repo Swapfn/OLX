@@ -129,18 +129,16 @@ app.UseAuthorization();
 app.UseStaticFiles();
 app.MapControllers();
 
-// Seed part
+
+
+// Push any pending migrations part
 
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
 try
 {
     var dbContext = services.GetRequiredService<ApplicationDbContext>();
-    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
     await dbContext.Database.MigrateAsync();
-    // excute only if user table is empty
-    if (await userManager.Users.AnyAsync() == false)
-        await UserConfiguration.SeedUsers(userManager);
 }
 catch (Exception ex)
 {
