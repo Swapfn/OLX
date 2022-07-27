@@ -19,7 +19,7 @@ export class PostDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     // this.loadPost();
-    this.getItem();
+    // this.getItem();
   }
 
   Post:Post;
@@ -28,13 +28,13 @@ export class PostDetailsComponent implements OnInit {
   //  this.PostService.getPost(this.id).subscribe(p=>{this.Post=p;});
   // }
 
-  Item=this.PostService.Item;
+  // Item=this.PostService.Item;
 
 
-  getItem(){
-    this.Item=this.PostService.getItemsMaually();
-    console.log("from details");
-  }
+  // getItem(){
+  //   this.Item=this.PostService.getItemsMaually();
+  //   console.log("from details");
+  // }
  
 
 

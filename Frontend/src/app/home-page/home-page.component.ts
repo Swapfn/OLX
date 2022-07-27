@@ -33,7 +33,7 @@ export class HomePageComponent implements OnInit {
   setItem(i:object){
     console.log("from home");
     console.log(i);
-    this.PostService.setItemsMaually(i);
+    // this.PostService.setItemsMaually(i);
     
   }
 
