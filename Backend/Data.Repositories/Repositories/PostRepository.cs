@@ -30,7 +30,10 @@ namespace Data.Repositories.Repositories
             return postList;
         }
 
-        public Post GetById(int id) => this.DbContext.Posts.Include(p => p.User).Include(l => l.Location).Include(s => s.SubCategory).FirstOrDefault(p => p.PostId == id);
+        public Post GetById(int id) => this.DbContext.Posts.Include(p => p.User)
+            .Include(l => l.Location)
+            .Include(s => s.SubCategory)
+            .FirstOrDefault(p => p.PostId == id);
 
         public PagedResult<Post> GetAll(int PageNumber, int PageSize, string SortBy = "CreatedAt", string SortDirection = "")
         {
