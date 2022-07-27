@@ -23,6 +23,6 @@ namespace Models.Models
         {
             PostImages = new List<PostImage>();
         }
-
+        public bool Available { get; set; } // tbd
     }
 }

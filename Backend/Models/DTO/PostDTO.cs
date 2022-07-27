@@ -17,5 +17,6 @@ namespace Models.DTO
         public string? SubCategoryName { set; get; }
         public string? CityName { set; get; }
         public string? FullName { set; get; }
+        public bool? Available { get; set; }
     }
 }
