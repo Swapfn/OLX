@@ -38,8 +38,9 @@ namespace Data
                 .IsRequired();
 
 
-            modelBuilder.ApplyConfiguration(new CategoryConfigration());
-            modelBuilder.ApplyConfiguration(new LocationConfigration());
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new SubCategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new LocationConfiguration());
             modelBuilder.ApplyConfiguration(new RolesConfiguration());
         }
         public void Commit()

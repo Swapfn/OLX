@@ -4,7 +4,7 @@ using Models.Models;
 
 namespace Data.Configuration
 {
-    public class LocationConfigration : IEntityTypeConfiguration<Location>
+    public class LocationConfiguration : IEntityTypeConfiguration<Location>
     {
         public void Configure(EntityTypeBuilder<Location> builder)
         {
