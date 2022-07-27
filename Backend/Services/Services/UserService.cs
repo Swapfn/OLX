@@ -22,8 +22,7 @@ namespace Services.Services
         /// <param name="identity"></param>
         /// <param name="userManager"></param>
         /// <returns></returns>
-        public async Task<ApplicationUser> GetUserByIdAsync(ClaimsIdentity identity,
-            UserManager<ApplicationUser> userManager)
+        public async Task<ApplicationUser> GetUserByIdAsync(ClaimsIdentity identity)
         {
             int userId = 0;
 
@@ -35,7 +34,7 @@ namespace Services.Services
             }
 
             // find user by id
-            var user = await userManager.FindByIdAsync(userId.ToString());
+            var user = await _userManager.FindByIdAsync(userId.ToString());
             return user;
         }
 
@@ -48,10 +47,9 @@ namespace Services.Services
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
 
-        public async Task<ApplicationUser> UpdateUserAsync(ClaimsIdentity identity, UserManager<ApplicationUser> userManager,
-            UserDTO model)
+        public async Task<ApplicationUser> UpdateUserAsync(ClaimsIdentity identity, UserDTO model)
         {
-            var user = await GetUserByIdAsync(identity, userManager);
+            var user = await GetUserByIdAsync(identity);
             user.AboutMe = model.AboutMe;
             user.PhoneNumber = model.Phone;
             user.FName = model.FirstName;
@@ -60,7 +58,7 @@ namespace Services.Services
             user.Email = model.Email;
 
 
-            var result = await userManager.UpdateAsync(user);
+            var result = await _userManager.UpdateAsync(user);
             if (result.Succeeded)
             {
                 return user;
@@ -77,10 +75,10 @@ namespace Services.Services
         /// <param name="identity"></param>
         /// <param name="userManager"></param>
         /// <returns></returns>
-        public async Task<StatusCodeResult> DeleteUserAsync(ClaimsIdentity identity, UserManager<ApplicationUser> userManager)
+        public async Task<StatusCodeResult> DeleteUserAsync(ClaimsIdentity identity)
         {
-            var user = await GetUserByIdAsync(identity, userManager);
-            var result = await userManager.DeleteAsync(user);
+            var user = await GetUserByIdAsync(identity);
+            var result = await _userManager.DeleteAsync(user);
             if (result.Succeeded)
             {
                 return new StatusCodeResult(204);

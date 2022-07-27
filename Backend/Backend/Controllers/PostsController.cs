@@ -10,17 +10,16 @@ using System.Security.Claims;
 
 namespace WepAPI.Controllers
 {
+    [Authorize]
     public class PostsController : APIBaseController
     {
         private readonly IPostService _postService;
         private readonly IUserService _userService;
-        private readonly UserManager<ApplicationUser> _userManager;
 
-        public PostsController(IPostService postService, IUserService userService, UserManager<ApplicationUser> userManager)
+        public PostsController(IPostService postService, IUserService userService)
         {
             _postService = postService;
             _userService = userService;
-            _userManager = userManager;
         }
 
         // GET Posts
@@ -64,7 +63,7 @@ namespace WepAPI.Controllers
             }
 
             ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
-            Task<ApplicationUser> user = _userService.GetUserByIdAsync(identity, _userManager);
+            Task<ApplicationUser> user = _userService.GetUserByIdAsync(identity);
             postDTO.UserID = user.Result.Id;
 
             PostDTO result = _postService.Add(postDTO);
