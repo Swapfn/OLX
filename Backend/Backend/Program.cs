@@ -126,7 +126,7 @@ app.UseCors("AllowAllOrigins");
 // Authentication & Authorization
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseStaticFiles();
 app.MapControllers();
 
 // Seed part
