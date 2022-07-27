@@ -11,8 +11,8 @@ import { AuthGuard } from './_guards/auth.guard';
 const routes: Routes = [
   { path: "", component: HomeComponent },
   {path: "",
-    //runGuardsAndResolvers: 'always',
-    //canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
     children: [
       { path: "profile", component: ProfileEditComponent },
       { path: "home", component: HomePageComponent },

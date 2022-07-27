@@ -21,13 +21,13 @@ export class NavComponent implements OnInit {
 
   login() {
     this.accountService.login(this.model).subscribe({
-      next: (response: Token) => {
-        this.toast.success("Logged in successfully");
+      next: () => {
+        this.toast.success(`Welcome ${this.model.username}`);
         this.router.navigateByUrl("/home");
       },
       error: error => {
         console.log(error);
-        this.toast.error(error.error);
+        this.toast.error(error.error.message);
       }
     })
   }

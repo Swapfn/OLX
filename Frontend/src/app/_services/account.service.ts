@@ -21,7 +21,7 @@ export class AccountService {
       map((response : Token) => {
         const user = response;
         if(user) {
-          localStorage.setItem("user",JSON.stringify(user));
+          localStorage.setItem("user",JSON.stringify(user.token));
           this.currentUserSource.next(user.token);
         }
         return user;
@@ -30,15 +30,16 @@ export class AccountService {
   }
 
   register(model : Register) {
-    return this.http.post(this.baseUrl + 'account/register',model).pipe(
-      map((user : Token) => {
-        if (user) {
-          localStorage.setItem("user",JSON.stringify(user.token));
-          this.currentUserSource.next(user.token);
-        }
-      })
-    )
+    return this.http.post(this.baseUrl + 'account/register',model);
   }
+  // .pipe(
+  //   map((user : Token) => {
+  //     if (user) {
+  //       localStorage.setItem("user",JSON.stringify(user.token));
+  //       this.currentUserSource.next(user.token);
+  //     }
+  //   })
+  // )
 
   setCurrentUser(user : string) {
     this.currentUserSource.next(user);

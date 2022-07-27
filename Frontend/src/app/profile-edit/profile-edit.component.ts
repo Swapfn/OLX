@@ -29,6 +29,7 @@ export class ProfileEditComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
+
   ngOnInit(): void {
     this.getUser();
   }
@@ -54,6 +55,7 @@ export class ProfileEditComponent implements OnInit {
       this.toast.success("Profile deleted successfully");
       this.router.navigateByUrl("/welcome");
       this.accountService.logout();
+      this.modalRef?.hide();
     });
   }
 
