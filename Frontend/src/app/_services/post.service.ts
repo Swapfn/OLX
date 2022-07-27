@@ -23,8 +23,24 @@ export class PostService {
 
   getCategories() {
     return this.http.get<Category>(this.baseUrl+'categories/');
+
+
+
+   Item:object;
+
+   setItemsMaually(I:object){
+    this.Item=I;
+    console.log("from set Service");
+    console.log(I);
+   }
+
+   getItemsMaually(){
+    console.log("from get Service");
+    return this.Item;
+    
   }
 }
+
 
 
 

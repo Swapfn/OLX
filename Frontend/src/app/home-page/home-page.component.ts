@@ -17,16 +17,25 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.loadPosts();
+    this.loadPosts();
   }
 
   TotaPostsNumb(){
     return this.AllPosts.length;
   }
 
-  // loadPosts(){
-  //   this.PostService.getAllPosts().subscribe(p=>{this.AllPosts=p;})
-  // }
+  loadPosts(){
+    this.PostService.getAllPosts().subscribe(p=>{this.AllPosts=p;})
+  }
+
+
+
+  setItem(i:object){
+    console.log("from home");
+    console.log(i);
+    this.PostService.setItemsMaually(i);
+    
+  }
 
 
  

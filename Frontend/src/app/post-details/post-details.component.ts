@@ -10,6 +10,7 @@ import { PostService } from '../_services/post.service';
   styleUrls: ['./post-details.component.css']
 })
 export class PostDetailsComponent implements OnInit {
+
   id: any;
 
   constructor(private PostService:PostService,private AccountService:AccountService,private route:ActivatedRoute) { 
@@ -17,13 +18,22 @@ export class PostDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadPost();
+    // this.loadPost();
+    this.getItem();
   }
 
   Post:Post;
 
-  loadPost(){
-   this.PostService.getPost(this.id).subscribe(p=>{this.Post=p;});
+  // loadPost(){
+  //  this.PostService.getPost(this.id).subscribe(p=>{this.Post=p;});
+  // }
+
+  Item=this.PostService.Item;
+
+
+  getItem(){
+    this.Item=this.PostService.getItemsMaually();
+    console.log("from details");
   }
  
 
