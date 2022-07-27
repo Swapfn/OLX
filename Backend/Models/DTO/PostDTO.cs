@@ -11,7 +11,7 @@ namespace Models.DTO
         public double Price { set; get; }
         public bool IsNew { set; get; }
         public bool IsNegotiable { set; get; }
-        public bool Available { get; set; }
+        public bool IsAvailable { get; set; }
         public int SubCategoryId { set; get; }
         public int LocationId { set; get; }
         public int UserID { set; get; }

@@ -108,7 +108,7 @@ namespace Data.Repositories.Repositories
         /// <exception cref="NotImplementedException"></exception>
         public IEnumerable<Post> GetAvailablePostsByUser(int id)
         {
-            return DbContext.Posts.Where(p => p.UserID == id && p.Available).ToList();
+            return DbContext.Posts.Where(p => p.UserID == id && p.IsAvailable).ToList();
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace Data.Repositories.Repositories
         /// <exception cref="NotImplementedException"></exception>
         public IEnumerable<Post> GetUnavailablePostsByUser(int id)
         {
-            return DbContext.Posts.Where(p => p.UserID == id && p.Available == false).ToList();
+            return DbContext.Posts.Where(p => p.UserID == id && p.IsAvailable == false).ToList();
         }
     }
 }

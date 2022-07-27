@@ -15,7 +15,7 @@ namespace Mapper.Mappers
             post.CreatedAt = postDTO.CreatedAt;
             post.Price = postDTO.Price;
             post.IsNew = postDTO.IsNew;
-            post.Available = postDTO.Available;
+            post.IsAvailable = postDTO.IsAvailable;
             post.IsNegotiable = postDTO.IsNegotiable;
             post.SubCategoryId = postDTO.SubCategoryId;
             post.UserID = postDTO.UserID;
@@ -32,7 +32,7 @@ namespace Mapper.Mappers
             postDTO.CreatedAt = post.CreatedAt;
             postDTO.Price = post.Price;
             postDTO.IsNew = post.IsNew;
-            postDTO.Available = post.Available;
+            postDTO.IsAvailable = post.IsAvailable;
             postDTO.IsNegotiable = post.IsNegotiable;
             postDTO.SubCategoryId = post.SubCategoryId;
             postDTO.UserID = post.UserID;
