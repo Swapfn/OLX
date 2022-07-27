@@ -3,7 +3,7 @@ import { Photo } from "./Photo";
 export interface Post {
     userId:number;
     id: number;
-    title: string;
+    adTitle: string;
     categoryId: number;
     subcategoryId:number;
     subcategoryName:string
