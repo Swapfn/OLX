@@ -10,6 +10,7 @@ namespace Models.DTO
         public DateTime CreatedAt { set; get; }
         public double Price { set; get; }
         public bool IsNew { set; get; }
+        public bool IsNegotiable { set; get; }
         public int SubCategoryId { set; get; }
         public int LocationId { set; get; }
         public int UserID { set; get; }
