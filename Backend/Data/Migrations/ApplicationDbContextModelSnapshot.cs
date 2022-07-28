@@ -815,8 +815,6 @@ namespace Data.Migrations
                     b.ToTable("Posts");
 
                     b.HasData(
-                        new
-                        {
                             PostId = 1,
                             CreatedAt = new DateTime(2020, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "mollis vitae, posuere at, velit. Cras lorem lorem, luctus ut, pellentesque eget, dictum placerat, augue. Sed molestie. Sed id risus quis diam luctus lobortis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Mauris ut quam vel sapien imperdiet ornare. In faucibus. Morbi vehicula. Pellentesque tincidunt tempus risus. Donec egestas. Duis ac arcu. Nunc mauris. Morbi non sapien molestie orci tincidunt adipiscing. Mauris molestie pharetra nibh. Aliquam ornare, libero at auctor ullamcorper, nisl arcu iaculis enim, sit amet ornare lectus justo eu arcu. Morbi sit amet massa. Quisque porttitor eros nec tellus. Nunc lectus pede, ultrices a, auctor non, feugiat nec, diam. Duis mi enim, condimentum eget, volutpat ornare, facilisis eget, ipsum. Donec sollicitudin adipiscing ligula. Aenean gravida nunc sed pede. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin vel arcu eu odio tristique pharetra. Quisque",
@@ -28816,11 +28814,7 @@ namespace Data.Migrations
                             UserID = 6
                         });
                 });
-
-            modelBuilder.Entity("Models.Models.PostImage", b =>
                 {
-                    b.Property<int>("PostImageID")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PostImageID"), 1L, 1);

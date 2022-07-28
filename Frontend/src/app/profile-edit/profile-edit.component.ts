@@ -15,7 +15,11 @@ import { AccountService } from '../_services/account.service';
 export class ProfileEditComponent implements OnInit {
   //Token: string;
   @ViewChild("ProfileEditForm") editForm: NgForm;
-  model: User = { userName: "", firstName: "", lastName: "", aboutMe: "", phone: null, email: "" };  //The model containing data to be edited
+  model: User = {
+    userName: "", firstName: "", lastName: "", aboutMe: "", phone: null, email: "",
+    password: '',
+    confirmPassword: ''
+  };  //The model containing data to be edited
   modalRef?: BsModalRef; //for the ngx-bootstrap modal
   constructor(private modalService: BsModalService, private router: Router, private accountService: AccountService, private toast: ToastrService) {
     //this.accountService.currentUser$.pipe(take(1)).subscribe(token => this.Token=token);
@@ -24,6 +28,7 @@ export class ProfileEditComponent implements OnInit {
   openModal(template: TemplateRef<any>) {   //For ngx modal
     this.modalRef = this.modalService.show(template);
   }
+
 
   ngOnInit(): void {
     this.getUser();
@@ -50,6 +55,7 @@ export class ProfileEditComponent implements OnInit {
       this.toast.success("Profile deleted successfully");
       this.router.navigateByUrl("/welcome");
       this.accountService.logout();
+      this.modalRef?.hide();
     });
   }
 
