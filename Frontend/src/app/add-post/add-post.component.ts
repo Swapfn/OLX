@@ -4,7 +4,7 @@ import { take } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Category } from '../_models/category';
 import { Location } from '../_models/location';
-import { Post } from '../_models/Post';
+import { Post } from '../_models/post';
 import { SubCategory } from '../_models/subCategory';
 import { Token } from '../_models/token';
 import { AccountService } from '../_services/account.service';

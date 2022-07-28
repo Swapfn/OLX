@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Category } from '../_models/category';
 import { Location } from '../_models/location';
-import { Post } from '../_models/Post';
+import { Post } from '../_models/post';
 
 @Injectable({
   providedIn: 'root'
