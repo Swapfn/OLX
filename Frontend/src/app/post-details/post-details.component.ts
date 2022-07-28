@@ -1,3 +1,4 @@
+import { isNgTemplate } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Post } from '../_models/post';
@@ -19,7 +20,8 @@ export class PostDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     // this.loadPost();
-    // this.getItem();
+    this.getitem();
+    
   }
 
   Post:Post;
@@ -28,14 +30,19 @@ export class PostDetailsComponent implements OnInit {
   //  this.PostService.getPost(this.id).subscribe(p=>{this.Post=p;});
   // }
 
-  // Item=this.PostService.Item;
+
+  // _________________________Manually_____________________________________
+
+ Item:any;
+ price:number=20;
+
+  getitem(){
+    this.Item=this.PostService.getItemsMaually();
+  }
 
 
-  // getItem(){
-  //   this.Item=this.PostService.getItemsMaually();
-  //   console.log("from details");
-  // }
- 
+
+
 
 
 

@@ -27,25 +27,25 @@
         <p class="card-text">
           <small class="text-muted">{{ i.area + " , " + i.city }}</small>
         </p>
-        <a (click)="setItem(i)"  class=" stretched-link"></a>
+        <a (click)="setItem(i)" routerLink="/Postdetails/{{i.Id}}" class=" stretched-link"></a>
       </div>
     </div>
   </div>
 </div>
 
-<!-- routerLink="/Postdetails/{{i.Id}}" -->
+<!--  -->
 
 <!-- ________________________Using API_________________________________ -->
 
 <div class="global row row-cols-2 row-cols-md-4 g-4 m-3">
   <div *ngFor="let post of AllPosts" class="col">
     <div class="card h-100">
-      <div class="card-img-wrapper">
-        <img src="{{ post.photos[0].photoUrl }}" class="card-img-top" alt="{{ post.adTitle}}" />
-      </div>
+      <!-- <div class="card-img-wrapper">
+        <img src="{{ post.photos[0].photoUrl }}" class="card-img-top" alt="{{ post.title}}" />
+      </div> -->
       <div class="card-body">
         <div class="d-flex align-items-start">
-          <p class="card-text">{{ post.adTitle }}</p>
+          <p class="card-text">{{ post.title }}</p>
           <div (click)="favorite(post)" class="m-1">
             <i [ngClass]="
                 Fav ? 'fa-solid fa-heart fa-lg' : 'fa-regular fa-heart fa-lg'
@@ -54,12 +54,12 @@
         </div>
         <div class="d-flex align-items-center">
           <h4 class="card-title">{{ post.price }} EGP</h4>
-          <small class="card-text text-muted mx-2" *ngIf="post.negotiatable">negotaitable</small>
+          <small class="card-text text-muted mx-2" *ngIf="post.isNegotiable">negotaitable</small>
         </div>
         <p class="card-text">
-          <small class="text-muted">{{ post.location }}</small>
+          <small class="text-muted">{{ post.cityName }}</small>
         </p>
-         <a href="#" routerLink="/Postdetails/{{post.id}}"  class=" stretched-link"></a>
+         <a href="#" routerLink="/Postdetails/{{post.postId}}"  class=" stretched-link"></a>
       </div>
     </div>
   </div>
