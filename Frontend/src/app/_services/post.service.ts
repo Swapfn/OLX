@@ -37,19 +37,19 @@ export class PostService {
 
 
 
-  //  Item:object;
+   Item:object;
 
-  //  setItemsMaually(I:object){
-  //   this.Item=I;
-  //   console.log("from set Service");
-  //   console.log(I);
-  //  }
+   setItemsMaually(I:object){
+    this.Item=I;
+    console.log("from set Service");
+    console.log(I);
+   }
 
-  //  getItemsMaually(){
-  //   console.log("from get Service");
-  //   return this.Item;
+   getItemsMaually(){
+    console.log("from get Service");
+    return this.Item;
     
-  // }
+  }
 }
 
 
