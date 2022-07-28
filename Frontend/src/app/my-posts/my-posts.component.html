@@ -1,1 +1,75 @@
-<p>my-posts works!</p>
+<h3 style="text-align: center;" class="m-3 fw-bolder">MY ADS</h3>
+<div class="d-flex flex-row" style="margin-left: 33%;">
+    <div class="form-check ms-5">
+        <input [(ngModel)]="available" name="available" class="form-check-input" type="checkbox" value="">
+        <label class="form-check-label">
+            Show Available Posts
+        </label>
+    </div>
+    <div class="form-check ms-5">
+        <input [(ngModel)]="unavailable" name="unavailable" class="form-check-input" type="checkbox"
+            value="">
+        <label class="form-check-label">
+            Show Unavailable posts
+        </label>
+    </div>
+</div>
+<div style="text-align: center;">
+    <button (click)="alltrue()" style="height: 50px;font-weight: 500;width: 120px;" type="button" class="btn btn-dark mt-3">View All({{AvailablePosts.length+UnvailablePosts.length}})</button>
+</div>
+
+<div *ngIf="(AvailablePosts.length>0) && (available)" class="global row row-cols-2 row-cols-md-4 g-4 m-3">
+    <div *ngFor="let i of Items" class="col">
+        <div class="card h-100">
+            <img src="{{ i.photo[0].src }}" class="card-img-top" alt="{{ i.title }}" />
+            <div></div>
+            <div class="card-body">
+                <div class="d-flex align-items-start">
+                    <p class="card-text">{{ i.title }}</p>
+                    <div class="m-1">
+                        <i></i>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center">
+                    <h4 class="card-title">{{ i.price }} EGP</h4>
+                    <small class="card-text text-muted mx-2" *ngIf="i.nego_Price">negotaitable</small>
+
+                </div>
+                <p class="card-text">
+                    <small class="text-muted">{{ i.area + " , " + i.city }}</small>
+                    <button type="submit" class="btn btn-dark mb-4"
+                        style="float: right;height: 70px;font-weight: 500;width: 70px;">Click if sold</button>
+                </p>
+                <a routerLink="/Postdetails/{{i.Id}}" class=" stretched-link"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="(UnvailablePosts.length>0) && (unavailable)" class="global row row-cols-2 row-cols-md-4 g-4 m-3">
+    <div *ngFor="let i of Items" class="col">
+        <div class="card h-100">
+            <img src="{{ i.photo[0].src }}" class="card-img-top" alt="{{ i.title }}" />
+            <div></div>
+            <div class="card-body">
+                <div class="d-flex align-items-start">
+                    <p class="card-text">{{ i.title }}</p>
+                    <div class="m-1">
+                        <i></i>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center">
+                    <h4 class="card-title">{{ i.price }} EGP</h4>
+                    <small class="card-text text-muted mx-2" *ngIf="i.nego_Price">negotaitable</small>
+
+                </div>
+                <p class="card-text">
+                    <small class="text-muted">{{ i.area + " , " + i.city }}</small>
+                    <button type="submit" class="btn btn-dark mb-4"
+                        style="float: right;height: 70px;font-weight: 500;width: 70px;">Click if sold</button>
+                </p>
+                <a routerLink="/Postdetails/{{i.Id}}" class=" stretched-link"></a>
+            </div>
+        </div>
+    </div>
+</div>

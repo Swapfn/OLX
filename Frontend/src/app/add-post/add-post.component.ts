@@ -6,7 +6,7 @@ import { take } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Category } from '../_models/category';
 import { Location } from '../_models/location';
-import { Post } from '../_models/Post';
+import { Post } from '../_models/post';
 import { SubCategory } from '../_models/subCategory';
 import { Token } from '../_models/token';
 import { AccountService } from '../_services/account.service';
@@ -19,23 +19,23 @@ import { PostService } from '../_services/post.service';
 })
 export class AddPostComponent implements OnInit {
   post : Post={
-    postId: null,
+    postId: 0,
     title: '',
     description: '',
-    createdAt: undefined,
+    createdAt: new Date(),
     price: null,
     isNew: false,
     isNegotiable: false,
-    isAvailable: false,
+    isAvailable: true,
     subCategoryId: null,
     locationId: null,
-    userID: null,
+    userID: 0,
     subCategoryName: '',
     cityName: '',
-    fullName: '',
+    fullName: null,
     phoneNumber: null,
-    minPrice: null,
-    maxPrice: null,
+    minPrice: 0,
+    maxPrice: 0,
     categoryId: null
   };
   uploader: FileUploader;
