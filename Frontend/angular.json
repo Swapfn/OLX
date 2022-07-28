@@ -76,8 +76,7 @@
           "options": {
             "ssl": true,
             "sslCert": "./ssl/server.crt",
-            "sslKey": "./ssl/server.key",
-            "proxyConfig": "proxy.conf.json"
+            "sslKey": "./ssl/server.key"
           },
           "configurations": {
             "production": {
