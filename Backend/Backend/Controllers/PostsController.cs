@@ -23,15 +23,17 @@ namespace WepAPI.Controllers
         }
 
         // GET Posts
-        [HttpGet]
-        [Route("{PageNumber}/{PageSize}/{SortBy}/{SortDirection}")]
-        public IActionResult GetAll(int PageNumber, int PageSize, string SortBy, string SortDirection)
-        {
-            PagedResult<PostDTO> postDTO = _postService.GetAll(PageNumber, PageSize, SortBy, SortDirection);
-            return Ok(postDTO);
-        }
+        //[Authorize]
+        //[HttpGet]
+        //[Route("{PageNumber}/{PageSize}/{SortBy}/{SortDirection}")]
+        //public IActionResult GetAll(int PageNumber, int PageSize, string SortBy, string SortDirection)
+        //{
+        //    PagedResult<PostDTO> postDTO = _postService.GetAll(PageNumber, PageSize, SortBy, SortDirection);
+        //    return Ok(postDTO);
+        //}
 
         // GET Posts/1
+        [Authorize]
         [HttpGet]
         [Route("{id}")]
         public IActionResult GetById(int id)
@@ -48,7 +50,7 @@ namespace WepAPI.Controllers
         // POST Posts
         [Authorize]
         [HttpPost]
-        [Route("")]
+        [Route("add")]
         public IActionResult Add(PostDTO postDTO)
         {
             if (!ModelState.IsValid)
@@ -72,6 +74,7 @@ namespace WepAPI.Controllers
         }
 
         // PUT Posts/1
+        [Authorize]
         [HttpPut]
         [Route("{id}")]
         public IActionResult Update(int id, PostDTO postDTO)
@@ -98,6 +101,7 @@ namespace WepAPI.Controllers
         }
 
         // DELETE Posts/1
+        [Authorize]
         [HttpDelete]
         [Route("{id}")]
         public IActionResult Delete(int id)
@@ -112,10 +116,15 @@ namespace WepAPI.Controllers
             return Ok("Post deleted");
         }
         [HttpPost]
-        [Route("filter")]
-        public IActionResult GetAll(FilterDTO filterObject)
+        [Route("")]
+        public IActionResult GetAll(FilterDTO<PostDTO> filterObject)
         {
-            IEnumerable<PostDTO> postDTO = _postService.GetAll(filterObject);
+            PagedResult<PostDTO> postDTO = _postService.GetAll(filterObject);
+            //if no search is applied
+            if (filterObject.SearchObject == null)
+            {
+                filterObject.SearchObject = new PostDTO();
+            }
             return Ok(postDTO);
         }
     }

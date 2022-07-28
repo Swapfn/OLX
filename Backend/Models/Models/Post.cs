@@ -12,6 +12,7 @@ namespace Models.Models
         public double Price { set; get; }
         public bool IsNew { set; get; }
         public bool IsNegotiable { set; get; }
+        public bool Available { get; set; }
         public int SubCategoryId { set; get; }
         public SubCategory SubCategory { set; get; }
         public int UserID { set; get; }
@@ -23,6 +24,5 @@ namespace Models.Models
         {
             PostImages = new List<PostImage>();
         }
-        public bool Available { get; set; } // tbd
     }
 }
