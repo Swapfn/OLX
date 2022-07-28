@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Category } from '../_models/category';
-import { Post } from '../_models/post';
+import { Location } from '../_models/location';
+import { Post } from '../_models/Post';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,15 @@ export class PostService {
    }
 
   getCategories() {
-    return this.http.get<Category>(this.baseUrl+'categories/');
+    return this.http.get<Category[]>(this.baseUrl+'categories/');
+  }
+
+  getCategoryById(id: number) {
+    return this.http.get<Category>(this.baseUrl+'categories/' +id);
+  }
+
+  getLocations() {
+    return this.http.get<Location[]>(this.baseUrl+'locations/');
   }
 
 
