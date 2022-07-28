@@ -27,12 +27,16 @@ export class PostService {
     return this.http.get<Category[]>(this.baseUrl+'categories/');
   }
 
-  getCategoryById(id: number) {
-    return this.http.get<Category>(this.baseUrl+'categories/' +id);
+  getCategoryById(id: string) {
+    return this.http.get<Category>(this.baseUrl+'categories/'+id);
   }
 
   getLocations() {
     return this.http.get<Location[]>(this.baseUrl+'locations/');
+  }
+
+  addPost(model: Post) {
+    return this.http.post(this.baseUrl + "posts/add",model);
   }
 
 

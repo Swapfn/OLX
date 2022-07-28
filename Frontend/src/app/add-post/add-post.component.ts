@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload';
+import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Category } from '../_models/category';
@@ -43,15 +45,23 @@ export class AddPostComponent implements OnInit {
   categories: Category[];
   subcategories: SubCategory[];
   locations: Location[];
+  category1: Category={
+    categoryID: null,
+    categoryName: '',
+    subCategories: [{categoryID: null,
+      subCategoryID: null,
+      subCategoryName:''}]
+  }
   // categoryID: number;
 
-  constructor(private accountService: AccountService, private postService: PostService) {
+  constructor(private accountService: AccountService, private postService: PostService, private toast: ToastrService,private router: Router) {
     this.accountService.currentUser$.pipe(take(1)).subscribe(token => this.token=token);
    }
 
   ngOnInit(): void {
     // this.initializeUploader();
     this.getCategories();
+    // this.getCategoryByID();
     this.getLocations();
   }
 
@@ -87,11 +97,26 @@ export class AddPostComponent implements OnInit {
   }
 
   getCategoryByID() {
-    this.postService.getCategoryById(this.post.categoryId).subscribe(category => this.subcategories=category.subCategories);
+    this.postService.getCategoryById(this.post.categoryId.toString()).subscribe(category => this.category1=category);
+    console.log(this.post.categoryId);
   }
 
   getLocations() {
     this.postService.getLocations().subscribe(locations => this.locations=locations);
+  }
+
+  addPost() {
+    // console.log(this.post);
+    this.postService.addPost(this.post).subscribe({
+      next: () => {
+        this.toast.success("Post added successfully");
+        this.router.navigateByUrl("/home");
+      },
+      error: error => {
+        console.log(error);
+        this.toast.error(error.error.message);
+      }
+    })
   }
 
 }
