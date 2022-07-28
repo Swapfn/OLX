@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Models.DTO
+﻿namespace Models.DTO
 {
-    public class FilterDTO
+    public class FilterDTO<T> where T : class
     {
-        public int? locationId { set; get; }
-        public int? subCategoryId { set; get; }
-        public int? minPrice { get; set; }
-        public int? maxPrice { get; set; }
-        /*public int? categoryId { get; set; }*/
+        public T SearchObject { get; set; }
+        public int PageNumber { get; set; }
+        public int PageSize { get; set; }
+        public string SortBy { get; set; }
+        public string SortDirection { get; set; }
+        public List<string> Includes { get; set; }
+
+        public FilterDTO()
+        {
+            Includes = new List<string>();
+        }
     }
 }

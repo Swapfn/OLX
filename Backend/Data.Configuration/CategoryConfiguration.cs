@@ -4,7 +4,7 @@ using Models.Models;
 
 namespace Data.Configuration
 {
-    public class CategoryConfigration : IEntityTypeConfiguration<Category>
+    public class CategoryConfiguration : IEntityTypeConfiguration<Category>
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {
