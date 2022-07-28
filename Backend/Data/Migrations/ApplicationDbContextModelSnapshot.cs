@@ -813,9 +813,7 @@ namespace Data.Migrations
                     b.HasIndex("UserID");
 
                     b.ToTable("Posts");
-
                     b.HasData(
-                        new
                         {
                             PostId = 1,
                             CreatedAt = new DateTime(2020, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -28816,10 +28814,6 @@ namespace Data.Migrations
                             UserID = 6
                         });
                 });
-
-            modelBuilder.Entity("Models.Models.PostImage", b =>
-                {
-                    b.Property<int>("PostImageID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Post } from '../_models/Post';
+import { Post } from '../_models/post';
+import { AccountService } from '../_services/account.service';
 import { PostService } from '../_services/post.service';
 
 @Component({
@@ -11,7 +12,9 @@ export class HomePageComponent implements OnInit {
 
   AllPosts:Post[];
 
-  constructor(private PostService:PostService) { }
+  constructor(private PostService:PostService, private accountService: AccountService) { 
+    this.accountService.setCurrentUser;
+  }
 
   ngOnInit(): void {
     this.loadPosts();
@@ -23,6 +26,15 @@ export class HomePageComponent implements OnInit {
 
   loadPosts(){
     this.PostService.getAllPosts().subscribe(p=>{this.AllPosts=p;})
+  }
+
+
+
+  setItem(i:object){
+    console.log("from home");
+    console.log(i);
+    // this.PostService.setItemsMaually(i);
+    
   }
 
 
