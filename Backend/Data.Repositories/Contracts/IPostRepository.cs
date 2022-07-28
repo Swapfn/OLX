@@ -1,14 +1,15 @@
 ﻿using Data.Infrastructure;
 using Models.DTO;
 using Models.Models;
+using System.Linq.Expressions;
 
 namespace Data.Repositories.Contracts
 {
     public interface IPostRepository : IRepository<Post>
     {
         public Post GetById(int id);
-        PagedResult<Post> GetAll(int PageNumber, int PageSize, string SortBy = "", string SortDirection = "");
-        IEnumerable<Post> GetAll(FilterDTO filterObject);
+        PagedResult<Post> GetAll(int PageNumber, int PageSize, List<string> includes, string SortBy, string SortDirection);
+        PagedResult<Post> GetAll(FilterDTO<PostDTO> FilterObject);
         bool IsExist(int id);
 
         /// <summary>
@@ -24,6 +25,5 @@ namespace Data.Repositories.Contracts
         /// <param name="id"></param>
         /// <returns></returns>
         IEnumerable<Post> GetUnavailablePostsByUser(int id);
-
     }
 }

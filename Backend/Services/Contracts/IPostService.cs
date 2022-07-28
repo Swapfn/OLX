@@ -13,6 +13,6 @@ namespace Services
         bool PostExists(int id);
         void SavePost();
         string Validate(PostDTO postDTO);
-        IEnumerable<PostDTO> GetAll(FilterDTO filterObject);
+        PagedResult<PostDTO> GetAll(FilterDTO<PostDTO> filterObject);
     }
 }
