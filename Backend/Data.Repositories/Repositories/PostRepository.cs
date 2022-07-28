@@ -129,7 +129,7 @@ namespace Data.Repositories.Repositories
             }
             if (filter != null)
             {
-                Query = Query.Where(filter);
+                Query = Query.Where(filter).Where(p => p.IsAvailable);
 
                 PagedList.TotalRecords = Query.AsNoTracking().ToList().Count();
 
