@@ -131,7 +131,6 @@ app.UseHttpsRedirection();
 // Use Cors
 app.UseCors("AllowAllOrigins");
 
-app.UseStaticFiles();
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),@"Resorces")),
