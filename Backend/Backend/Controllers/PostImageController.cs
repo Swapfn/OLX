@@ -49,17 +49,18 @@ namespace WepAPI.Controllers
         // POST PostImage
         [HttpPost]
         [Route("{id}")]
-        public IActionResult Add(int id, string[] dbPath)
+        public IActionResult Add(int id, List<string> dbPath)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            IEnumerable<PostImageDTO> postimagesDTO = null;
+            //id here stands for post id
+            IEnumerable<PostImageDTO> postimagesDTO = Enumerable.Empty<PostImageDTO>();
             foreach (var path in dbPath) {
                 PostImageDTO postimageDTO = new PostImageDTO();
                 postimageDTO.PostId = id;
                 postimageDTO.ImageURL = path;
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
                 _postimageService.Add(postimageDTO);
                 postimagesDTO.Append(postimageDTO);
                     }
@@ -105,17 +106,19 @@ namespace WepAPI.Controllers
             _postimageService.SavePostImage();
             return Ok("Post Image deleted");
         }
-        [HttpPost, DisableRequestSizeLimit]
-        [Route("")]
-        public async Task<IActionResult> UploadFiles()
+        /*[HttpPost, DisableRequestSizeLimit]
+        [Route("why")]*/
+        /*public async Task<IActionResult> UploadFiles()
         {
             try
             {
                 var formCollection = await Request.ReadFormAsync();
                 var files = formCollection.Files;
                 string folderName = Path.Combine("Resorces", "Images");
-                string pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-                string[] dbPath=null;
+                string pathToSave = Path.Combine("../", folderName);
+                var dbPaths = new List<string>();
+
+                *//*List<string> dbPaths = new List<string> { };*//*
                 if (!Directory.Exists(pathToSave))
                 {
                     Directory.CreateDirectory(pathToSave);
@@ -128,16 +131,19 @@ namespace WepAPI.Controllers
                         {
                             var fileName = DateTime.Now.ToString("yyyyMMddHHmmssfff") + "_" + ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
                             string fullPath = Path.Combine(pathToSave, fileName);
-                            dbPath.Append(Path.Combine(folderName, fileName));
-
-                            using (var stream = new FileStream(fullPath, FileMode.Create))
-                            {
-                                file.CopyTo(stream);
+                            var dbpath = Path.Combine(folderName, fileName);
+                            if (dbpath.Length > 0){
+                                dbPaths.Append(dbpath);
+                                using (var stream = new FileStream(fullPath, FileMode.Create))
+                                {
+                                    file.CopyTo(stream);
+                                }
                             }
+                            
                         }
                         catch (Exception ex)
                         {
-                            return StatusCode(500, $"Internal server error: {ex}");
+                            return StatusCode(500, $"Internal server error:  {ex}");
                         }
                     }
                     else
@@ -147,14 +153,51 @@ namespace WepAPI.Controllers
                     }
 
                 }
-                if (dbPath.Length>0)
-                    return Ok(new { dbPath });
+                if (dbPaths.Count > 0)
+                    return Ok(new { dbPaths });
                 else
                     return BadRequest();
             }
             catch (Exception ex)
             {
                 return StatusCode(500, $"Internal server error: {ex}");
+            }
+        }*/
+        [HttpPost, DisableRequestSizeLimit]
+        [Route("why")]
+        public IActionResult Upload()
+        {
+            try
+            {
+                var files = Request.Form.Files;
+                var folderName = Path.Combine("Resorces", "Images");
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                var dbPaths = new List<string>();
+                if (files.Any(f => f.Length == 0))
+                {
+                    return BadRequest();
+                }
+
+                foreach (var file in files)
+                {
+                    var fileName = DateTime.Now.ToString("yyyyMMddHHmmssfff") + "_" + ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                    var fullPath = Path.Combine(pathToSave, fileName);
+                    var dbPath = Path.Combine(folderName, fileName);
+
+                    using (var stream = new FileStream(fullPath, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+
+                    dbPaths.Add(dbPath);
+
+                }
+
+                return Ok(new { dbPaths });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error");
             }
         }
 

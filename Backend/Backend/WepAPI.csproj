@@ -31,4 +31,9 @@
     <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Resorces\Images\" />
+    <Folder Include="Resorces\NewFolder\" />
+  </ItemGroup>
+
 </Project>
