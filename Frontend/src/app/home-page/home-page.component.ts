@@ -28,6 +28,10 @@ export class HomePageComponent implements OnInit {
     this.PostService.getAllPosts().subscribe(p=>{this.AllPosts=p;})
   }
 
+  createImgPath = (serverPath: any) => { 
+    return `https://localhost:44355/${serverPath}`; 
+  }
+
 
 
   setItem(i:object){

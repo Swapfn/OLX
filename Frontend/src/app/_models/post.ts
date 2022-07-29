@@ -1,3 +1,4 @@
+import { PostImage } from "./postImage";
 
 export interface Post{
     
@@ -19,4 +20,5 @@ fullName:string;
 phoneNumber:number;
 minPrice:number;
 maxPrice:number;
+postImage: PostImage[];
 }

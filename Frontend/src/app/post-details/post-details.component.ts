@@ -30,6 +30,11 @@ export class PostDetailsComponent implements OnInit {
    this.PostService.getPost(this.id).subscribe(p=>{this.Post=p;});
   }
 
+  createImgPath = (serverPath: any) => { 
+    return `https://localhost:44355/${serverPath}`; 
+  }
+
+
 
   // _________________________Manually_____________________________________
 

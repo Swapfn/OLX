@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpEventType } from '@angular/common/http';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload';
 import { ToastrService } from 'ngx-toastr';
@@ -7,6 +8,7 @@ import { environment } from 'src/environments/environment';
 import { Category } from '../_models/category';
 import { Location } from '../_models/location';
 import { Post } from '../_models/post';
+import { PostImage } from '../_models/postImage';
 import { SubCategory } from '../_models/subCategory';
 import { Token } from '../_models/token';
 import { AccountService } from '../_services/account.service';
@@ -18,6 +20,9 @@ import { PostService } from '../_services/post.service';
   styleUrls: ['./add-post.component.css']
 })
 export class AddPostComponent implements OnInit {
+  selectedFiles: any = null;
+  dbPaths: string[];
+  @Output() public onnUploadFinished = new EventEmitter();
   post : Post={
     postId: 0,
     title: '',
@@ -36,7 +41,8 @@ export class AddPostComponent implements OnInit {
     phoneNumber: null,
     minPrice: 0,
     maxPrice: 0,
-    categoryId: null
+    categoryId: null,
+    postImage: []
   };
   uploader: FileUploader;
   hasBaseDropzoneOver = false;
@@ -54,7 +60,7 @@ export class AddPostComponent implements OnInit {
   }
   // categoryID: number;
 
-  constructor(private accountService: AccountService, private postService: PostService, private toast: ToastrService,private router: Router) {
+  constructor(private accountService: AccountService, private postService: PostService, private toast: ToastrService,private router: Router, private http: HttpClient) {
     this.accountService.currentUser$.pipe(take(1)).subscribe(token => this.token=token);
    }
 
@@ -107,6 +113,7 @@ export class AddPostComponent implements OnInit {
 
   addPost() {
     // console.log(this.post);
+    this.onCreate();
     this.postService.addPost(this.post).subscribe({
       next: () => {
         this.toast.success("Post added successfully");
@@ -117,6 +124,37 @@ export class AddPostComponent implements OnInit {
         this.toast.error(error.error.message);
       }
     })
+  }
+  onFileSelected(event: any) {
+    this.selectedFiles = <File>event.target.files;
+  }
+  onUpload() {
+    if (this.selectedFiles.length === 0) {
+      return;
+    }
+    let filesToUpload: File[] = this.selectedFiles;
+    const filedata = new FormData();
+    Array.from(filesToUpload).map((file) => {
+      filedata.append('image', file, file.name);
+    });
+
+    this.http.post('https://localhost:44355/PostImage/upload', filedata)
+    .subscribe((res:any) => this.dbPaths=res.dbPaths);
+  }
+
+  onCreate() {//add post image
+    // this.post.postImage.push
+    // this.post.postId = 3;//post id =3 
+    let image: PostImage;
+    for (var path of this.dbPaths) {
+      image.imageURL = path;
+      this.http.post('https://localhost:44355/PostImage', this.post)
+        .subscribe((event: any) => {
+          if (event.type === HttpEventType.Response) {
+          }
+        });
+      this.post.postImage.push(image);
+    }
   }
 
 }

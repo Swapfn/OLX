@@ -11,8 +11,8 @@ import { PostService } from '../_services/post.service';
 export class MyPostsComponent implements OnInit {
   available: boolean;
   unavailable: boolean;
-  AvailablePosts: Post[]=[];
-  UnvailablePosts: Post[]=[];
+  AvailablePosts: Post[]= [];
+  UnvailablePosts: Post[]= [];
 
   constructor(private http: HttpClient, private postService: PostService) { }
 
@@ -46,6 +46,10 @@ export class MyPostsComponent implements OnInit {
 
   alltrue() {
     this.available = this.unavailable = true;
+  }
+
+  createImgPath = (serverPath: any) => { 
+    return `https://localhost:44355/${serverPath}`; 
   }
 
 }

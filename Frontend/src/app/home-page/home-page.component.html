@@ -40,13 +40,13 @@
 <div class="global row row-cols-2 row-cols-md-4 g-4 m-3">
   <div *ngFor="let post of AllPosts" class="col">
     <div class="card h-100">
-      <!-- <div class="card-img-wrapper">
-        <img src="{{ post.photos[0].photoUrl }}" class="card-img-top" alt="{{ post.title}}" />
-      </div> -->
+      <div class="card-img-wrapper">
+        <img [src]="createImgPath(post.postImage[0].imageURL)" class="card-img-top" alt="{{ post.title}}" />
+      </div>
       <div class="card-body">
         <div class="d-flex align-items-start">
           <p class="card-text">{{ post.title }}</p>
-          <div (click)="favorite(post)" class="m-1">
+          <div class="m-1">
             <i [ngClass]="
                 Fav ? 'fa-solid fa-heart fa-lg' : 'fa-regular fa-heart fa-lg'
               "></i>

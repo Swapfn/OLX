@@ -81,6 +81,8 @@
         <h5 class="fw-bolder">UPLOAD UP TO 5 PHOTOS</h5>
         <hr>
         <div class="row mt-3">
+            <input type="file" placeholder="Choose file" (change)="onFileSelected($event)" multiple>
+            <input type="button" value="upload" (click)="onUpload()">
 
             <!-- <div class="col-md-3">
 
