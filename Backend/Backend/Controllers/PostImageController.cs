@@ -47,7 +47,7 @@ namespace WepAPI.Controllers
         }
 
         // POST PostImage
-        [HttpPost]
+        /*[HttpPost]
         [Route("{id}")]
         public IActionResult Add(int id, List<string> dbPath)
         {
@@ -65,7 +65,21 @@ namespace WepAPI.Controllers
                 postimagesDTO.Append(postimageDTO);
                     }
             _postimageService.SavePostImage();
-            return Ok(postimagesDTO);
+            return Ok(postimagesDTO); 
+        }*/
+        [HttpPost]
+        [Route("")]
+        public IActionResult Add(PostImageDTO postimageDTO)
+        {
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+            _postimageService.Add(postimageDTO);
+            _postimageService.SavePostImage();
+            return Ok(postimageDTO);
         }
 
         // PUT PostImage

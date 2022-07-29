@@ -33,7 +33,6 @@
 
   <ItemGroup>
     <Folder Include="Resorces\Images\" />
-    <Folder Include="Resorces\NewFolder\" />
   </ItemGroup>
 
 </Project>

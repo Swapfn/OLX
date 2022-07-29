@@ -107,7 +107,15 @@ app.UseStaticFiles();
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),@"Resorces")),
+    RequestPath = "/Resorces"
 });
+app.UseDirectoryBrowser(new DirectoryBrowserOptions
+{
+    FileProvider = new PhysicalFileProvider(
+                Path.Combine(Directory.GetCurrentDirectory(), @"Resorces")),
+    RequestPath = "/Resorces"
+});
+
 // Authentication & Authorization
 app.UseAuthentication();
 app.UseAuthorization();
