@@ -26,9 +26,9 @@ export class PostDetailsComponent implements OnInit {
 
   Post:Post;
 
-  // loadPost(){
-  //  this.PostService.getPost(this.id).subscribe(p=>{this.Post=p;});
-  // }
+  loadPost(){
+   this.PostService.getPost(this.id).subscribe(p=>{this.Post=p;});
+  }
 
 
   // _________________________Manually_____________________________________

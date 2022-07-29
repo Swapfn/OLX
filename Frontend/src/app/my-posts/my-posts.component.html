@@ -7,7 +7,7 @@
         </label>
     </div>
     <div class="form-check ms-5">
-        <input [(ngModel)]="unavailable" name="unavailable" class="form-check-input" type="checkbox"
+        <input  [(ngModel)]="unavailable" name="unavailable" class="form-check-input" type="checkbox"
             value="">
         <label class="form-check-label">
             Show Unavailable posts
@@ -37,10 +37,10 @@
                 </div>
                 <p class="card-text">
                     <small class="text-muted">{{ post.cityName }}</small>
-                    <button type="submit" class="btn btn-dark mb-4"
+                    <button routerLink="/PostEdit/{{post.postId}}" class=" stretched-link" type="submit" class="btn btn-dark mb-4"
                         style="float: right;height: 40px;font-weight: 500;width: 60px;">Edit</button>
                 </p>
-                <!-- <a routerLink="/Postdetails/{{i.Id}}" class=" stretched-link"></a> -->
+                <!-- <a ></a> -->
             </div>
         </div>
     </div>
@@ -65,10 +65,10 @@
                 </div>
                 <p class="card-text">
                     <small class="text-muted">{{ post.cityName }}</small>
-                    <button type="submit" class="btn btn-dark mb-4"
+                    <button routerLink="/PostEdit/{{post.postId}}" class=" stretched-link" type="submit" class="btn btn-dark mb-4"
                         style="float: right;height: 40px;font-weight: 500;width: 60px;">Edit</button>
                 </p>
-                <!-- <a routerLink="/Postdetails/{{i.Id}}" class=" stretched-link"></a> -->
+                <!-- <a routerLink="/Postdetails/{{post.postId}}" class=" stretched-link"></a> -->
             </div>
         </div>
     </div>
