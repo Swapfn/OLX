@@ -2,8 +2,10 @@ using Data;
 using Data.Configuration;
 using Data.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Models.Models;
@@ -12,6 +14,12 @@ using WebAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.Configure<FormOptions>(o =>
+{
+    o.ValueLengthLimit = int.MaxValue;
+    o.MultipartBodyLengthLimit = int.MaxValue;
+    o.MemoryBufferThreshold = int.MaxValue;
+});
 
 // Add services to the container.
 
@@ -122,6 +130,19 @@ app.UseHttpsRedirection();
 
 // Use Cors
 app.UseCors("AllowAllOrigins");
+
+app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),@"Resorces")),
+    RequestPath = "/Resorces"
+});
+app.UseDirectoryBrowser(new DirectoryBrowserOptions
+{
+    FileProvider = new PhysicalFileProvider(
+                Path.Combine(Directory.GetCurrentDirectory(), @"Resorces")),
+    RequestPath = "/Resorces"
+});
 
 // Authentication & Authorization
 app.UseAuthentication();

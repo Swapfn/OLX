@@ -32,6 +32,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Resorces\Images\" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 
