@@ -87,15 +87,15 @@ namespace Data.Repositories.Repositories
             &&
             (a.Description.Contains(FilterObject.SearchObject.Description) || string.IsNullOrEmpty(FilterObject.SearchObject.Description))
             &&
-            (a.SubCategoryId == FilterObject.SearchObject.SubCategoryId || FilterObject.SearchObject.SubCategoryId == 0)
+            (a.SubCategoryId == FilterObject.SearchObject.SubCategoryId || FilterObject.SearchObject.SubCategoryId == 0|| FilterObject.SearchObject.SubCategoryId == null)
             &&
-            (a.LocationId == FilterObject.SearchObject.LocationId || FilterObject.SearchObject.LocationId == 0)
+            (a.LocationId == FilterObject.SearchObject.LocationId || FilterObject.SearchObject.LocationId == 0 || FilterObject.SearchObject.LocationId == null)
             &&
-            (a.SubCategory.CategoryID == FilterObject.SearchObject.CategoryId || FilterObject.SearchObject.CategoryId == 0)
+            (a.SubCategory.CategoryID == FilterObject.SearchObject.CategoryId || FilterObject.SearchObject.CategoryId == 0 || FilterObject.SearchObject.CategoryId == null)
             &&
-            (a.Price >= FilterObject.SearchObject.minPrice || FilterObject.SearchObject.minPrice == 0)
+            (a.Price >= FilterObject.SearchObject.minPrice || FilterObject.SearchObject.minPrice == 0|| FilterObject.SearchObject.minPrice == null)
             &&
-            (a.Price <= FilterObject.SearchObject.maxPrice || FilterObject.SearchObject.maxPrice == 0)
+            (a.Price <= FilterObject.SearchObject.maxPrice || FilterObject.SearchObject.maxPrice == 0|| FilterObject.SearchObject.maxPrice == null)
             );
             posts = this.GetAll(FilterObject.PageNumber, FilterObject.PageSize, FilterObject.Includes, SearchCriteria, FilterObject.SortBy, FilterObject.SortDirection);
             return posts;
