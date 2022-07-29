@@ -1,0 +1,18 @@
+<div class="dropdown">
+  <button
+    class="btn dropdown-toggle mb-2"
+    type="button"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+  >
+    All Categories
+  </button>
+  <ng-select [(ngModel)]="selectedCategory">
+    <ng-option
+      *ngFor="let category of categories"
+      [value]="category.categoryID"
+    >
+      {{ category.categoryName }}
+    </ng-option>
+  </ng-select>
+</div>

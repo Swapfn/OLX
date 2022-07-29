@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +20,7 @@ import { MyPostsComponent } from './my-posts/my-posts.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
 import { FooterComponent } from './footer/footer.component';
+import { CategoryComponent } from './category/category.component';
 
 
 @NgModule({
@@ -34,7 +36,8 @@ import { FooterComponent } from './footer/footer.component';
     MyPostsComponent,
     AddPostComponent,
     PostDetailsComponent,
-    FooterComponent
+    FooterComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,7 @@ import { FooterComponent } from './footer/footer.component';
     BrowserAnimationsModule,
     FormsModule,
     SharedModule,
- 
+    NgSelectModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass:JwtInterceptor, multi:true}
