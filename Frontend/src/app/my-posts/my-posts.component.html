@@ -19,57 +19,61 @@
 </div>
 
 <div *ngIf="(AvailablePosts.length>0) && (available)" class="global row row-cols-2 row-cols-md-4 g-4 m-3">
-    <div *ngFor="let i of Items" class="col">
+    <div *ngFor="let post of AvailablePosts" class="col">
         <div class="card h-100">
-            <img src="{{ i.photo[0].src }}" class="card-img-top" alt="{{ i.title }}" />
+            <img src="" class="card-img-top" alt="{{post.title}}" />
             <div></div>
             <div class="card-body">
                 <div class="d-flex align-items-start">
-                    <p class="card-text">{{ i.title }}</p>
+                    <p class="card-text">{{ post.title }}</p>
                     <div class="m-1">
                         <i></i>
                     </div>
                 </div>
                 <div class="d-flex align-items-center">
-                    <h4 class="card-title">{{ i.price }} EGP</h4>
-                    <small class="card-text text-muted mx-2" *ngIf="i.nego_Price">negotaitable</small>
+                    <h4 class="card-title">{{ post.price }} EGP</h4>
+                    <small class="card-text text-muted mx-2" *ngIf="post.isNegotiable">negotaitable</small>
 
                 </div>
                 <p class="card-text">
-                    <small class="text-muted">{{ i.area + " , " + i.city }}</small>
+                    <small class="text-muted">{{ post.cityName }}</small>
                     <button type="submit" class="btn btn-dark mb-4"
-                        style="float: right;height: 70px;font-weight: 500;width: 70px;">Click if sold</button>
+                        style="float: right;height: 40px;font-weight: 500;width: 60px;">Edit</button>
                 </p>
-                <a routerLink="/Postdetails/{{i.Id}}" class=" stretched-link"></a>
+                <!-- <a routerLink="/Postdetails/{{i.Id}}" class=" stretched-link"></a> -->
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="(UnvailablePosts.length>0) && (unavailable)" class="global row row-cols-2 row-cols-md-4 g-4 m-3">
+    <div *ngFor="let post of UnvailablePosts" class="col">
+        <div class="card h-100">
+            <img src="" class="card-img-top" alt="{{ post.title }}" />
+            <div></div>
+            <div class="card-body">
+                <div class="d-flex align-items-start">
+                    <p class="card-text">{{ post.title }}</p>
+                    <div class="m-1">
+                        <i></i>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center">
+                    <h4 class="card-title">{{ post.price }} EGP</h4>
+                    <small class="card-text text-muted mx-2" *ngIf="post.isNegotiable">negotaitable</small>
+                    <small class="card-text text-muted mx-2">Unavailable</small>
+
+                </div>
+                <p class="card-text">
+                    <small class="text-muted">{{ post.cityName }}</small>
+                    <button type="submit" class="btn btn-dark mb-4"
+                        style="float: right;height: 40px;font-weight: 500;width: 60px;">Edit</button>
+                </p>
+                <!-- <a routerLink="/Postdetails/{{i.Id}}" class=" stretched-link"></a> -->
             </div>
         </div>
     </div>
 </div>
 
-<div *ngIf="(UnvailablePosts.length>0) && (unavailable)" class="global row row-cols-2 row-cols-md-4 g-4 m-3">
-    <div *ngFor="let i of Items" class="col">
-        <div class="card h-100">
-            <img src="{{ i.photo[0].src }}" class="card-img-top" alt="{{ i.title }}" />
-            <div></div>
-            <div class="card-body">
-                <div class="d-flex align-items-start">
-                    <p class="card-text">{{ i.title }}</p>
-                    <div class="m-1">
-                        <i></i>
-                    </div>
-                </div>
-                <div class="d-flex align-items-center">
-                    <h4 class="card-title">{{ i.price }} EGP</h4>
-                    <small class="card-text text-muted mx-2" *ngIf="i.nego_Price">negotaitable</small>
-
-                </div>
-                <p class="card-text">
-                    <small class="text-muted">{{ i.area + " , " + i.city }}</small>
-                    <button type="submit" class="btn btn-dark mb-4"
-                        style="float: right;height: 70px;font-weight: 500;width: 70px;">Click if sold</button>
-                </p>
-                <a routerLink="/Postdetails/{{i.Id}}" class=" stretched-link"></a>
-            </div>
-        </div>
-    </div>
+<div style="margin-top: 100px;" *ngIf="(UnvailablePosts.length==0) && (AvailablePosts.length==0)">
+    <h3 style="text-align: center;" class="m-3 fw-bolder">You still didn't post any ad!</h3>
 </div>

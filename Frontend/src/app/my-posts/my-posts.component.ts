@@ -41,7 +41,7 @@ export class MyPostsComponent implements OnInit {
   }
 
   getUnAvAds() {
-    this.postService.getMyAvailableAds().subscribe(posts => this.UnvailablePosts=posts);
+    this.postService.getMyUnvailabaleAds().subscribe(posts => this.UnvailablePosts=posts);
   }
 
   alltrue() {
