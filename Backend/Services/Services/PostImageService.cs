@@ -1,12 +1,14 @@
 ﻿using Data.Infrastructure;
 using Data.Repositories.Contracts;
 using Mapper.Contracts;
+using Microsoft.AspNetCore.Http;
 using Models.DTO;
 using Models.Models;
 using Services.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -72,6 +74,28 @@ namespace Services.Services
             IEnumerable<PostImage> postimages = _postimageRepository.GetAll(id);
             IEnumerable<PostImageDTO> postimagesDTO = postimages.Select(postimage => _postimageMapper.MapToDTO(postimage));
             return postimagesDTO;
+        }
+
+        public List<string> Upload(IFormFileCollection files)
+        {
+            var folderName = Path.Combine("Resorces", "Images");
+            var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+            var dbPaths = new List<string>();
+            foreach (var file in files)
+            {
+                var fileName = DateTime.Now.ToString("yyyyMMddHHmmssfff") + "_" + ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                var fullPath = Path.Combine(pathToSave, fileName);
+                var dbPath = Path.Combine(folderName, fileName);
+
+                using (var stream = new FileStream(fullPath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+
+                dbPaths.Add(dbPath);
+
+            }
+            return dbPaths;
         }
     }
 }

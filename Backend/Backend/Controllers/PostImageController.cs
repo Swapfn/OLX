@@ -120,93 +120,23 @@ namespace WepAPI.Controllers
             _postimageService.SavePostImage();
             return Ok("Post Image deleted");
         }
-        /*[HttpPost, DisableRequestSizeLimit]
-        [Route("why")]*/
-        /*public async Task<IActionResult> UploadFiles()
+        [HttpPost, DisableRequestSizeLimit]
+        [Route("upload")]
+        public async Task<IActionResult> Upload()
         {
             try
             {
                 var formCollection = await Request.ReadFormAsync();
                 var files = formCollection.Files;
-                string folderName = Path.Combine("Resorces", "Images");
-                string pathToSave = Path.Combine("../", folderName);
-                var dbPaths = new List<string>();
-
-                *//*List<string> dbPaths = new List<string> { };*//*
-                if (!Directory.Exists(pathToSave))
-                {
-                    Directory.CreateDirectory(pathToSave);
-                }
-                foreach (var file in files)
-                {
-                    if (file.Length > 0)
-                    {
-                        try
-                        {
-                            var fileName = DateTime.Now.ToString("yyyyMMddHHmmssfff") + "_" + ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                            string fullPath = Path.Combine(pathToSave, fileName);
-                            var dbpath = Path.Combine(folderName, fileName);
-                            if (dbpath.Length > 0){
-                                dbPaths.Append(dbpath);
-                                using (var stream = new FileStream(fullPath, FileMode.Create))
-                                {
-                                    file.CopyTo(stream);
-                                }
-                            }
-                            
-                        }
-                        catch (Exception ex)
-                        {
-                            return StatusCode(500, $"Internal server error:  {ex}");
-                        }
-                    }
-                    else
-                    {
-                        return BadRequest();
-
-                    }
-
-                }
-                if (dbPaths.Count > 0)
-                    return Ok(new { dbPaths });
-                else
-                    return BadRequest();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex}");
-            }
-        }*/
-        [HttpPost, DisableRequestSizeLimit]
-        [Route("why")]
-        public IActionResult Upload()
-        {
-            try
-            {
-                var files = Request.Form.Files;
-                var folderName = Path.Combine("Resorces", "Images");
-                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-                var dbPaths = new List<string>();
                 if (files.Any(f => f.Length == 0))
                 {
                     return BadRequest();
                 }
-
-                foreach (var file in files)
+                if (files.Count > 5)
                 {
-                    var fileName = DateTime.Now.ToString("yyyyMMddHHmmssfff") + "_" + ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                    var fullPath = Path.Combine(pathToSave, fileName);
-                    var dbPath = Path.Combine(folderName, fileName);
-
-                    using (var stream = new FileStream(fullPath, FileMode.Create))
-                    {
-                        file.CopyTo(stream);
-                    }
-
-                    dbPaths.Add(dbPath);
-
+                    return BadRequest("Upload limit is 5 images per post");
                 }
-
+                var dbPaths = _postimageService.Upload(files);
                 return Ok(new { dbPaths });
             }
             catch (Exception ex)

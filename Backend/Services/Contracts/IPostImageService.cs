@@ -1,4 +1,5 @@
-﻿using Models.DTO;
+﻿using Microsoft.AspNetCore.Http;
+using Models.DTO;
 using Models.Models;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace Services.Contracts
         void Update(int id, PostImageDTO postimageDTO);//do we need this?.. leave it for now
         void Delete(int id); //delete using postImage id... reminder: we need a delete using post id method or "cascade delete"
         bool ImageExists(int id);
+        List<string> Upload(IFormFileCollection files);
         void SavePostImage();
     }
 }
