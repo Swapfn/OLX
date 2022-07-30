@@ -4,7 +4,7 @@ export interface Post{
 postId:number;
 title:string;
 description:string;
-createdAt:string;
+createdAt:Date;
 price:number;
 isNew:boolean;
 isNegotiable:boolean;

@@ -22,3 +22,57 @@
     font-size: 0.9rem;
     overflow: hidden; 
 }
+
+.location{
+    position: sticky;
+    top:0px;
+}
+
+.apply{
+    position: fixed;
+    top:0px;
+    right:200px
+}
+
+.dropdown-toggle, .dropdown-item {
+    cursor: pointer;
+}
+
+
+.backcolor {
+    background-color: rgb(0, 47, 52);
+}
+
+
+.dropdown-menu {         
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.input-group{
+    width: 300px;
+}
+
+.container-fluid{
+    justify-content: space-evenly;
+}
+
+.categories{
+   
+    max-height: fit-content !important;
+    height: auto !important;
+    width: 1130px;
+    font-size: small;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.wrap{
+    display: flex;
+    flex-flow: column wrap;
+}
+
+
+

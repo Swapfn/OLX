@@ -1,4 +1,4 @@
-<form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="off">
+<form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="off" class="px-5">
     <h2 class="text-center text-primary">Sign Up</h2>
     <hr>
     <div class="form-group mt-2">
@@ -58,7 +58,7 @@
     </div>
 
     <div class="form-group text-center mt-2">
-        <button [disabled]="registerForm.invalid || !confirm" class="btn btn-success me-2" type="submit">Register</button>
+        <button [disabled]="registerForm.invalid || !confirm" class="btn btn-primary me-2" type="submit">Register</button>
         <button style="background-color: rgb(219, 217, 217);" class="btn" (click)="cancel()" type="button">Cancel</button>
     </div>
 </form>

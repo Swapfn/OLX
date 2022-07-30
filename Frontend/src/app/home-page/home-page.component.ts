@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Post } from '../_models/Post';
+import { Post } from '../_models/post';
+import { Pagination } from '../_models/pagination'; 
 import { AccountService } from '../_services/account.service';
 import { PostService } from '../_services/post.service';
+import { Location } from '../_models/location';
+import { Category } from '../_models/category';
+import { SubCategory } from '../_models/subCategory';
+
+
+
 
 @Component({
   selector: 'app-home-page',
@@ -10,32 +17,145 @@ import { PostService } from '../_services/post.service';
 })
 export class HomePageComponent implements OnInit {
 
-  AllPosts:Post[];
+  
 
-  constructor(private PostService:PostService, private accountService: AccountService) { 
+  constructor(public postService:PostService, private accountService: AccountService) { 
     this.accountService.setCurrentUser;
   }
 
   ngOnInit(): void {
     this.loadPosts();
+    this.getLocations();
+    this.getAllCategories();
+
   }
 
-  TotaPostsNumb(){
-    return this.AllPosts.length;
+
+  filter:Pagination={
+    searchObject:{
+      categoryId: 0,
+      subCategoryId:0,
+      locationId: 0,
+      minPrice: 0,
+      maxPrice: 0,
+      title:"",
+      description:""
+    },
+    pageNumber:1,
+    pageSize:20,
+    sortBy:"createdAt",
+    sortDirection:"dec"
   }
+
+  
+  AllPosts:Post[];
+  totalRecords:number;
+
+  Today = new Date();
+
+ 
 
   loadPosts(){
-    this.PostService.getAllPosts().subscribe(p=>{this.AllPosts=p;})
+    this.postService.getAllpagination(this.filter).subscribe((response: any) => {
+      console.log(response);
+      this.AllPosts = response.results;
+      this.totalRecords=response.totalRecords;  
+    })
+
+  }
+
+  pageChanged(event:any){
+    this.filter.pageNumber=event.page;
+    this.loadPosts();
+  }
+
+  //________________________________category filter__________________________________________
+
+  allCategories:Category[];
+
+  getAllCategories(){
+    this.postService.getCategories().subscribe(categories => this.allCategories=categories)
+
+    console.log(this.allCategories);
+  }
+
+  catId:number;
+  subcatId:number;
+
+
+  categorySelect(event){
+    this.catId = this.filter.searchObject.categoryId = event.target.value;
+    this.subcatId = this.filter.searchObject.subCategoryId = 0;
+    this.loadPosts();
+  }
+
+  subCategorySelect(event,cat){
+    this.catId = this.filter.searchObject.categoryId=cat;
+    this.subcatId = this.filter.searchObject.subCategoryId=event.target.value;
+    this.loadPosts();
   }
 
 
+  subcategorySelected:SubCategory;
 
-  setItem(i:object){
-    console.log("from home");
-    console.log(i);
-    // this.PostService.setItemsMaually(i);
+  getSubcategoryById(){
+    this.postService.getSubcategoryById(this.subcatId).subscribe(s=>this.subcategorySelected=s)
+
+  }
+
+
+  //________________________________category filter__________________________________________
+
+
+  //________________________________location filter__________________________________________
+
+  onlocationSelect(event){
+    this.filter.searchObject.locationId=this.locationSelectedValue;
+    this.loadPosts();
+  }
+
+  locationSelectedValue:number;
+
+  locations:Location[];
+
+  getLocations() {
+    this.postService.getLocations().subscribe(locations => this.locations=locations);
+  }
+  //________________________________location filter__________________________________________
+
+
+  //________________________________Search___________________________________________
+
+  searchValue:string="";
+
+  OnsearchText(){ 
+    this.filter.searchObject.title= this.searchValue;
+    this.filter.searchObject.description= this.searchValue;
+    this.loadPosts();
+  }
+
+  //________________________________Search___________________________________________
+
+
+  //________________________________Price filter___________________________________________
+
+  OnPriceSet(Min,Max){
+    this.filter.searchObject.minPrice=Min;
+    this.filter.searchObject.maxPrice=Max;
+    this.loadPosts();
+  }
+    //________________________________Price filter___________________________________________
+
+
+  
+
+
+  // setItem(i:object){
+  //   console.log("from home");
+  //   console.log(i);
+  //   this.PostService.setItemsMaually(i);
     
-  }
+  // }
 
 
  

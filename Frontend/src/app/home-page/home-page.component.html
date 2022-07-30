@@ -1,8 +1,94 @@
-<!-- <div class="global">
-  <app-nav (locationselect)="onLocationChange($event)" 
-  (searchText)="OnsearchTextChange($event)">
-</app-nav>
-</div> -->
+
+<!-- ________________________Filter Nav_________________________________ -->
+
+
+<nav class="navbar navbar-expand-lg bg-light pb-2">
+
+  <div class="container-fluid d-flex align-content-center mx-5">
+
+    <!-- _____Categories list________ -->
+
+    <div class="nav-item dropdown">
+
+      <a class="nav-link dropdown-toggle link-dark" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        ALL CATEGORIES
+      </a>
+      <div class="dropdown-menu categories" >
+        <ul class="d-flex flex-wrap justify-content-around p-4">
+          <div class="m-3" *ngFor="let category of allCategories">
+            <option class="fs-6 fw-bold dropdown-item list-group"(click)="categorySelect($event)" value="{{category.categoryID}}" class="dropdown-item list-group">{{category.categoryName}}</option>
+            <option *ngFor="let c of category.subCategories" (click)="subCategorySelect($event,category.categoryID)" value="{{c.subCategoryID}}" class="text-muted dropdown-item m-0 p-0">{{c.subCategoryName}}</option> 
+          </div>
+        </ul>
+      </div>
+      
+      <!-- *ngFor="let category of allCategories" -->
+    </div>
+    <!-- _____Categories list________ -->
+
+    <div class="d-flex" style="height: 30px;">
+      <div class="vr"></div>
+    </div>
+
+    <!-- _____Location filter / Search________ -->
+
+    <div class="container-fluid d-flex" >
+
+      <div class="location">
+        <select class="form-select input-group mx-2" aria-placeholder="Egypt" aria-label="Default select example"
+          [(ngModel)]="locationSelectedValue" (change)="onlocationSelect($event.target)">
+          <option selected [value]="0">See Ads in all Egypt </option>
+          <hr class="dropdown-divider">
+          <option [value]="C.locationId" *ngFor="let C of locations">{{C.cityName}}</option>
+        </select>
+      </div>
+  
+      <div class="input-group mx-2">
+        <input [(ngModel)]="searchValue" type="text" class="form-control"
+          placeholder="Find Cars, Mobile phones and More">
+        <button (click)="OnsearchText()" class="btn btn-outline backcolor" type="submit" id="button-addon2">
+          <img src="/assets/images/search2.png" alt="" width="20" height="20">
+        </button>
+      </div>
+    </div>
+    <!-- _____Location filter / Search________ -->
+
+    <div class="d-flex" style="height: 30px;">
+      <div class="vr"></div>
+    </div>
+
+    <!-- _____Price filter_______ -->
+
+    <form class="d-flex justify-content-around mx-3">
+      <div class="me-1"> 
+        <input type="number" ng-init="0" min="10" step="10" name="filter.searchObject.minPrice" #Min placeholder="Min Price" class="form-control">
+      </div>
+  
+      <div class="mx-1">
+        <input type="number" ng-init="0" min="10" step="10" name="filter.searchObject.maxPrice" #Max placeholder="Max Price" class="form-control">
+      </div>
+
+      <button (click)="OnPriceSet(Min.value,Max.value)" class="btn btn-outline backcolor" type="submit" id="button-addon2">
+        <img src="/assets/images/search2.png" alt="" width="20" height="20">
+      </button>
+      
+    </form>
+    <!-- _____Price filter_______ -->
+
+  </div>
+</nav>
+<!-- ________________________Filter Nav_________________________________ -->
+
+<nav aria-label="breadcrumb ">
+  <ol class="breadcrumb my-3 mx-1">
+    <li class="breadcrumb-item">All Categories</li>
+    <li class="breadcrumb-item">{{catId}}</li>
+    <li *ngIf="subcatId!=0" class="breadcrumb-item active" aria-current="page">{{subcatId}}</li>
+  </ol>
+</nav>
+
+
+
 
 <!-- ________________________Manually_________________________________ -->
 
@@ -15,9 +101,9 @@
         <div class="d-flex align-items-start">
           <p class="card-text">{{ i.title }}</p>
           <div (click)="favorite(i)" class="m-1">
-            <i [ngClass]="
+            <!-- <i [ngClass]="
                 Fav ? 'fa-solid fa-heart fa-lg' : 'fa-regular fa-heart fa-lg'
-              "></i>
+              "></i> -->
           </div>
         </div>
         <div class="d-flex align-items-center">
@@ -27,11 +113,11 @@
         <p class="card-text">
           <small class="text-muted">{{ i.area + " , " + i.city }}</small>
         </p>
-        <a (click)="setItem(i)" routerLink="/Postdetails/{{i.Id}}" class=" stretched-link"></a>
+        <!-- <a (click)="setItem(i)" routerLink="/Postdetails/{{i.Id}}" class=" stretched-link"></a> -->
       </div>
     </div>
   </div>
-</div> -->
+</div>
 
 <!--  -->
 
@@ -40,27 +126,38 @@
 <div class="global row row-cols-2 row-cols-md-4 g-4 m-3">
   <div *ngFor="let post of AllPosts" class="col">
     <div class="card h-100">
-      <!-- <div class="card-img-wrapper">
-        <img src="{{ post.photos[0].photoUrl }}" class="card-img-top" alt="{{ post.title}}" />
-      </div> -->
+
+      <img src="/assets/images/placeholder-rgb.jpg" class="card-img-top" alt="{{ post.title}}" />
+
       <div class="card-body">
-        <div class="d-flex align-items-start">
+        <div class="d-flex align-items-start justify-content-between">
           <p class="card-text">{{ post.title }}</p>
           <div (click)="favorite(post)" class="m-1">
-            <i [ngClass]="
+            <i class="fa-regular fa-heart fa-lg"></i>
+            <!-- <i [ngClass]="
                 Fav ? 'fa-solid fa-heart fa-lg' : 'fa-regular fa-heart fa-lg'
-              "></i>
+              "></i> -->
           </div>
         </div>
-        <div class="d-flex align-items-center">
-          <h4 class="card-title">{{ post.price }} EGP</h4>
+        <div class="d-flex align-items-center mb-5">
+          <h4 class="card-title ">{{ post.price }} EGP</h4>
           <small class="card-text text-muted mx-2" *ngIf="post.isNegotiable">negotaitable</small>
         </div>
-        <p class="card-text">
-          <small class="text-muted">{{ post.cityName }}</small>
+        <p class="card-text d-flex justify-content-between">
+          <small class="text-muted">{{ post.cityName }},Egypt</small>
+          <small class="text-muted">{{post.createdAt}}</small>
         </p>
-         <a href="#" routerLink="/Postdetails/{{post.postId}}"  class=" stretched-link"></a>
+        <a href="#" routerLink="/Postdetails/{{post.postId}}" class=" stretched-link"></a>
       </div>
     </div>
   </div>
+</div>
+
+<!-- ________________________Pagination_________________________________ -->
+
+<div class="d-flex justify-content-center m-0">
+  <pagination [boundaryLinks]="false" [maxSize]=5 [totalItems]="totalRecords" [itemsPerPage]="filter.pageSize"
+    [(ngModel)]="filter.pageNumber" (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;"
+    firstText="&laquo;" lastText="&raquo;">
+  </pagination>
 </div>

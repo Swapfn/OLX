@@ -1,9 +1,13 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { Token } from '../_models/token';
 import { AccountService } from '../_services/account.service';
+import { PostService } from '../_services/post.service';
+import { Location } from '../_models/location';
+
+
 
 @Component({
   selector: 'app-nav',
@@ -14,9 +18,12 @@ export class NavComponent implements OnInit {
   model: any = {};
   currentUser$: Observable<Token>;
 
-  constructor(public accountService: AccountService, private router: Router, private toast: ToastrService) { }
+  constructor(public postService:PostService, public accountService: AccountService, private router: Router, private toast: ToastrService) {
+    
+   }
 
   ngOnInit(): void {
+
   }
 
   login() {
@@ -36,19 +43,6 @@ export class NavComponent implements OnInit {
     this.accountService.logout();
     this.router.navigateByUrl("/");
   }
-
-
-
-
-  //________________________________Search___________________________________________
-
-  searchValue:string="";
-
-  OnsearchText(){ 
-  }
-
-
-
 
 
 

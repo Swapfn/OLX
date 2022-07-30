@@ -12,13 +12,16 @@ import { RegisterComponent } from './register/register.component';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { NavComponent } from './nav/nav.component';
 import { HomePageComponent } from './home-page/home-page.component';
-import { LocationFilterComponent } from './location-filter/location-filter.component';
+
 import { SharedModule } from './_modules/shared.module';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { MyPostsComponent } from './my-posts/my-posts.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
 import { FooterComponent } from './footer/footer.component';
+
+
+
 
 
 @NgModule({
@@ -30,11 +33,11 @@ import { FooterComponent } from './footer/footer.component';
     ProfileEditComponent,
     NavComponent,
     HomePageComponent,
-    LocationFilterComponent,
     MyPostsComponent,
     AddPostComponent,
     PostDetailsComponent,
-    FooterComponent
+    FooterComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -43,6 +46,7 @@ import { FooterComponent } from './footer/footer.component';
     BrowserAnimationsModule,
     FormsModule,
     SharedModule,
+    
  
   ],
   providers: [
