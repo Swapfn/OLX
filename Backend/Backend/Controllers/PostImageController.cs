@@ -47,13 +47,14 @@ namespace WepAPI.Controllers
         }
 
         // POST PostImage
-        /*[HttpPost]
+        [HttpPost]
         [Route("{id}")]
         public IActionResult Add(int id, List<string> dbPath)
         {
             //id here stands for post id
             IEnumerable<PostImageDTO> postimagesDTO = Enumerable.Empty<PostImageDTO>();
-            foreach (var path in dbPath) {
+            foreach (var path in dbPath)
+            {
                 PostImageDTO postimageDTO = new PostImageDTO();
                 postimageDTO.PostId = id;
                 postimageDTO.ImageURL = path;
@@ -63,19 +64,19 @@ namespace WepAPI.Controllers
                 }
                 _postimageService.Add(postimageDTO);
                 postimagesDTO.Append(postimageDTO);
-                    }
+            }
             _postimageService.SavePostImage();
-            return Ok(postimagesDTO); 
-        }*/
+            return Ok(postimagesDTO);
+        }
         [HttpPost]
         [Route("")]
         public IActionResult Add(PostImageDTO postimageDTO)
         {
 
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
             _postimageService.Add(postimageDTO);
             _postimageService.SavePostImage();
@@ -107,7 +108,7 @@ namespace WepAPI.Controllers
             return Ok(postimageDTO);
         }
 
-        // DELETE Location/1
+        // DELETE /1
         [HttpDelete]
         [Route("{id}")]
         public IActionResult Delete(int id)
