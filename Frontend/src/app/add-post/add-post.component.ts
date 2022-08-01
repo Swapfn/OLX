@@ -151,9 +151,10 @@ export class AddPostComponent implements OnInit {
       this.http.post('https://localhost:44355/PostImage', this.post)
         .subscribe((event: any) => {
           if (event.type === HttpEventType.Response) {
+            this.post.postImage.push(image);
           }
         });
-      this.post.postImage.push(image);
+      // this.post.postImage.push(image);
     }
   }
 
