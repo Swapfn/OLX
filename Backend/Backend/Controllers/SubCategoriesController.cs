@@ -1,7 +1,6 @@
 ﻿using Data.Repositories.Contracts;
 using Mapper.Contracts;
 using Mapper.Mappers;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models.DTO;
 using Models.Models;
@@ -9,7 +8,6 @@ using Services;
 
 namespace WepAPI.Controllers
 {
-    [Authorize]
     public class SubCategoriesController : APIBaseController
     {
         private readonly ISubCategoryService _subCategoryService;

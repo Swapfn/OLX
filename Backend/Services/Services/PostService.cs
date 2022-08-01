@@ -26,17 +26,18 @@ namespace Services
         }
         public PagedResult<PostDTO> GetAll(int PageNumber, int PageSize, string SortBy = "", string SortDirection = "")
         {
-            List<string> Includes = new List<string>();
-            Includes.Add("SubCategory");
-            Includes.Add("User");
-            Includes.Add("Location");
-            PagedResult<Post> posts = _postRepository.GetAll(PageNumber, PageSize, Includes, SortBy, SortDirection);
+            PagedResult<Post> posts = _postRepository.GetAll(PageNumber, PageSize, SortBy, SortDirection);
+
             PagedResult<PostDTO> postDTOs = new PagedResult<PostDTO>();
+            foreach (var post in posts.Results)
+            {
+                PostDTO postDTO = _postMapper.MapToDTO(post);
+                postDTOs.Results.Add(postDTO);
+            }
             postDTOs.TotalRecords = posts.TotalRecords;
-            postDTOs.Results = posts.Results.Select(x => _postMapper.MapToDTO(x)).ToList();
+
             return postDTOs;
         }
-
         public PostDTO GetById(int id)
         {
             Post post = _postRepository.GetById(id);
@@ -87,20 +88,16 @@ namespace Services
             return error;
         }
 
-        public PagedResult<PostDTO> GetAll(FilterDTO<PostDTO> filterObject)
+        public IEnumerable<PostDTO> GetAll(FilterDTO filterObject)
         {
-            List<string> Includes = new List<string>();
-            Includes.Add("SubCategory");
-            Includes.Add("User");
-            Includes.Add("Location");
-            filterObject.Includes = Includes;
-            PagedResult<Post> posts = _postRepository.GetAll(filterObject);
-
-            PagedResult<PostDTO> result = new PagedResult<PostDTO>();
-            result.TotalRecords = posts.TotalRecords;
-            result.Results = posts.Results.Select(x => _postMapper.MapToDTO(x)).ToList();
-
-            return result;
+            IEnumerable<Post> posts = _postRepository.GetAll(filterObject);
+            List<PostDTO> postDTOs = new List<PostDTO>();
+            foreach (var post in posts)
+            {
+                PostDTO postDTO = _postMapper.MapToDTO(post);
+                postDTOs.Add(postDTO);
+            }
+            return postDTOs;
         }
     }
 }

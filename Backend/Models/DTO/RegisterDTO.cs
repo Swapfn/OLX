@@ -27,7 +27,6 @@ namespace Models.DTO
         public string? AboutMe { get; set; }
 
         [Required(ErrorMessage = "Phone Number is required"), MaxLength(11)]
-        [RegularExpression("01[0-9]+")]
         public string? Phone { get; set; }
     }
 }

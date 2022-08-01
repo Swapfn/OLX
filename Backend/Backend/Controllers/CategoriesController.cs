@@ -3,11 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Models.DTO;
 using Mapper.Contracts;
 using Data.Repositories.Contracts;
-using Microsoft.AspNetCore.Authorization;
 
 namespace WepAPI.Controllers
 {
-    [Authorize]
     public class CategoriesController : APIBaseController
     {
         private readonly ICategoryService _categoryService;

@@ -23,5 +23,6 @@ namespace Models.Models
         }
 
         public ICollection<ApplicationUserRole> UserRoles { get; set; }
+
     }
 }

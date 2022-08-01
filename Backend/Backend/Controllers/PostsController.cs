@@ -9,16 +9,26 @@ using System.Security.Claims;
 
 namespace WepAPI.Controllers
 {
-    [Authorize]
     public class PostsController : APIBaseController
     {
         private readonly IPostService _postService;
         private readonly IUserService _userService;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public PostsController(IPostService postService, IUserService userService)
+        public PostsController(IPostService postService, IUserService userService, UserManager<ApplicationUser> userManager)
         {
             _postService = postService;
             _userService = userService;
+            _userManager = userManager;
+        }
+
+        // GET Posts
+        [HttpGet]
+        [Route("{PageNumber}/{PageSize}/{SortBy}/{SortDirection}")]
+        public IActionResult GetAll(int PageNumber, int PageSize, string SortBy, string SortDirection)
+        {
+            PagedResult<PostDTO> postDTO = _postService.GetAll(PageNumber, PageSize, SortBy, SortDirection);
+            return Ok(postDTO);
         }
 
         // GET Posts/1
@@ -37,7 +47,7 @@ namespace WepAPI.Controllers
 
         // POST Posts
         [HttpPost]
-        [Route("add")]
+        [Route("")]
         public IActionResult Add(PostDTO postDTO)
         {
             if (!ModelState.IsValid)
@@ -52,7 +62,7 @@ namespace WepAPI.Controllers
             }
 
             ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
-            Task<ApplicationUser> user = _userService.GetUserByIdAsync(identity);
+            Task<ApplicationUser> user = _userService.GetUserByIdAsync(identity, _userManager);
             postDTO.UserID = user.Result.Id;
 
             PostDTO result = _postService.Add(postDTO);
@@ -118,15 +128,10 @@ namespace WepAPI.Controllers
         }
 
         [HttpPost]
-        [Route("")]
-        public IActionResult GetAll(FilterDTO<PostDTO> filterObject)
+        [Route("filter")]
+        public IActionResult GetAll(FilterDTO filterObject)
         {
-            PagedResult<PostDTO> postDTO = _postService.GetAll(filterObject);
-            //if no search is applied
-            if (filterObject.SearchObject == null)
-            {
-                filterObject.SearchObject = new PostDTO();
-            }
+            IEnumerable<PostDTO> postDTO = _postService.GetAll(filterObject);
             return Ok(postDTO);
         }
     }

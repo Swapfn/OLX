@@ -11,19 +11,6 @@ namespace Services
 {
     public class AccountService : ControllerBase, IAccountService
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly RoleManager<ApplicationRole> _roleManager;
-        private readonly ITokenService _token;
-        private readonly IUserService _user;
-
-        public AccountService(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, 
-            ITokenService token, IUserService user)
-        {
-            _userManager = userManager;
-            _roleManager = roleManager;
-            _token = token;
-            _user = user;
-        }
 
         /// <summary>
         /// Register
@@ -31,10 +18,10 @@ namespace Services
         /// <param name="model"></param>
         /// <param name="userManager"></param>
         /// <returns></returns>
-        public async Task<IActionResult> RegisterAsync(RegisterDTO model)
+        public async Task<IActionResult> RegisterAsync(RegisterDTO model, UserManager<ApplicationUser> userManager)
         {
             // check if user exists
-            var userCheck = await _userManager.FindByNameAsync(model.Username);
+            var userCheck = await userManager.FindByNameAsync(model.Username);
             if (userCheck != null)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new
@@ -57,12 +44,12 @@ namespace Services
 
 
             // bind user and role
-            var resultUser = await _userManager.CreateAsync(user, model.Password);
+            var resultUser = await userManager.CreateAsync(user, model.Password);
             if (!resultUser.Succeeded)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new { Errors = resultUser.Errors });
             }
-            var resultRole = await _userManager.AddToRoleAsync(user, "User");
+            var resultRole = await userManager.AddToRoleAsync(user, "User");
 
             // if fail
             if (!resultRole.Succeeded && !resultUser.Succeeded)
@@ -85,18 +72,19 @@ namespace Services
         /// <param name="roleManager"></param>
         /// <param name="_token"></param>
         /// <returns></returns>
-        public async Task<IActionResult> LoginAsync(LoginDTO model)
+        public async Task<IActionResult> LoginAsync(LoginDTO model, UserManager<ApplicationUser> userManager,
+            RoleManager<ApplicationRole> roleManager, ITokenService _token)
         {
             // check if username exists
-            var user = await _userManager.FindByNameAsync(model.Username);
+            var user = await userManager.FindByNameAsync(model.Username);
             if (user == null)
                 return NotFound(new { Status = "Error", Message = "Username Doesn't Exist!!" });
 
             // check if passowrd is correct
-            if (await _userManager.CheckPasswordAsync(user, model.Password))
+            if (await userManager.CheckPasswordAsync(user, model.Password))
             {
-                var roles = await _userManager.GetRolesAsync(user);
-                var token = await _token.CreateToken(user, roles, _roleManager);
+                var roles = await userManager.GetRolesAsync(user);
+                var token = await _token.CreateToken(user, roles, roleManager);
 
                 return Ok(new
                 {
@@ -121,23 +109,24 @@ namespace Services
         /// <param name="roleManager"></param>
         /// <param name="_token"></param>
         /// <returns></returns>
-        public async Task<IActionResult> ChangePasswordAsync(ClaimsIdentity identity, ChangePasswordDTO model)
+        public async Task<IActionResult> ChangePasswordAsync(ClaimsIdentity identity, ChangePasswordDTO model, UserManager<ApplicationUser> userManager,
+            RoleManager<ApplicationRole> roleManager, ITokenService _token, IUserService _user)
         {
             // check if username exists
-            var user = await _user.GetUserByIdAsync(identity);
+            var user = await _user.GetUserByIdAsync(identity, userManager);
             if (user == null)
                 return NotFound(new { Status = "Error", Message = "Username Doesn't Exist!!" });
 
             // check if user exists
-            if (await _userManager.CheckPasswordAsync(user, model.CurrentPassword))
+            if (await userManager.CheckPasswordAsync(user, model.CurrentPassword))
             {
-                var roles = await _userManager.GetRolesAsync(user);
+                var roles = await userManager.GetRolesAsync(user);
                 // change password
                 if (model.NewPassword == model.ConfirmNewPassword)
                 {
-                    await _userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
+                    await userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
                 }
-                var token = await _token.CreateToken(user, roles, _roleManager);
+                var token = await _token.CreateToken(user, roles, roleManager);
 
                 return Ok(new
                 {
