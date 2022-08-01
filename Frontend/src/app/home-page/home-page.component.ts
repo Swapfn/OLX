@@ -70,10 +70,11 @@ export class HomePageComponent implements OnInit {
 
 
 
-  setItem(i:object){
-    console.log("from home");
-    console.log(i);
-    this.PostService.setItemsMaually(i);
+  // setItem(i:object){
+  //   console.log("from home");
+  //   console.log(i);
+  //   this.postService.setItemsMaually(i);
+  // }
   pageChanged(event:any){
     this.filter.pageNumber=event.page;
     this.loadPosts();
@@ -249,4 +250,3 @@ export class HomePageComponent implements OnInit {
 }
 
  
-

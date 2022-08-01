@@ -34,9 +34,6 @@ export class PostDetailsComponent implements OnInit {
     return `https://localhost:44355/${serverPath}`; 
   }
 
-   console.log(this.id);
-   this.PostService.getPost(this.id).subscribe(p=>this.Post=p);
-  }
 
 
 
@@ -77,11 +74,6 @@ export class PostDetailsComponent implements OnInit {
 //     this.Item=this.PostService.getItemsMaually();
 //     console.log("from get details");
 //   }
-
-
-
-
-
 
 
 
