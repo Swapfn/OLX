@@ -91,7 +91,7 @@ namespace Data.Repositories.Repositories
                 }
             }
 
-            posts.TotalRecords = posts.Results.Count();
+            posts.TotalRecords = this.DbContext.Posts.Count();
             return posts;
         }
 
@@ -130,7 +130,7 @@ namespace Data.Repositories.Repositories
             IQueryable<Post> Query = this.DbContext.Posts.AsQueryable<Post>();
             foreach (string include in includes)
             {
-                Query = Query.Include(include).Where(p => p.IsAvailable);
+                Query = Query.Include(include);
             }
             string SortByParam = "CreationDate";
             string SortDirectionParam = "ASC";
@@ -146,9 +146,15 @@ namespace Data.Repositories.Repositories
             if (filter != null)
             {
                 Query = Query.Where(filter);
+
+                PagedList.TotalRecords = Query.AsNoTracking().ToList().Count();
+
+            }
+            else
+            {
+                PagedList.TotalRecords = this.DbContext.Posts.Count();
             }
 
-            PagedList.TotalRecords = Query.AsNoTracking().ToList().Count();
 
             if (SortDirectionParam.ToLower() == "asc")
             {
