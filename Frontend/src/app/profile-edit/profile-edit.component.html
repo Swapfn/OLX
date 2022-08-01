@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <div style="margin-left: 150px;margin-right: 150px;" class="alert alert-info" *ngIf="ProfileEditForm.dirty">
+    <div style="margin-left: 260px;width: 1000px;" class="alert alert-info" *ngIf="ProfileEditForm.dirty">
         <strong>Information: </strong>You have made changes, any unsaved changes will be lost!
     </div>
     <div style="width: 1000px;" class="container border mt-3">
@@ -75,14 +75,14 @@
         </form>
     </div>
 
-    <form style="width: 1000px;" class="container border mt-3">
+    <form (ngSubmit)="updatePassword()" #PasswordForm="ngForm" style="width: 1000px;" class="container border mt-3">
         <h5 class="m-3 fw-bolder">Do you want to change your password?</h5>
         <hr class="mx-3">
         <div class="d-flex flex-column mx-3">
-            <input placeholder="Old Password" style="height: 50px;color: black;width: 500px;" type="password">
-            <input placeholder="New Password" style="height: 50px;color: black;margin-top: 6px;width: 500px;"
+            <input [(ngModel)]="changeModel.currentPassword" name="currentPassword" placeholder="Old Password" style="height: 50px;color: black;width: 500px;" type="password">
+            <input [(ngModel)]="changeModel.newPassword" name="newPassword" placeholder="New Password" style="height: 50px;color: black;margin-top: 6px;width: 500px;"
                 type="password">
-            <input placeholder="Confirm Password" style="height: 50px;color: black;margin-top: 6px;width: 500px;"
+            <input [(ngModel)]="changeModel.confirmNewPassword" name="confirmNewPassword" placeholder="Confirm Password" style="height: 50px;color: black;margin-top: 6px;width: 500px;"
                 type="password">
         </div>
         <button class="btn btn-dark mb-4 mx-3 mt-4" style="height: 50px;font-weight: 500;">Change Password</button>
