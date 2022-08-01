@@ -1,0 +1,78 @@
+<div style="margin-left: 150px;margin-right: 150px;" class="alert alert-info" *ngIf="PostEditForm.dirty">
+    <strong>Information: </strong>You have made changes, any unsaved changes will be lost!
+</div>
+<div style="width: 700px;" class="container border mt-3">
+    <h5 class="m-3 fw-bolder">Edit Post</h5>
+    <hr class="mx-3">
+    <form #PostEditForm="ngForm" class="d-inline-flex flex-column mx-3">
+        <div class="d-inline-flex flex-row">
+            <div class="d-inline-flex flex-column">
+                <div>
+                    <h6 style="font-size: 12px;font-weight: 400;">Price</h6>
+                    <input required name="price" [(ngModel)]="model.price" value="model.price" placeholder="Price (EGP)"
+                        style="width: 500px;height: 50px;color: black;" type="text">
+
+                    <h6 style="font-size: 12px;font-weight: 400;" class="mt-3">Is price negotiable?</h6>
+                    <input name="isNegotiable" [(ngModel)]="model.isNegotiable" value="model.isNegotiable"
+                    class="form-check-input" type="checkbox">
+
+                    <h6 style="font-size: 12px;font-weight: 400;" class="mt-3">Is the product new?</h6>
+                    <input name="isNew" [(ngModel)]="model.isNew" value="model.isNew"
+                    class="form-check-input" type="checkbox">
+
+                    <h6 style="font-size: 12px;font-weight: 400;" class="mt-3">Is product still available?</h6>
+                    <input name="isAvailable" [(ngModel)]="model.isAvailable" value="model.isAvailable"
+                    class="form-check-input" type="checkbox">
+
+                    <textarea required name="description" class="mt-5"
+                        style="height: 150px;width: 500px;color: black;resize: none;" [(ngModel)]="model.description"
+                        maxlength="200" placeholder="Description"></textarea>
+                </div>
+                <div style="font-size: 12px;margin-left: 490px;" class="fw-lighter">
+                    <span>{{model.description.length}}</span>
+                    <span>/200</span>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <!-- <hr style="margin-top: 50px;">
+
+        <div style="margin-bottom: 60px;">
+            <h6 class="fw-bolder">Contact Infromation</h6>
+            <input name="phone" value="model.phone" [(ngModel)]="model.phone" class="me-3"
+                style="width: 500px;height: 50px;color: black;margin-bottom: 30px;" type="text"
+                placeholder="    Phone Number: 01XXXXXXXXX">
+            <label style="font-size: 12px;font-weight: 400;opacity: 60%;">This is the number for buyers contacts,
+                reminders, and other notifications.</label>
+            <input name="email" value="model.email" [(ngModel)]="model.email" class="me-3"
+                style="width: 500px;height: 50px;color: black;" type="email" placeholder="    Your_email@xxx.xxx">
+            <label style="font-size: 12px;font-weight: 400;opacity: 60%;">We won't reveal your email to anyone else
+                nor use it to send you spam</label>
+        </div> -->
+        <hr class="mx-1">
+        <div class="d-flex justify-content-between">
+            <a routerLink="/MyPosts" style="color: black;font-weight: 600;" class="text-decoration-underline">Discard</a>
+            <button [disabled]="PostEditForm.invalid" type="submit" class="btn btn-dark mb-4" style="height: 50px;font-weight: 500;">Save
+                changes</button>
+        </div>
+    </form>
+</div>
+
+<div style="width: 700px;" class="container border mt-3">
+    <h5 class="m-3 fw-bolder">Delete this Ad</h5>
+    <hr class="mx-3">
+    <h5 class="m-3 fw-bolder">Are you sure you want to delete your Ad?</h5>
+    <button (click)="openModal(template)" class="btn btn-dark mb-4 mx-3" style="height: 50px;font-weight: 500;">Yes,
+        Delete</button>
+    <ng-template #template>
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">There is still time to think!</h4>
+            <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+                <span aria-hidden="true" class="visually-hidden">&times;</span>
+            </button>
+        </div>
+        <div style="text-align: center;" class="modal-body">
+            <button  class="btn btn-dark mb-4" style="height: 50px;font-weight: 500;">No, Delete</button>
+        </div>
+    </ng-template>
+</div>
