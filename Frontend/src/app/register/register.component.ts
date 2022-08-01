@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
   register() {
     this.accountService.register(this.model).subscribe({
       next : response => {
-        console.log(response);
+        // console.log(response);
         // this.route.navigateByUrl("/home");
         this.toast.success("Account created successfully")
         this.cancel();

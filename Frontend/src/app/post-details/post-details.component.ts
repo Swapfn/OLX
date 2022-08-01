@@ -1,7 +1,7 @@
 import { isNgTemplate } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Post } from '../_models/Post';
+import { Post } from '../_models/post';
 import { AccountService } from '../_services/account.service';
 import { PostService } from '../_services/post.service';
 
@@ -26,9 +26,14 @@ export class PostDetailsComponent implements OnInit {
 
   Post:Post;
 
-  // loadPost(){
-  //  this.PostService.getPost(this.id).subscribe(p=>{this.Post=p;});
-  // }
+  loadPost(){
+   this.PostService.getPost(this.id).subscribe(p=>{this.Post=p;});
+  }
+
+  createImgPath = (serverPath: any) => { 
+    return `https://localhost:44355/${serverPath}`; 
+  }
+
 
 
   // _________________________Manually_____________________________________

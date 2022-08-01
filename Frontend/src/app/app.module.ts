@@ -19,6 +19,7 @@ import { MyPostsComponent } from './my-posts/my-posts.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
 import { FooterComponent } from './footer/footer.component';
+import { PostEditComponent } from './post-edit/post-edit.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { FooterComponent } from './footer/footer.component';
     MyPostsComponent,
     AddPostComponent,
     PostDetailsComponent,
-    FooterComponent
+    FooterComponent,
+    PostEditComponent
   ],
   imports: [
     BrowserModule,

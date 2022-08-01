@@ -9,9 +9,9 @@
 
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
-            <div class="carousel-item active" *ngFor="let ph of Item.photo let i = index"
+            <div class="carousel-item active" *ngFor="let ph of Post.postImage let i = index"
               [ngClass]="{'active': i == 0 }">
-              <img [src]="ph.src" alt="..." class="c-img">
+              <img [src]="createImgPath(ph.imageURL)" alt="..." class="c-img">
             </div>
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
