@@ -1,3 +1,4 @@
+import { Photo } from "./photo";
 
 export interface Post{
     
@@ -19,5 +20,6 @@ fullName:string;
 phoneNumber:number;
 minPrice:number;
 maxPrice:number;
+
 
 }

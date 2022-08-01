@@ -79,29 +79,36 @@ export class HomePageComponent implements OnInit {
     console.log(this.allCategories);
   }
 
-  catId:number;
-  subcatId:number;
+  categorySelectedId:number;
+  categorySelectedName:string;
+
+  subcategorySelectedId:number;
+  subcategorySelectedName:string;
 
 
   categorySelect(event){
-    this.catId = this.filter.searchObject.categoryId = event.target.value;
-    this.subcatId = this.filter.searchObject.subCategoryId = 0;
+    this.categorySelectedId = this.filter.searchObject.categoryId = event.target.value;
+    this.categorySelectedName = event.target.title;
+    this.subcategorySelectedId = this.filter.searchObject.subCategoryId = 0;
+    
     this.loadPosts();
   }
 
-  subCategorySelect(event,cat){
-    this.catId = this.filter.searchObject.categoryId=cat;
-    this.subcatId = this.filter.searchObject.subCategoryId=event.target.value;
+  subCategorySelect(event,catId,catName){
+    this.categorySelectedId = this.filter.searchObject.categoryId = catId ;
+    this.categorySelectedName = catName;
+
+    this.subcategorySelectedId = this.filter.searchObject.subCategoryId = event.target.value;
+    this.subcategorySelectedName = event.target.title;
     this.loadPosts();
   }
 
 
-  subcategorySelected:SubCategory;
+  // subcategorySelected:SubCategory;
 
-  getSubcategoryById(){
-    this.postService.getSubcategoryById(this.subcatId).subscribe(s=>this.subcategorySelected=s)
-
-  }
+  // getSubcategoryById(){
+  //   this.postService.getSubcategoryById(this.subcategorySelectedId).subscribe(s=>this.subcategorySelected=s)
+  // }
 
 
   //________________________________category filter__________________________________________
@@ -209,7 +216,8 @@ export class HomePageComponent implements OnInit {
   FavPosts:object[]=[];
 
 
-  favorite(i:object){
+  favorite(event,i:object){
+    event.stopPropagation();
     this.Fav=!this.Fav;
     this.FavPosts.push(i)
     console.log(this.FavPosts);

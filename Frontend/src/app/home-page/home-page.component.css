@@ -74,5 +74,18 @@ ul {
     flex-flow: column wrap;
 }
 
+.filters{
+    position: sticky;
+    top: 0px;
+    z-index: 9;
+}
+
+.categoryPath{
+
+    background-color: white;
+    position: sticky;
+    top: 56px;
+    z-index: 1;
+}
 
 

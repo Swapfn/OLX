@@ -21,16 +21,43 @@ export class PostDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadPost();
-    console.log(this.Post);
-    // this.getitem();
     
   }
 
   Post:Post;
 
   loadPost(){
-    console.log(this.id);
+   console.log(this.id);
    this.PostService.getPost(this.id).subscribe(p=>this.Post=p);
+  }
+
+
+
+
+  show:boolean=false
+  showNumber(){
+    this.show=true;
+  }
+
+
+
+  Fav:boolean=false;
+
+  FavPosts:object[]=[];
+
+
+  favorite(i:object){
+    this.Fav=!this.Fav;
+
+    if(this.Fav==true){
+      this.FavPosts.push(i)
+      console.log(this.FavPosts);
+    }
+    else{
+      this.FavPosts.pop()
+      console.log(this.FavPosts);
+    }
+   
   }
 
 

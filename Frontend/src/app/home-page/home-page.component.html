@@ -1,10 +1,9 @@
-
 <!-- ________________________Filter Nav_________________________________ -->
 
 
-<nav class="navbar navbar-expand-lg bg-light pb-2">
+<nav class="filters navbar navbar-expand-lg bg-light pb-2 my-0">
 
-  <div class="container-fluid d-flex align-content-center mx-5">
+  <div class="container-fluid  mx-5">
 
     <!-- _____Categories list________ -->
 
@@ -13,17 +12,29 @@
       <a class="nav-link dropdown-toggle link-dark" role="button" data-bs-toggle="dropdown" aria-expanded="false">
         ALL CATEGORIES
       </a>
-      <div class="dropdown-menu categories" >
-        <ul class="d-flex flex-wrap justify-content-around p-4">
+
+      <ul class="dropdown-menu categories">
+
+        <div class="d-flex flex-wrap justify-content-around p-4">
+
           <div class="m-3" *ngFor="let category of allCategories">
-            <option class="fs-6 fw-bold dropdown-item list-group"(click)="categorySelect($event)" value="{{category.categoryID}}" class="dropdown-item list-group">{{category.categoryName}}</option>
-            <option *ngFor="let c of category.subCategories" (click)="subCategorySelect($event,category.categoryID)" value="{{c.subCategoryID}}" class="text-muted dropdown-item m-0 p-0">{{c.subCategoryName}}</option> 
+            <li class="fs-6 fw-bold dropdown-item list-group" (click)="categorySelect($event)"
+              value="{{category.categoryID}}" title="{{category.categoryName}}"> {{category.categoryName}}</li>
+
+            <li *ngFor="let c of category.subCategories" class="text-muted dropdown-item m-0 p-0"
+              (click)="subCategorySelect($event,category.categoryID,category.categoryName)" value="{{c.subCategoryID}}"
+              title="{{c.subCategoryName}}"> {{c.subCategoryName}}</li>
           </div>
-        </ul>
-      </div>
-      
-      <!-- *ngFor="let category of allCategories" -->
+
+        </div>
+      </ul>
+
     </div>
+
+
+
+
+
     <!-- _____Categories list________ -->
 
     <div class="d-flex" style="height: 30px;">
@@ -32,7 +43,7 @@
 
     <!-- _____Location filter / Search________ -->
 
-    <div class="container-fluid d-flex" >
+    <div class="container-fluid d-flex">
 
       <div class="location">
         <select class="form-select input-group mx-2" aria-placeholder="Egypt" aria-label="Default select example"
@@ -42,7 +53,7 @@
           <option [value]="C.locationId" *ngFor="let C of locations">{{C.cityName}}</option>
         </select>
       </div>
-  
+
       <div class="input-group mx-2">
         <input [(ngModel)]="searchValue" type="text" class="form-control"
           placeholder="Find Cars, Mobile phones and More">
@@ -60,18 +71,21 @@
     <!-- _____Price filter_______ -->
 
     <form class="d-flex justify-content-around mx-3">
-      <div class="me-1"> 
-        <input type="number" ng-init="0" min="10" step="10" name="filter.searchObject.minPrice" #Min placeholder="Min Price" class="form-control">
-      </div>
-  
-      <div class="mx-1">
-        <input type="number" ng-init="0" min="10" step="10" name="filter.searchObject.maxPrice" #Max placeholder="Max Price" class="form-control">
+      <div class="me-1">
+        <input type="number" ng-init="0" min="10" step="10" name="filter.searchObject.minPrice" #Min
+          placeholder="Min Price" class="form-control">
       </div>
 
-      <button (click)="OnPriceSet(Min.value,Max.value)" class="btn btn-outline backcolor" type="submit" id="button-addon2">
+      <div class="mx-1">
+        <input type="number" ng-init="0" min="10" step="10" name="filter.searchObject.maxPrice" #Max
+          placeholder="Max Price" class="form-control">
+      </div>
+
+      <button (click)="OnPriceSet(Min.value,Max.value)" class="btn btn-outline backcolor" type="submit"
+        id="button-addon2">
         <img src="/assets/images/search2.png" alt="" width="20" height="20">
       </button>
-      
+
     </form>
     <!-- _____Price filter_______ -->
 
@@ -79,13 +93,20 @@
 </nav>
 <!-- ________________________Filter Nav_________________________________ -->
 
-<nav aria-label="breadcrumb ">
-  <ol class="breadcrumb my-3 mx-1">
-    <li class="breadcrumb-item">All Categories</li>
-    <li class="breadcrumb-item">{{catId}}</li>
-    <li *ngIf="subcatId!=0" class="breadcrumb-item active" aria-current="page">{{subcatId}}</li>
-  </ol>
-</nav>
+
+<div class="categoryPath">
+  <nav aria-label="breadcrumb ">
+    <ol class="breadcrumb my-3 mx-1">
+      <li class="breadcrumb-item">All Categories</li>
+      <li class="breadcrumb-item">{{categorySelectedName}}</li>
+      <li *ngIf="subcategorySelectedId!=0" class="breadcrumb-item active" aria-current="page">{{subcategorySelectedName}}
+      </li>
+    </ol>
+  </nav>
+</div>
+
+
+
 
 
 
@@ -100,11 +121,11 @@
       <div class="card-body">
         <div class="d-flex align-items-start">
           <p class="card-text">{{ i.title }}</p>
-          <div (click)="favorite(i)" class="m-1">
-            <!-- <i [ngClass]="
+          <!-- <div (click)="favorite(i)" class="m-1">
+            <i [ngClass]="
                 Fav ? 'fa-solid fa-heart fa-lg' : 'fa-regular fa-heart fa-lg'
-              "></i> -->
-          </div>
+              "></i>
+          </div> -->
         </div>
         <div class="d-flex align-items-center">
           <h4 class="card-title">{{ i.price }} EGP</h4>
@@ -132,11 +153,11 @@
       <div class="card-body">
         <div class="d-flex align-items-start justify-content-between">
           <p class="card-text">{{ post.title }}</p>
-          <div (click)="favorite(post)" class="m-1">
-            <i class="fa-regular fa-heart fa-lg"></i>
-            <!-- <i [ngClass]="
+          <div (click)="favorite($event,post)" class="m-1">
+            <!-- <i class="fa-regular fa-heart fa-lg"></i> -->
+            <i [ngClass]="
                 Fav ? 'fa-solid fa-heart fa-lg' : 'fa-regular fa-heart fa-lg'
-              "></i> -->
+              "></i>
           </div>
         </div>
         <div class="d-flex align-items-center mb-5">

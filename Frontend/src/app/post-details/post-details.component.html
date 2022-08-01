@@ -73,8 +73,10 @@
               <h2 class="card-title m-0">EGP {{Post.price}}</h2>
               <small class="card-text text-muted" *ngIf="Post.isNegotiable ">PRICE IS NEGOTIABLE</small>
             </div>
-            <div class="m-1">
-              <i Class='fa-regular fa-heart fa-lg'></i>
+            <div (click)="favorite(Post)" class="m-1">
+               <i [ngClass]="
+                  Fav ? 'fa-solid fa-heart fa-lg' : 'fa-regular fa-heart fa-lg'
+                "></i> 
             </div>
 
           </div>
@@ -101,13 +103,14 @@
             <img src="/assets/images/iconProfilePicture.png" alt="" width="80" height="80">
             <div class="mx-3">
               <p class="card-text m-0">{{Post.fullName}} </p>
-              <small class="card-text text-muted">Member since ay 7aga</small>
+              
             </div>
           </div>
 
           <div class="d-flex align-items-center justify-content-center my-2">
             <img src="/assets/images/telephone-call.png" class="mx-3" alt="" width="20" height="20">
-            <p class="card-text">Call the seller at {{Post.phoneNumber}}</p>
+            <p *ngIf="!show"class="card-text"> ** **** ***** <a class ='btn text-primary'(click)="showNumber()" > Show number</a></p>
+            <a *ngIf="show" href="tel:{{Post.phoneNumber}}">01202073302{{Post.phoneNumber}}</a>
           </div>
 
         </div>
