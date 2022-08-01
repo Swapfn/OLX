@@ -23,20 +23,21 @@ export class PostDetailsComponent implements OnInit {
     this.loadPost();
     
   }
+  
 
   Post:Post;
 
   loadPost(){
    this.PostService.getPost(this.id).subscribe(p=>{this.Post=p;});
   }
-
+  
   createImgPath = (serverPath: any) => { 
     return `https://localhost:44355/${serverPath}`; 
+    // console.log(this.id);
+    // this.PostService.getPost(this.id).subscribe(p=>this.Post=p);
   }
 
-   console.log(this.id);
-   this.PostService.getPost(this.id).subscribe(p=>this.Post=p);
-  }
+  
 
 
 
@@ -78,11 +79,11 @@ export class PostDetailsComponent implements OnInit {
 //     console.log("from get details");
 //   }
 
-
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
