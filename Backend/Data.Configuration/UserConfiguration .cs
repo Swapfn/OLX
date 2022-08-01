@@ -24,7 +24,6 @@ namespace Data.Configuration
                     SecurityStamp = Guid.NewGuid().ToString(),
                     FName = "Admin",
                     LName = "Admin",
-                    PhoneNumber = "01234567891"
                 };
 
                 // generate user and user PW 
@@ -44,7 +43,6 @@ namespace Data.Configuration
                         SecurityStamp = Guid.NewGuid().ToString(),
                         FName = "User",
                         LName = $"{i}",
-                        PhoneNumber = "01234567891"
                     };
                     // generate user and user PW 
                     user.PasswordHash = ph.HashPassword(user, "string");

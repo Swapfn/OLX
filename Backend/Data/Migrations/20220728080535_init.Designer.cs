@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220801151133_finalInit")]
-    partial class finalInit
+    [Migration("20220728080535_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -145,14 +145,14 @@ namespace Data.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "482008a6-56df-46d9-a919-c7f82872cf7a",
+                            ConcurrencyStamp = "c11186c3-085c-495a-8142-0c52c2ecbf4d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "47c38b03-e51a-4bce-a119-c422ca5c8d4d",
+                            ConcurrencyStamp = "0981403a-720a-47d8-aaa2-30524f07db55",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -242,7 +242,7 @@ namespace Data.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7a70fa49-27a9-42e7-9f42-69107edc8e56",
+                            ConcurrencyStamp = "08de9818-2acf-41c1-805a-07a51133d023",
                             Email = "Admin@admin.com",
                             EmailConfirmed = false,
                             FName = "Admin",
@@ -250,10 +250,9 @@ namespace Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGBcB2TiXHU5KCVRJosgG2cjQX0BsPH+QJRPoRTQ7+KxRqpd/49GrXoer0+pPjJRxg==",
-                            PhoneNumber = "01234567891",
+                            PasswordHash = "AQAAAAEAACcQAAAAENdwDQlZvlKmicfr/AO1QXvJZ0exTqM3mepLM6P1ioOFokvQo0GLMvKkRWxoJ6aizA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0a72f32d-9ef2-4bbe-8565-053d1c1f422d",
+                            SecurityStamp = "7dbec274-03e6-4f04-9afc-9d783d41847b",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         },
@@ -261,7 +260,7 @@ namespace Data.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b22e0764-c72b-4c94-bd14-5ae0e0151135",
+                            ConcurrencyStamp = "45f2c2c1-5ef7-447f-8c90-88efad598a2f",
                             Email = "User@user.com",
                             EmailConfirmed = false,
                             FName = "User",
@@ -269,10 +268,9 @@ namespace Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@USER.COM",
                             NormalizedUserName = "USER1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEECDXZaTAXvvUv+oprJYQyvt30kXhd6Z8xSktJzgMplXI+uNDOUpUr9lEV1VGd+d/Q==",
-                            PhoneNumber = "01234567891",
+                            PasswordHash = "AQAAAAEAACcQAAAAEH3fxgoh9fZX381vOggIIRabLm/hpI2bro2UrDKnHgWEaJTjzyLYX3kvHJB1Ry8PoQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2608a3c6-2ac4-4477-a28e-2f0f8f9802bc",
+                            SecurityStamp = "a2e35bb5-6a34-4359-bff4-50059250b534",
                             TwoFactorEnabled = false,
                             UserName = "User1"
                         },
@@ -280,7 +278,7 @@ namespace Data.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ea6371a1-6043-4486-8385-4352b1b03924",
+                            ConcurrencyStamp = "44b467ce-81e7-4038-9241-6d3793c6de89",
                             Email = "User@user.com",
                             EmailConfirmed = false,
                             FName = "User",
@@ -288,10 +286,9 @@ namespace Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@USER.COM",
                             NormalizedUserName = "USER2",
-                            PasswordHash = "AQAAAAEAACcQAAAAENKN4FktTicEAB31JXW5nK/ToCgG2wYTBpd0Uqabz7s8alt1Kyj5+/UinP3HkX4jLg==",
-                            PhoneNumber = "01234567891",
+                            PasswordHash = "AQAAAAEAACcQAAAAEI8Gabuw67AmE1BVq1JMiCHEqe8lJPj0YRWvFPuvFshzsSvRGoXvw3ZjT2FDeizd5Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "728021c6-1754-4331-9179-06bbfb930e72",
+                            SecurityStamp = "04b73c06-187f-4af1-8c52-dc658e1467a0",
                             TwoFactorEnabled = false,
                             UserName = "User2"
                         },
@@ -299,7 +296,7 @@ namespace Data.Migrations
                         {
                             Id = 4,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4ddf0cc6-1a2d-47a5-afc4-7723c7d4cf9f",
+                            ConcurrencyStamp = "0c273959-cf72-4316-b51c-3d9592c92f5b",
                             Email = "User@user.com",
                             EmailConfirmed = false,
                             FName = "User",
@@ -307,10 +304,9 @@ namespace Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@USER.COM",
                             NormalizedUserName = "USER3",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJsFCyDiZKsS2iyh8u6p1IQOaCDws39Wxws83r0T4/JehmFEW1IJMlz+VcK34Z7O7A==",
-                            PhoneNumber = "01234567891",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJGtFjvBe+pZlJp6Xsu/PEJnsw7SL9vrgs4kSiqJjok/56jumiV5PRzdPbgB8iEtng==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e4398733-ceab-4a52-8273-2bc3293c23cc",
+                            SecurityStamp = "44db45e9-8d90-48a3-9c1b-298cae622f36",
                             TwoFactorEnabled = false,
                             UserName = "User3"
                         },
@@ -318,7 +314,7 @@ namespace Data.Migrations
                         {
                             Id = 5,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cf406204-d309-42e7-bdd5-f717103ad302",
+                            ConcurrencyStamp = "0d85b667-7098-4953-8b08-48d2e8d92616",
                             Email = "User@user.com",
                             EmailConfirmed = false,
                             FName = "User",
@@ -326,10 +322,9 @@ namespace Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@USER.COM",
                             NormalizedUserName = "USER4",
-                            PasswordHash = "AQAAAAEAACcQAAAAEO4p6N9d8eU5pMoS84btkFVojVMcBOts8KUjCV4mJK6gfKWdPyX4GoOpZ1/NKKs4Ew==",
-                            PhoneNumber = "01234567891",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFHlNhALJAxaHVls7xOX8M7ugTUwl2iKhwGomyfhI2F36N5nx/Ro7p2b9HORNXuXcA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ea3b1e99-5951-4ba7-a811-9484cd6b46aa",
+                            SecurityStamp = "02c1d239-439b-46de-8cd3-708d2297aa5e",
                             TwoFactorEnabled = false,
                             UserName = "User4"
                         },
@@ -337,7 +332,7 @@ namespace Data.Migrations
                         {
                             Id = 6,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c7e35e44-31a0-46d2-98cb-ce4ffdd8cd58",
+                            ConcurrencyStamp = "72416e75-75f1-4712-bf13-45d06c1e0b3a",
                             Email = "User@user.com",
                             EmailConfirmed = false,
                             FName = "User",
@@ -345,10 +340,9 @@ namespace Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@USER.COM",
                             NormalizedUserName = "USER5",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOTzkzmQyCXlNC2olVstwrUny2DMWrFt9ZnVOikg4GfXJKXQ91NwtaVRH+k+u7QjlQ==",
-                            PhoneNumber = "01234567891",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDdbs6NaG7gcZ0YX9KXbnKBTUeZ8zmI+7k1AWgAO6H4AM6An//sunbMqcsMgZ5VV9w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d09b877a-b24e-4767-850a-32a3bde5d823",
+                            SecurityStamp = "3d170451-702c-42cb-acc5-a2ac0f515475",
                             TwoFactorEnabled = false,
                             UserName = "User5"
                         },
@@ -356,7 +350,7 @@ namespace Data.Migrations
                         {
                             Id = 7,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6a88e21d-318d-4fdc-8397-02803413dfa9",
+                            ConcurrencyStamp = "fc3aae72-91d7-45a5-89c4-e1139d9dedf2",
                             Email = "User@user.com",
                             EmailConfirmed = false,
                             FName = "User",
@@ -364,10 +358,9 @@ namespace Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@USER.COM",
                             NormalizedUserName = "USER6",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHvvYTfiMrk2xHESBgmqBzV7iIfeoKdHsYV/dmkdlgiRmZaYFuW4ZjMbV4KlMNVi6g==",
-                            PhoneNumber = "01234567891",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDeyZ0VbOwnRaKT9REfgs0fWRs9TpLILTFAg33bQkO2nRNDou3CnR3K4Prea9tboqw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "000015ed-35a9-4bcd-aa20-e633547fa279",
+                            SecurityStamp = "4bbf7c7f-9a2a-4af5-8e21-afe4a34db544",
                             TwoFactorEnabled = false,
                             UserName = "User6"
                         },
@@ -375,7 +368,7 @@ namespace Data.Migrations
                         {
                             Id = 8,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "918e552d-f303-4ffd-a72a-dcc31cbd8dd7",
+                            ConcurrencyStamp = "c70518da-3f7e-4ea0-a69d-92510963fcd3",
                             Email = "User@user.com",
                             EmailConfirmed = false,
                             FName = "User",
@@ -383,10 +376,9 @@ namespace Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@USER.COM",
                             NormalizedUserName = "USER7",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAlqm41CT+fED6+Sw+loPBg2Pe5Oumnnr+oGSjceCBWm8I0Z6dc8HbfyOlSQX+iSHg==",
-                            PhoneNumber = "01234567891",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPRCyqmZk2dmByrh9B1JSU/7FEwlBQtOteBxxtZfkTe4lGnZijt+XoRzgIv2sIxwbg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "38217e73-9698-4184-8afb-84fdb1898011",
+                            SecurityStamp = "9b9183fd-ad76-41c6-bdf5-a37605c0730b",
                             TwoFactorEnabled = false,
                             UserName = "User7"
                         },
@@ -394,7 +386,7 @@ namespace Data.Migrations
                         {
                             Id = 9,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f285beef-ba2a-4e46-8aa7-104a9068be7b",
+                            ConcurrencyStamp = "530a2b6a-3777-4a39-bbaf-c64d0945eec0",
                             Email = "User@user.com",
                             EmailConfirmed = false,
                             FName = "User",
@@ -402,10 +394,9 @@ namespace Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@USER.COM",
                             NormalizedUserName = "USER8",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPM/RO5Mktyme6wEFhBeGRWeINrX1r4a9u0YbOPHOhr1FQq/n5XRHVEiHPvLKZtr9Q==",
-                            PhoneNumber = "01234567891",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBFvBG2RmmIDzs1+G52rT7nUmwISheoUeC8ZKtFsZYWg+5D1AHtDV+BGprmOCADovw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "91715f10-bac7-44f7-b430-6ec152f765c9",
+                            SecurityStamp = "affcf2c2-320f-44bc-ae04-dcf0dda3c5a8",
                             TwoFactorEnabled = false,
                             UserName = "User8"
                         },
@@ -413,7 +404,7 @@ namespace Data.Migrations
                         {
                             Id = 10,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "58c9cd0c-6389-43dc-b584-409365cabeff",
+                            ConcurrencyStamp = "c906fa33-c7b6-4894-82f3-03c879414690",
                             Email = "User@user.com",
                             EmailConfirmed = false,
                             FName = "User",
@@ -421,10 +412,9 @@ namespace Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@USER.COM",
                             NormalizedUserName = "USER9",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAl3db6mq+PaMiuZ84W5PqpHwDSNciSPbyUV1rDuL+EhETru3Z48el/+EdP9N5zuXQ==",
-                            PhoneNumber = "01234567891",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMGz9VDVQRdXAAWd2NusMqwA9IG0gLHGkJru461xh0mpxPTPMDdnUtiSNAxqx3f0nA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f290d325-05ed-4afc-bae6-bb49528262eb",
+                            SecurityStamp = "499953bd-ea13-4aca-b037-5279b6c0c9e0",
                             TwoFactorEnabled = false,
                             UserName = "User9"
                         },
@@ -432,7 +422,7 @@ namespace Data.Migrations
                         {
                             Id = 11,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f47759f3-38a6-4727-a60a-b359b6017ed6",
+                            ConcurrencyStamp = "6ea87cb5-f021-42a7-8b5a-24577ffe8615",
                             Email = "User@user.com",
                             EmailConfirmed = false,
                             FName = "User",
@@ -440,10 +430,9 @@ namespace Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@USER.COM",
                             NormalizedUserName = "USER10",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEgnEifryMP/DGi+s0WLvKtilYeJplHJqgnmM8glCNBidmy2r/5IScj3dadR5592oQ==",
-                            PhoneNumber = "01234567891",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAnZvCuF9H89KkKqqhwqFNCaFqKVB9+oFWsuQPEYN9/i75RRAsUK3E8mztQ724Oo9w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8d256dfd-33f6-4f2b-b6bd-0df17a778eaa",
+                            SecurityStamp = "015edbc9-4207-45c0-a804-2526c7f75974",
                             TwoFactorEnabled = false,
                             UserName = "User10"
                         },
@@ -451,7 +440,7 @@ namespace Data.Migrations
                         {
                             Id = 12,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "49705a65-650d-4be0-b05e-4f8d43641a7d",
+                            ConcurrencyStamp = "457eda89-4108-495d-a54b-d5c5112bdff6",
                             Email = "User@user.com",
                             EmailConfirmed = false,
                             FName = "User",
@@ -459,10 +448,9 @@ namespace Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@USER.COM",
                             NormalizedUserName = "USER11",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAOWok+cUIQkf+sIwLEpgI7qMy0Ese1XueUDZtJQSPhNgfwDiHLP+BHUetcMTBIBIw==",
-                            PhoneNumber = "01234567891",
+                            PasswordHash = "AQAAAAEAACcQAAAAENNQGayvdzaMbVwGdu4ra13XcK/oESKlDWUcn1zuOL6YMgZ1Eb1IR4LzhfevuP6XSA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a3789f58-3554-4ffc-aee6-e9623b75926b",
+                            SecurityStamp = "596f303a-240d-41e1-8a4c-920901b3213c",
                             TwoFactorEnabled = false,
                             UserName = "User11"
                         });

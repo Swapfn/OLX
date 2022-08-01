@@ -42,11 +42,7 @@ namespace Mapper.Mappers
                 postDTO.SubCategoryName = post.SubCategory.SubCategoryName;
 
             if (post.User != null)
-            {
                 postDTO.FullName = post.User.FName + ' ' + post.User.LName;
-                postDTO.PhoneNumber = post.User.PhoneNumber;
-                postDTO.AboutMe = post.User.AboutMe;
-            }
 
             if (post.Location != null)
                 postDTO.CityName = post.Location.CityName;
