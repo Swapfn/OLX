@@ -14,7 +14,12 @@ namespace Data.Repositories.Repositories
         {
         }
 
-        public Post GetById(int id) => this.DbContext.Posts.Include(p => p.User).Include(l => l.Location).Include(s => s.SubCategory).FirstOrDefault(p => p.PostId == id);
+        public Post GetById(int id) => this.DbContext.Posts
+            .Include(p => p.User)
+            .Include(post => post.PostImages)
+            .Include(l => l.Location)
+            .Include(s => s.SubCategory)
+            .FirstOrDefault(p => p.PostId == id);
 
         public PagedResult<Post> GetAll(int PageNumber, int PageSize, List<string> includes, Expression<Func<PostDTO, bool>> filter = null, string SortBy = "", string SortDirection = "")
         {
@@ -26,6 +31,7 @@ namespace Data.Repositories.Repositories
                     posts.Results = this.DbContext.Posts
                                         .Where(x => x.IsAvailable)
                                         .Include(p => p.User)
+                                        .Include(post => post.PostImages)
                                         .Include(l => l.Location)
                                         .Include(s => s.SubCategory)
                                         .OrderBy(on => on.Price)
@@ -38,6 +44,7 @@ namespace Data.Repositories.Repositories
                     posts.Results = this.DbContext.Posts
                                         .Where(x => x.IsAvailable)
                                         .Include(p => p.User)
+                                        .Include(post => post.PostImages)
                                         .Include(l => l.Location)
                                         .Include(s => s.SubCategory)
                                         .OrderByDescending(on => on.Price)
@@ -54,6 +61,7 @@ namespace Data.Repositories.Repositories
                     posts.Results = this.DbContext.Posts
                                         .Where(x => x.IsAvailable)
                                         .Include(p => p.User)
+                                        .Include(post => post.PostImages)
                                         .Include(l => l.Location)
                                         .Include(s => s.SubCategory)
                                         .OrderBy(on => on.CreatedAt)
@@ -66,6 +74,7 @@ namespace Data.Repositories.Repositories
                     posts.Results = this.DbContext.Posts
                                         .Where(x => x.IsAvailable)
                                         .Include(p => p.User)
+                                        .Include(post => post.PostImages)
                                         .Include(l => l.Location)
                                         .Include(s => s.SubCategory)
                                         .OrderByDescending(on => on.CreatedAt)
@@ -75,7 +84,7 @@ namespace Data.Repositories.Repositories
                 }
             }
 
-            posts.TotalRecords = this.DbContext.Posts.Count();
+            posts.TotalRecords = posts.Results.Count();
             return posts;
         }
 
@@ -114,7 +123,7 @@ namespace Data.Repositories.Repositories
             IQueryable<Post> Query = this.DbContext.Posts.AsQueryable<Post>();
             foreach (string include in includes)
             {
-                Query = Query.Include(include);
+                Query = Query.Include(include).Where(p => p.IsAvailable);
             }
             string SortByParam = "CreationDate";
             string SortDirectionParam = "ASC";
@@ -130,15 +139,9 @@ namespace Data.Repositories.Repositories
             if (filter != null)
             {
                 Query = Query.Where(filter);
-
-                PagedList.TotalRecords = Query.AsNoTracking().ToList().Count();
-
-            }
-            else
-            {
-                PagedList.TotalRecords = this.DbContext.Posts.Count();
             }
 
+            PagedList.TotalRecords = Query.AsNoTracking().ToList().Count();
 
             if (SortDirectionParam.ToLower() == "asc")
             {
