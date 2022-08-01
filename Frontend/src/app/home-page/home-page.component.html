@@ -148,10 +148,11 @@
   <div *ngFor="let post of AllPosts" class="col">
     <div class="card h-100">
       <div class="card-img-wrapper">
-        <img [src]="createImgPath(post.postImage[0].imageURL)" class="card-img-top" alt="{{ post.title}}" />
+        <img *ngIf="post.postImage==undefined" src="/assets/images/placeholder-rgb.jpg" class="card-img-top" alt="{{ post.title}}" />
+
+        <img *ngIf="post.postImage!=undefined" [src]="createImgPath(post.postImage[0].imageURL)" class="card-img-top" alt="{{ post.title}}" />
       </div>
 
-      <!-- <img src="/assets/images/placeholder-rgb.jpg" class="card-img-top" alt="{{ post.title}}" /> -->
 
       <div class="card-body">
         <div class="d-flex align-items-start justify-content-between">
