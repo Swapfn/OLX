@@ -75,8 +75,6 @@ export class HomePageComponent implements OnInit {
 
   getAllCategories(){
     this.postService.getCategories().subscribe(categories => this.allCategories=categories)
-
-    console.log(this.allCategories);
   }
 
   categorySelectedId:number;
@@ -147,8 +145,22 @@ export class HomePageComponent implements OnInit {
   //________________________________Price filter___________________________________________
 
   OnPriceSet(Min,Max){
-    this.filter.searchObject.minPrice=Min;
-    this.filter.searchObject.maxPrice=Max;
+    
+    if(Min==""){
+      this.filter.searchObject.minPrice=0;
+    }
+    else{
+      this.filter.searchObject.minPrice=Min;
+    }
+
+    if(Max==""){
+      this.filter.searchObject.maxPrice=0;
+    }
+    else{
+      this.filter.searchObject.maxPrice=Max;
+    }
+    
+
     this.loadPosts();
   }
     //________________________________Price filter___________________________________________
