@@ -5,6 +5,4 @@ export interface User {
     email: string;
     phone: string;
     aboutMe: string;
-    password: string;
-    confirmPassword: string;
 }

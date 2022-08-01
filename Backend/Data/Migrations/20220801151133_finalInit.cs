@@ -270,13 +270,8 @@ namespace Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-<<<<<<<< HEAD:Backend/Data/Migrations/20220801151133_finalInit.cs
                     { 1, "482008a6-56df-46d9-a919-c7f82872cf7a", "Admin", "ADMIN" },
                     { 2, "47c38b03-e51a-4bce-a119-c422ca5c8d4d", "User", "USER" }
-========
-                    { 1, "a45190c2-848c-4181-8845-5359796c3bb0", "Admin", "ADMIN" },
-                    { 2, "ec1cf7a7-9f9e-4558-9035-68769f697745", "User", "USER" }
->>>>>>>> frontend:Backend/Data/Migrations/20220728093644_init.cs
                 });
 
             migrationBuilder.InsertData(
@@ -284,7 +279,6 @@ namespace Data.Migrations
                 columns: new[] { "Id", "AboutMe", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FName", "LName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-<<<<<<<< HEAD:Backend/Data/Migrations/20220801151133_finalInit.cs
                     { 1, null, 0, "7a70fa49-27a9-42e7-9f42-69107edc8e56", "Admin@admin.com", false, "Admin", "Admin", false, null, "ADMIN@ADMIN.COM", "ADMIN", "AQAAAAEAACcQAAAAEGBcB2TiXHU5KCVRJosgG2cjQX0BsPH+QJRPoRTQ7+KxRqpd/49GrXoer0+pPjJRxg==", "01234567891", false, "0a72f32d-9ef2-4bbe-8565-053d1c1f422d", false, "Admin" },
                     { 2, null, 0, "b22e0764-c72b-4c94-bd14-5ae0e0151135", "User@user.com", false, "User", "1", false, null, "USER@USER.COM", "USER1", "AQAAAAEAACcQAAAAEECDXZaTAXvvUv+oprJYQyvt30kXhd6Z8xSktJzgMplXI+uNDOUpUr9lEV1VGd+d/Q==", "01234567891", false, "2608a3c6-2ac4-4477-a28e-2f0f8f9802bc", false, "User1" },
                     { 3, null, 0, "ea6371a1-6043-4486-8385-4352b1b03924", "User@user.com", false, "User", "2", false, null, "USER@USER.COM", "USER2", "AQAAAAEAACcQAAAAENKN4FktTicEAB31JXW5nK/ToCgG2wYTBpd0Uqabz7s8alt1Kyj5+/UinP3HkX4jLg==", "01234567891", false, "728021c6-1754-4331-9179-06bbfb930e72", false, "User2" },
@@ -297,20 +291,6 @@ namespace Data.Migrations
                     { 10, null, 0, "58c9cd0c-6389-43dc-b584-409365cabeff", "User@user.com", false, "User", "9", false, null, "USER@USER.COM", "USER9", "AQAAAAEAACcQAAAAEAl3db6mq+PaMiuZ84W5PqpHwDSNciSPbyUV1rDuL+EhETru3Z48el/+EdP9N5zuXQ==", "01234567891", false, "f290d325-05ed-4afc-bae6-bb49528262eb", false, "User9" },
                     { 11, null, 0, "f47759f3-38a6-4727-a60a-b359b6017ed6", "User@user.com", false, "User", "10", false, null, "USER@USER.COM", "USER10", "AQAAAAEAACcQAAAAEEgnEifryMP/DGi+s0WLvKtilYeJplHJqgnmM8glCNBidmy2r/5IScj3dadR5592oQ==", "01234567891", false, "8d256dfd-33f6-4f2b-b6bd-0df17a778eaa", false, "User10" },
                     { 12, null, 0, "49705a65-650d-4be0-b05e-4f8d43641a7d", "User@user.com", false, "User", "11", false, null, "USER@USER.COM", "USER11", "AQAAAAEAACcQAAAAEAOWok+cUIQkf+sIwLEpgI7qMy0Ese1XueUDZtJQSPhNgfwDiHLP+BHUetcMTBIBIw==", "01234567891", false, "a3789f58-3554-4ffc-aee6-e9623b75926b", false, "User11" }
-========
-                    { 1, null, 0, "900b59cb-daa8-4674-a156-c0ba670d6699", "Admin@admin.com", false, "Admin", "Admin", false, null, "ADMIN@ADMIN.COM", "ADMIN", "AQAAAAEAACcQAAAAEMx0sGtV0gdI3zQWwQGYgYOpBy0AtZe4T+dHfLCRQ7NZLQYictJLiKZy5Vz4h1BceQ==", null, false, "36f035a9-ddf1-46b3-bbbd-e7ef0d08840f", false, "Admin" },
-                    { 2, null, 0, "1c875be0-31c4-402a-bd0f-b444145efd36", "User@user.com", false, "User", "1", false, null, "USER@USER.COM", "USER1", "AQAAAAEAACcQAAAAEBK6fAb0L4zoNTD+R4q/3j3s6lNM3p9pm5F2+btulfFlcVm8qUrVTkz73WBbeQ6aYw==", null, false, "bf1e8522-2228-45c8-8aa2-51000029ed90", false, "User1" },
-                    { 3, null, 0, "8d82228e-52e2-4ebc-bb3a-1989d10b1cc0", "User@user.com", false, "User", "2", false, null, "USER@USER.COM", "USER2", "AQAAAAEAACcQAAAAEHBwEwwpQ6qYDuHRnHVV+LjCFEcOkvq2UUCo4ERYSjrnYIVV3FtIQTKilqG2TBWmhw==", null, false, "e15cc9f2-214d-4d73-8e9a-56329c081d05", false, "User2" },
-                    { 4, null, 0, "2cbc4196-7577-4464-997d-2cb3821598c4", "User@user.com", false, "User", "3", false, null, "USER@USER.COM", "USER3", "AQAAAAEAACcQAAAAEFNC0xCzopmCF0qtHTHq2Uj06Hp5bkk9+2fqb6yDxmguzlAeExDW1jt8Xfbrc94XOg==", null, false, "a244e018-f917-494d-a7b1-b800f271d6e5", false, "User3" },
-                    { 5, null, 0, "ed219808-d3b9-4ba5-b0b1-ed1fbdeaf9b0", "User@user.com", false, "User", "4", false, null, "USER@USER.COM", "USER4", "AQAAAAEAACcQAAAAEKO+PCOPqztjpopQbHaw7RfPOqUDKFTEn8yXWO9APrc6lIhghNa0dlUwRD0YcedLIA==", null, false, "580e251e-c1f3-494d-afbf-ad3b82409620", false, "User4" },
-                    { 6, null, 0, "c664b84e-d52f-41d7-9dac-7308c8d4ede7", "User@user.com", false, "User", "5", false, null, "USER@USER.COM", "USER5", "AQAAAAEAACcQAAAAENgKQUXpBKGdYuasFYMVsK/KpTPE4MIvhVFYqAE741KMtiTM93+Bd8uEno/48HPUGg==", null, false, "d1d245ac-9a61-4dc5-baa2-86000d1a03b9", false, "User5" },
-                    { 7, null, 0, "4d43e322-6e72-4f36-9216-1b403658b8f7", "User@user.com", false, "User", "6", false, null, "USER@USER.COM", "USER6", "AQAAAAEAACcQAAAAEDtsWvfANMk7VkgsBEPLEgk4j1wKmzgBN8KUkBeVfCb2sLnSRCZZTTDksdFOLSN+ZA==", null, false, "d50e940b-cdcb-4742-9d22-c52be9a25845", false, "User6" },
-                    { 8, null, 0, "1a9af56b-ff68-4c67-8758-89f5bf7eafb7", "User@user.com", false, "User", "7", false, null, "USER@USER.COM", "USER7", "AQAAAAEAACcQAAAAEOrI6KpmbbxbqbU8Iy8iPptyGGoLytgegMpvDgvXM4w+V2l5URqUPoWqeXbths3R/g==", null, false, "d8a3717b-4ea6-4735-83e5-67666ef979b7", false, "User7" },
-                    { 9, null, 0, "f7f6a965-cea2-4b9f-82d2-7d65af9a08bd", "User@user.com", false, "User", "8", false, null, "USER@USER.COM", "USER8", "AQAAAAEAACcQAAAAEP5/njm+CYYtOmoPFzU0yEA0DW3H0kuPEbKVvhnCemsAzucBs3aTz6jC0mHBOx97zw==", null, false, "e9aefc01-76b5-4e95-bb85-f2b3fed44ea5", false, "User8" },
-                    { 10, null, 0, "cff859fa-adc2-4d94-b3f0-15bb5e8ae0fc", "User@user.com", false, "User", "9", false, null, "USER@USER.COM", "USER9", "AQAAAAEAACcQAAAAEHphGUtcdskUeCZGEeabWDOqggXJicaqQ6jhmEAubt7ObS4IAVupT3xq2kkK6rI1AA==", null, false, "4ce200b9-0175-42bc-8765-c8badf64bc1b", false, "User9" },
-                    { 11, null, 0, "b60d9404-72c5-49c5-a8e5-b41949e6b824", "User@user.com", false, "User", "10", false, null, "USER@USER.COM", "USER10", "AQAAAAEAACcQAAAAEASFoHbxAKpEFnGlgrE5Vr6v31AcuGyTfCrizkDYc6bnjIVgmkUIVLYfwt97bsnwOg==", null, false, "693f8faa-1f14-4f22-8289-b00803164fcc", false, "User10" },
-                    { 12, null, 0, "c57f8b58-1376-47ed-ba14-8a2a1a492a77", "User@user.com", false, "User", "11", false, null, "USER@USER.COM", "USER11", "AQAAAAEAACcQAAAAEBQrb7jACmZujB7HuRj5VsUCm8xuc3UF8oMybpJKV3ejnlbKQ33xWzjNtRh22tXM8A==", null, false, "321c73cd-54e3-42a3-b221-8ac15b78dc7b", false, "User11" }
->>>>>>>> frontend:Backend/Data/Migrations/20220728093644_init.cs
                 });
 
             migrationBuilder.InsertData(
