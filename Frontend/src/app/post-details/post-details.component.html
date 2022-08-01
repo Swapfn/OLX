@@ -37,31 +37,27 @@
           <div class="row">
             <div class="col light d-flex">
               <p class="me-1">Price : </p>
-              <p> {{Item.price}}</p>
+              <p> {{Post.price}}</p>
             </div>
             <div class="col light d-flex">
               <p class="me-1">Price Type : </p>
-              <p>{{Item.nego_Price ? 'Negotiable' : 'Not negotiable'}}</p>
+              <p>{{Post.isNegotiable ? 'Negotiable' : 'Not negotiable'}}</p>
             </div>
           </div>
           <div class="row">
             <div class="col light d-flex">
               <p class="me-1">Type : </p>
-              <p>Post.subCategoryName</p>
+              <p>{{Post.subCategoryName}}</p>
             </div>
             <div class="col light d-flex">
               <p class="me-1">Condition : </p>
-              <!-- <p>{{Post.isNew ? 'New' : 'Used'}}</p>  -->
+              <p>{{Post.isNew ? 'New' : 'Used'}}</p> 
             </div>
           </div>
 
           <hr>
           <h4 class="card-title">Description</h4>
-          <p class="light">
-            Post.description hvbusdbw suiqwuqed w suqbwdubyq uasiqbwdyue d asbrfg8wq bi bywed ed ibduey8 dbud
-            uduibvywerd buidhdovjoe
-            birfhuef eff fbiuefew f a
-          </p>
+          <p class="light">{{Post.description}}</p>
         </div>
       </div>
     </div>
@@ -74,22 +70,24 @@
 
           <div class="d-flex justify-content-between">
             <div class="">
-              <h2 class="card-title m-0">EGP {{Item.price}}</h2>
-              <small class="card-text text-muted" *ngIf="Item.nego_Price">PRICE IS NEGOTIABLE</small>
+              <h2 class="card-title m-0">EGP {{Post.price}}</h2>
+              <small class="card-text text-muted" *ngIf="Post.isNegotiable ">PRICE IS NEGOTIABLE</small>
             </div>
-            <div class="m-1">
-              <i Class='fa-regular fa-heart fa-lg'></i>
+            <div (click)="favorite(Post)" class="m-1">
+               <i [ngClass]="
+                  Fav ? 'fa-solid fa-heart fa-lg' : 'fa-regular fa-heart fa-lg'
+                "></i> 
             </div>
 
           </div>
 
           <div class="d-flex align-items-start my-4">
-            <p class="card-text">{{ Item.title }}</p>
+            <p class="card-text">{{ Post.title }}</p>
           </div>
 
           <p class="card-text d-flex justify-content-between">
-            <small class="text-muted">{{ Item.area + " , " + Item.city }}</small>
-            <small class="text-muted"> Post.createdAt </small>
+            <small class="text-muted">{{Post.cityName }}</small>
+            <small class="text-muted"> {{Post.createdAt}} </small>
           </p>
 
         </div>
@@ -104,14 +102,15 @@
           <div class="d-flex align-items-center">
             <img src="/assets/images/iconProfilePicture.png" alt="" width="80" height="80">
             <div class="mx-3">
-              <p class="card-text m-0">Post.fullName </p>
-              <small class="card-text text-muted">Member since ay 7aga</small>
+              <p class="card-text m-0">{{Post.fullName}} </p>
+              
             </div>
           </div>
 
           <div class="d-flex align-items-center justify-content-center my-2">
             <img src="/assets/images/telephone-call.png" class="mx-3" alt="" width="20" height="20">
-            <p class="card-text">Call the seller at 0123847532</p>
+            <p *ngIf="!show"class="card-text"> ** **** ***** <a class ='btn text-primary'(click)="showNumber()" > Show number</a></p>
+            <a *ngIf="show" href="tel:{{Post.phoneNumber}}">01202073302{{Post.phoneNumber}}</a>
           </div>
 
         </div>
