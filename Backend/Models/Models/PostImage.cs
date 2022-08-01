@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models.Models
 {
-    public class PostImage
+    public class PostImage : BaseModel
     {
         public int PostImageID { get; set; }
         public string ImageURL { get; set; }

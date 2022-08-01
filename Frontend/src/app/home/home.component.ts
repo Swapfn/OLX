@@ -1,8 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { map } from 'rxjs';
-import { AccountService } from '../_services/account.service';
 
 @Component({
   selector: 'app-home',
@@ -12,11 +9,9 @@ import { AccountService } from '../_services/account.service';
 export class HomeComponent implements OnInit {
   registerMode = false;
 
-  constructor(private accountService: AccountService, private route: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.navigate();
-
   }
 
   registerToggle() {
@@ -24,22 +19,9 @@ export class HomeComponent implements OnInit {
   }
 
 
-  cancelRegisterMode(event: boolean) {
+  cancelRegisterMode(event : boolean) {
     this.registerMode = event;
   }
-
-  navigate() {
-    if(localStorage.getItem("user")) {
-      this.route.navigateByUrl("/home");
-    }
-  }
-  // this.accountService.currentUser$.pipe(
-  //   map((user) => {
-  //     if (user) {
-  //       this.route.navigateByUrl("/home");
-  //     }
-  //   })
-  // )
 
 }
 

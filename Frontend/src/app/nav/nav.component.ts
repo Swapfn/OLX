@@ -1,13 +1,8 @@
-import { Component, OnInit, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
-import { Token } from '../_models/token';
 import { AccountService } from '../_services/account.service';
-import { PostService } from '../_services/post.service';
-import { Location } from '../_models/location';
-
-
 
 @Component({
   selector: 'app-nav',
@@ -16,33 +11,57 @@ import { Location } from '../_models/location';
 })
 export class NavComponent implements OnInit {
   model: any = {};
-  currentUser$: Observable<Token>;
+  loggedIn: boolean;
+  currentUser$: Observable<string>;
 
-  constructor(public postService:PostService, public accountService: AccountService, private router: Router, private toast: ToastrService) {
-    
-   }
+  constructor(public accountService: AccountService, private router: Router, private toast: ToastrService) { }
 
   ngOnInit(): void {
-
+    this.currentUser$ = this.accountService.currentUser$;
   }
 
   login() {
     this.accountService.login(this.model).subscribe({
-      next: () => {
-        this.toast.success(`Welcome ${this.model.username}`);
+      next: response => {
+        console.log(response);
+        this.loggedIn = true;
         this.router.navigateByUrl("/home");
       },
       error: error => {
         console.log(error);
-        this.toast.error(error.error.message);
+        this.toast.error(error.error);
       }
     })
   }
 
   logout() {
     this.accountService.logout();
+    this.loggedIn = false;
     this.router.navigateByUrl("/");
   }
+
+  getCurrentUser() {
+    this.accountService.currentUser$.subscribe({
+      next: response => {
+        this.loggedIn = !!response;
+      },
+      error: error => {
+        console.log(error);
+      }
+    })
+  }
+
+
+
+  //________________________________Search___________________________________________
+
+  searchValue:string="";
+
+  OnsearchText(){ 
+  }
+
+
+
 
 
 
