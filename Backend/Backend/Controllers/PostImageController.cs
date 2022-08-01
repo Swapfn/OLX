@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Models.DTO;
 using Services.Contracts;
 using System.Net.Http.Headers;
 
 namespace WepAPI.Controllers
 {
+    [Authorize]
     public class PostImageController : APIBaseController
     {
         private readonly IPostImageService _postimageService;
