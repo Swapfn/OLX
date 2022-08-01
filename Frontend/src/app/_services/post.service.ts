@@ -75,6 +75,10 @@ export class PostService {
     return this.http.post(this.baseUrl+'Posts',filter);
   }
 
+  updatePassword(model : any) {
+    return this.http.post(this.baseUrl+'account/changePassword',model);
+  }
+
 
   // Item:object;
 
