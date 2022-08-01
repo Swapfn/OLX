@@ -21,5 +21,6 @@ namespace Models.DTO
         public int minPrice { get; set; }
         public int maxPrice { get; set; }
         public int CategoryId { get; set; }
+        public List<PostImage>? PostImages { set; get; }
     }
 }
