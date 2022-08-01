@@ -18,6 +18,8 @@ namespace Models.DTO
         public string? SubCategoryName { set; get; }
         public string? CityName { set; get; }
         public string? FullName { set; get; }
+        public string? PhoneNumber { set; get; }
+        public string? AboutMe { set; get; }
         public int minPrice { get; set; }
         public int maxPrice { get; set; }
         public int CategoryId { get; set; }
