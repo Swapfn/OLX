@@ -75,11 +75,11 @@ namespace Services
         public string Validate(PostDTO postDTO)
         {
             string error = "";
-            if (!_locationService.LocationExists(postDTO.LocationId))
+            if (postDTO.LocationId != null && !_locationService.LocationExists(postDTO.LocationId.Value))
             {
                 error = "Location is required";
             }
-            if (!_subCategoryService.SubCategoryExists(postDTO.SubCategoryId))
+            if (postDTO.SubCategoryId != null && !_subCategoryService.SubCategoryExists(postDTO.SubCategoryId.Value))
             {
                 error = "SubCategory is required";
             }

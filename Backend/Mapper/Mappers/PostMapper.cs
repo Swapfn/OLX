@@ -17,9 +17,9 @@ namespace Mapper.Mappers
             post.IsNew = postDTO.IsNew;
             post.IsAvailable = postDTO.IsAvailable;
             post.IsNegotiable = postDTO.IsNegotiable;
-            post.SubCategoryId = postDTO.SubCategoryId;
-            post.UserID = postDTO.UserID;
-            post.LocationId = postDTO.LocationId;
+            post.SubCategoryId = postDTO.SubCategoryId == null ? 0 : postDTO.SubCategoryId.Value;
+            post.UserID = postDTO.UserID == null ? 0 : postDTO.UserID.Value;
+            post.LocationId = postDTO.LocationId == null ? 0 : postDTO.LocationId.Value;
             return post;
         }
 
