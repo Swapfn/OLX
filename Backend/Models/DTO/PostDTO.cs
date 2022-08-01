@@ -16,5 +16,9 @@ namespace Models.DTO
         public string? SubCategoryName { set; get; }
         public string? CityName { set; get; }
         public string? FullName { set; get; }
+        public int minPrice { get; set; }
+        public int maxPrice { get; set; }
+        public int CategoryId { get; set; }
+        public List<PostImage>? PostImages { set; get; }
     }
 }
