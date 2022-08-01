@@ -133,7 +133,7 @@ app.UseCors("AllowAllOrigins");
 
 app.UseStaticFiles(new StaticFileOptions
 {
-    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),@"Resorces")),
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resorces")),
     RequestPath = "/Resorces"
 });
 app.UseDirectoryBrowser(new DirectoryBrowserOptions

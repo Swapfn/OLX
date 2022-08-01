@@ -1,6 +1,5 @@
 ﻿using Mapper.Contracts;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Models.DTO;
 using Models.Models;
@@ -22,18 +21,7 @@ namespace WepAPI.Controllers
             _userService = userService;
         }
 
-        // GET Posts
-        //[Authorize]
-        //[HttpGet]
-        //[Route("{PageNumber}/{PageSize}/{SortBy}/{SortDirection}")]
-        //public IActionResult GetAll(int PageNumber, int PageSize, string SortBy, string SortDirection)
-        //{
-        //    PagedResult<PostDTO> postDTO = _postService.GetAll(PageNumber, PageSize, SortBy, SortDirection);
-        //    return Ok(postDTO);
-        //}
-
         // GET Posts/1
-        [Authorize]
         [HttpGet]
         [Route("{id}")]
         public IActionResult GetById(int id)
@@ -48,7 +36,6 @@ namespace WepAPI.Controllers
         }
 
         // POST Posts
-        [Authorize]
         [HttpPost]
         [Route("add")]
         public IActionResult Add(PostDTO postDTO)
@@ -74,10 +61,9 @@ namespace WepAPI.Controllers
         }
 
         // PUT Posts/1
-        [Authorize]
         [HttpPut]
         [Route("{id}")]
-        public IActionResult Update(int id, PostDTO postDTO)
+        public async Task<IActionResult> Update(int id, PostDTO postDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -87,6 +73,13 @@ namespace WepAPI.Controllers
             if (id != postDTO.PostId)
             {
                 return BadRequest();
+            }
+
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            var user = await _userService.GetUserByIdAsync(identity);
+            if (user.Id != postDTO.UserID)
+            {
+                return Unauthorized();
             }
 
             if (!_postService.PostExists(id))
@@ -101,20 +94,29 @@ namespace WepAPI.Controllers
         }
 
         // DELETE Posts/1
-        [Authorize]
         [HttpDelete]
         [Route("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (!_postService.PostExists(id))
             {
                 return NotFound();
+            }
+            PostDTO post = _postService.GetById(id);
+
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            var user = await _userService.GetUserByIdAsync(identity);
+
+            if (user.Id != post.UserID)
+            {
+                return Unauthorized();
             }
 
             _postService.Delete(id);
             _postService.SavePost();
             return Ok("Post deleted");
         }
+
         [HttpPost]
         [Route("")]
         public IActionResult GetAll(FilterDTO<PostDTO> filterObject)
