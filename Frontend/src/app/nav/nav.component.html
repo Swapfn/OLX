@@ -43,9 +43,9 @@
             <div class="d-flex align-items-center ">
                 <form #loginForm="ngForm" class="d-flex mx-5" (ngSubmit)="login()" autocomplete="off">
                     <input required name="username" [(ngModel)]="model.username" class="form-control me-2" type="text"
-                        placeholder="Username">
+                        placeholder="Username" id="username">
                     <input required name="password" [(ngModel)]="model.password" class="form-control me-2" type="password"
-                        placeholder="Password">
+                        placeholder="Password" id="password">
                     <button [disabled]="loginForm.invalid" class="btn btn-outline-dark" type="submit">Login</button>
 
                 </form>
@@ -107,7 +107,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" routerLink="/profile">Edit Profile</a></li>
-                        <li><a class="dropdown-item" routerLink="/MyPosts">My Posts</a></li>
+                        <li><a class="dropdown-item" routerLink="/MyPosts">My Ads</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
