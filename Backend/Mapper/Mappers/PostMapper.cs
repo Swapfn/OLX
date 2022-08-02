@@ -15,9 +15,11 @@ namespace Mapper.Mappers
             post.CreatedAt = postDTO.CreatedAt;
             post.Price = postDTO.Price;
             post.IsNew = postDTO.IsNew;
-            post.SubCategoryId = postDTO.SubCategoryId;
-            post.UserID = postDTO.UserID;
-            post.LocationId = postDTO.LocationId;
+            post.IsAvailable = postDTO.IsAvailable;
+            post.IsNegotiable = postDTO.IsNegotiable;
+            post.SubCategoryId = postDTO.SubCategoryId == null ? 0 : postDTO.SubCategoryId.Value;
+            post.UserID = postDTO.UserID == null ? 0 : postDTO.UserID.Value;
+            post.LocationId = postDTO.LocationId == null ? 0 : postDTO.LocationId.Value;
             return post;
         }
 
@@ -30,6 +32,8 @@ namespace Mapper.Mappers
             postDTO.CreatedAt = post.CreatedAt;
             postDTO.Price = post.Price;
             postDTO.IsNew = post.IsNew;
+            postDTO.IsAvailable = post.IsAvailable;
+            postDTO.IsNegotiable = post.IsNegotiable;
             postDTO.SubCategoryId = post.SubCategoryId;
             postDTO.UserID = post.UserID;
             postDTO.LocationId = post.LocationId;
@@ -38,7 +42,11 @@ namespace Mapper.Mappers
                 postDTO.SubCategoryName = post.SubCategory.SubCategoryName;
 
             if (post.User != null)
+            {
                 postDTO.FullName = post.User.FName + ' ' + post.User.LName;
+                postDTO.PhoneNumber = post.User.PhoneNumber;
+                postDTO.AboutMe = post.User.AboutMe;
+            }
 
             if (post.Location != null)
                 postDTO.CityName = post.Location.CityName;

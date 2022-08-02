@@ -1,6 +1,5 @@
 ﻿using Mapper.Contracts;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Models.DTO;
 using Models.Models;
@@ -10,26 +9,16 @@ using System.Security.Claims;
 
 namespace WepAPI.Controllers
 {
+    [Authorize]
     public class PostsController : APIBaseController
     {
         private readonly IPostService _postService;
         private readonly IUserService _userService;
-        private readonly UserManager<ApplicationUser> _userManager;
 
-        public PostsController(IPostService postService, IUserService userService, UserManager<ApplicationUser> userManager)
+        public PostsController(IPostService postService, IUserService userService)
         {
             _postService = postService;
             _userService = userService;
-            _userManager = userManager;
-        }
-
-        // GET Posts
-        [HttpGet]
-        [Route("{PageNumber}/{PageSize}/{SortBy}/{SortDirection}")]
-        public IActionResult GetAll(int PageNumber, int PageSize, string SortBy, string SortDirection)
-        {
-            PagedResult<PostDTO> postDTO = _postService.GetAll(PageNumber, PageSize, SortBy, SortDirection);
-            return Ok(postDTO);
         }
 
         // GET Posts/1
@@ -47,9 +36,8 @@ namespace WepAPI.Controllers
         }
 
         // POST Posts
-        [Authorize]
         [HttpPost]
-        [Route("")]
+        [Route("add")]
         public IActionResult Add(PostDTO postDTO)
         {
             if (!ModelState.IsValid)
@@ -64,7 +52,7 @@ namespace WepAPI.Controllers
             }
 
             ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
-            Task<ApplicationUser> user = _userService.GetUserByIdAsync(identity, _userManager);
+            Task<ApplicationUser> user = _userService.GetUserByIdAsync(identity);
             postDTO.UserID = user.Result.Id;
 
             PostDTO result = _postService.Add(postDTO);
@@ -75,7 +63,7 @@ namespace WepAPI.Controllers
         // PUT Posts/1
         [HttpPut]
         [Route("{id}")]
-        public IActionResult Update(int id, PostDTO postDTO)
+        public async Task<IActionResult> Update(int id, PostDTO postDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -85,6 +73,13 @@ namespace WepAPI.Controllers
             if (id != postDTO.PostId)
             {
                 return BadRequest();
+            }
+
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            var user = await _userService.GetUserByIdAsync(identity);
+            if (user.Id != postDTO.UserID)
+            {
+                return Unauthorized();
             }
 
             if (!_postService.PostExists(id))
@@ -101,22 +96,37 @@ namespace WepAPI.Controllers
         // DELETE Posts/1
         [HttpDelete]
         [Route("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (!_postService.PostExists(id))
             {
                 return NotFound();
+            }
+            PostDTO post = _postService.GetById(id);
+
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            var user = await _userService.GetUserByIdAsync(identity);
+
+            if (user.Id != post.UserID)
+            {
+                return Unauthorized();
             }
 
             _postService.Delete(id);
             _postService.SavePost();
             return Ok("Post deleted");
         }
+
         [HttpPost]
-        [Route("filter")]
-        public IActionResult GetAll(FilterDTO filterObject)
+        [Route("")]
+        public IActionResult GetAll(FilterDTO<PostDTO> filterObject)
         {
-            IEnumerable<PostDTO> postDTO = _postService.GetAll(filterObject);
+            PagedResult<PostDTO> postDTO = _postService.GetAll(filterObject);
+            //if no search is applied
+            if (filterObject.SearchObject == null)
+            {
+                filterObject.SearchObject = new PostDTO();
+            }
             return Ok(postDTO);
         }
     }

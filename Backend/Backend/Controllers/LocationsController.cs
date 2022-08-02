@@ -1,4 +1,5 @@
 ﻿using Mapper.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.DTO;
@@ -6,6 +7,7 @@ using Services;
 
 namespace WepAPI.Controllers
 {
+    [Authorize]
     public class LocationsController : APIBaseController
     {
         private readonly ILocationService _locationService;
