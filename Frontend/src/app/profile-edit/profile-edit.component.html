@@ -29,7 +29,7 @@
                         <h6 style="font-size: 12px;font-weight: 400;" class="mt-3">Last Name</h6>
                         <input name="lastName" [(ngModel)]="model.lastName" value="model.lastName"
                             placeholder="Last Name" style="width: 500px;height: 50px;color: black;" type="text">
-                        <textarea  name="aboutMe" class="mt-4"
+                        <textarea name="aboutMe" class="mt-4"
                             style="height: 150px;width: 500px;color: black;resize: none;" [(ngModel)]="model.aboutMe"
                             [ngModelOptions]="{standalone: true}" maxlength="200"
                             placeholder="About Me(optional)"></textarea>
@@ -68,8 +68,7 @@
             <div>
                 <a routerLink="/home" style="color: black;font-weight: 600;"
                     class="text-decoration-underline">Discard</a>
-                <button type="submit" class="btn btn-dark mb-4"
-                    style="float: right;height: 50px;font-weight: 500;">Save
+                <button type="submit" class="btn btn-dark mb-4" style="float: right;height: 50px;font-weight: 500;">Save
                     changes</button>
             </div>
         </form>
@@ -79,13 +78,36 @@
         <h5 class="m-3 fw-bolder">Do you want to change your password?</h5>
         <hr class="mx-3">
         <div class="d-flex flex-column mx-3">
-            <input [(ngModel)]="changeModel.currentPassword" name="currentPassword" placeholder="Old Password" style="height: 50px;color: black;width: 500px;" type="password">
-            <input [(ngModel)]="changeModel.newPassword" name="newPassword" placeholder="New Password" style="height: 50px;color: black;margin-top: 6px;width: 500px;"
-                type="password">
-            <input [(ngModel)]="changeModel.confirmNewPassword" name="confirmNewPassword" placeholder="Confirm Password" style="height: 50px;color: black;margin-top: 6px;width: 500px;"
-                type="password">
+            <div class="form-group">
+                <input class="form-control" required [(ngModel)]="changeModel.currentPassword" name="currentPassword"
+                    placeholder="Old Password" #old="ngModel" style="height: 50px;color: black;width: 500px;"
+                    type="password">
+            </div>
+            <div class="mt-1" *ngIf="(old.touched)&&(old.errors)">
+                <h6 style="color: red;font-size: small;">Please enter the old password</h6>
+            </div>
+
+            <div class="form-group">
+                <input class="form-control" required [(ngModel)]="changeModel.newPassword" name="newPassword"
+                    placeholder="New Password" #new="ngModel"
+                    style="height: 50px;color: black;margin-top: 6px;width: 500px;" type="password" minlength="6">
+            </div>
+            <div class="mt-1" *ngIf="(new.touched)&&(new.errors)">
+                <h6 style="color: red;font-size: small;">Minimum password length is 6 characters</h6>
+            </div>
+
+            <div class="form-group">
+                <input class="form-control" (keyup)="compare()" required [(ngModel)]="changeModel.confirmNewPassword"
+                    name="confirmNewPassword" placeholder="Confirm Password" #confirms="ngModel"
+                    style="height: 50px;color: black;margin-top: 6px;width: 500px;" type="password">
+            </div>
+            <div class="mt-1">
+                <h6 *ngIf="!confirm && confirms.touched" style="color: red;font-size: small;">Confirm password should be
+                    same as new password</h6>
+            </div>
         </div>
-        <button class="btn btn-dark mb-4 mx-3 mt-4" style="height: 50px;font-weight: 500;">Change Password</button>
+        <button [disabled]="PasswordForm.invalid || !confirm" class="btn btn-dark mb-4 mx-3 mt-4"
+            style="height: 50px;font-weight: 500;">Change Password</button>
     </form>
 
     <div style="width: 1000px;" class="container border mt-3">
@@ -102,7 +124,8 @@
                 </button>
             </div>
             <div style="text-align: center;" class="modal-body">
-                <button (click)="delete()" class="btn btn-dark mb-4" style="height: 50px;font-weight: 500;">No, Delete</button>
+                <button (click)="delete()" class="btn btn-dark mb-4" style="height: 50px;font-weight: 500;">No,
+                    Delete</button>
             </div>
         </ng-template>
     </div>

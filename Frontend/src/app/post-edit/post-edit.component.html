@@ -1,4 +1,4 @@
-<div style="margin-left: 150px;margin-right: 150px;" class="alert alert-info" *ngIf="PostEditForm.dirty">
+<div style="margin-left: 410px;width: 700px;" class="alert alert-info" *ngIf="PostEditForm.dirty">
     <strong>Information: </strong>You have made changes, any unsaved changes will be lost!
 </div>
 <div style="width: 700px;" class="container border mt-3">
@@ -8,7 +8,10 @@
         <div class="d-inline-flex flex-row">
             <div class="d-inline-flex flex-column">
                 <div>
-                    <h6 style="font-size: 12px;font-weight: 400;">Price</h6>
+                    <h6 style="font-size: 12px;font-weight: 400;">Ad Title</h6>
+                    <input disabled name="title" [(ngModel)]="model.title" value="model.title" placeholder="Ad Title"
+                        style="width: 500px;height: 50px;color: black;" type="text">
+                    <h6 class="mt-2" style="font-size: 12px;font-weight: 400;">Price</h6>
                     <input required name="price" [(ngModel)]="model.price" value="model.price" placeholder="Price (EGP)"
                         style="width: 500px;height: 50px;color: black;" type="text">
 
@@ -26,33 +29,20 @@
 
                     <textarea required name="description" class="mt-5"
                         style="height: 150px;width: 500px;color: black;resize: none;" [(ngModel)]="model.description"
-                        maxlength="200" placeholder="Description"></textarea>
+                        maxlength="4096" placeholder="Description"></textarea>
                 </div>
                 <div style="font-size: 12px;margin-left: 490px;" class="fw-lighter">
                     <span>{{model.description.length}}</span>
-                    <span>/200</span>
+                    <span>/4096</span>
                 </div>
             </div>
             <hr>
         </div>
-        <!-- <hr style="margin-top: 50px;">
 
-        <div style="margin-bottom: 60px;">
-            <h6 class="fw-bolder">Contact Infromation</h6>
-            <input name="phone" value="model.phone" [(ngModel)]="model.phone" class="me-3"
-                style="width: 500px;height: 50px;color: black;margin-bottom: 30px;" type="text"
-                placeholder="    Phone Number: 01XXXXXXXXX">
-            <label style="font-size: 12px;font-weight: 400;opacity: 60%;">This is the number for buyers contacts,
-                reminders, and other notifications.</label>
-            <input name="email" value="model.email" [(ngModel)]="model.email" class="me-3"
-                style="width: 500px;height: 50px;color: black;" type="email" placeholder="    Your_email@xxx.xxx">
-            <label style="font-size: 12px;font-weight: 400;opacity: 60%;">We won't reveal your email to anyone else
-                nor use it to send you spam</label>
-        </div> -->
         <hr class="mx-1">
         <div class="d-flex justify-content-between">
             <a routerLink="/MyPosts" style="color: black;font-weight: 600;" class="text-decoration-underline">Discard</a>
-            <button [disabled]="PostEditForm.invalid" type="submit" class="btn btn-dark mb-4" style="height: 50px;font-weight: 500;">Save
+            <button (click)="updatePost()"  type="submit" class="btn btn-dark mb-4" style="height: 50px;font-weight: 500;">Save
                 changes</button>
         </div>
     </form>
@@ -66,13 +56,13 @@
         Delete</button>
     <ng-template #template>
         <div class="modal-header">
-            <h4 class="modal-title pull-left">There is still time to think!</h4>
+            <h4 class="modal-title pull-left">Are you sure?</h4>
             <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
                 <span aria-hidden="true" class="visually-hidden">&times;</span>
             </button>
         </div>
         <div style="text-align: center;" class="modal-body">
-            <button  class="btn btn-dark mb-4" style="height: 50px;font-weight: 500;">No, Delete</button>
+            <button (click)="deletePost()" class="btn btn-dark mb-4" style="height: 50px;font-weight: 500;">Yes, Delete</button>
         </div>
     </ng-template>
 </div>
