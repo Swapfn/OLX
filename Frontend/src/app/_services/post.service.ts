@@ -62,6 +62,10 @@ export class PostService {
     return this.http.put(this.baseUrl + "posts/"+postId,model);
   }
 
+  getSubcategoryByCategoryId(id:string){
+    return this.http.get<SubCategory[]>(this.baseUrl+"SubCategories/getByCategoryId/"+id);
+  }
+
 
 
   //  Item:object;
