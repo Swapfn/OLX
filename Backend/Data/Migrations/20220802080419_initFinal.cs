@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
 {
-    public partial class init : Migration
+    public partial class initFinal : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -270,8 +270,8 @@ namespace Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "c11186c3-085c-495a-8142-0c52c2ecbf4d", "Admin", "ADMIN" },
-                    { 2, "0981403a-720a-47d8-aaa2-30524f07db55", "User", "USER" }
+                    { 1, "e589c1bb-5248-484e-a695-1587e49017d8", "Admin", "ADMIN" },
+                    { 2, "1194d145-e20f-4c51-9eb8-fa7fb0f2842b", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -279,18 +279,18 @@ namespace Data.Migrations
                 columns: new[] { "Id", "AboutMe", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FName", "LName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, null, 0, "08de9818-2acf-41c1-805a-07a51133d023", "Admin@admin.com", false, "Admin", "Admin", false, null, "ADMIN@ADMIN.COM", "ADMIN", "AQAAAAEAACcQAAAAENdwDQlZvlKmicfr/AO1QXvJZ0exTqM3mepLM6P1ioOFokvQo0GLMvKkRWxoJ6aizA==", null, false, "7dbec274-03e6-4f04-9afc-9d783d41847b", false, "Admin" },
-                    { 2, null, 0, "45f2c2c1-5ef7-447f-8c90-88efad598a2f", "User@user.com", false, "User", "1", false, null, "USER@USER.COM", "USER1", "AQAAAAEAACcQAAAAEH3fxgoh9fZX381vOggIIRabLm/hpI2bro2UrDKnHgWEaJTjzyLYX3kvHJB1Ry8PoQ==", null, false, "a2e35bb5-6a34-4359-bff4-50059250b534", false, "User1" },
-                    { 3, null, 0, "44b467ce-81e7-4038-9241-6d3793c6de89", "User@user.com", false, "User", "2", false, null, "USER@USER.COM", "USER2", "AQAAAAEAACcQAAAAEI8Gabuw67AmE1BVq1JMiCHEqe8lJPj0YRWvFPuvFshzsSvRGoXvw3ZjT2FDeizd5Q==", null, false, "04b73c06-187f-4af1-8c52-dc658e1467a0", false, "User2" },
-                    { 4, null, 0, "0c273959-cf72-4316-b51c-3d9592c92f5b", "User@user.com", false, "User", "3", false, null, "USER@USER.COM", "USER3", "AQAAAAEAACcQAAAAEJGtFjvBe+pZlJp6Xsu/PEJnsw7SL9vrgs4kSiqJjok/56jumiV5PRzdPbgB8iEtng==", null, false, "44db45e9-8d90-48a3-9c1b-298cae622f36", false, "User3" },
-                    { 5, null, 0, "0d85b667-7098-4953-8b08-48d2e8d92616", "User@user.com", false, "User", "4", false, null, "USER@USER.COM", "USER4", "AQAAAAEAACcQAAAAEFHlNhALJAxaHVls7xOX8M7ugTUwl2iKhwGomyfhI2F36N5nx/Ro7p2b9HORNXuXcA==", null, false, "02c1d239-439b-46de-8cd3-708d2297aa5e", false, "User4" },
-                    { 6, null, 0, "72416e75-75f1-4712-bf13-45d06c1e0b3a", "User@user.com", false, "User", "5", false, null, "USER@USER.COM", "USER5", "AQAAAAEAACcQAAAAEDdbs6NaG7gcZ0YX9KXbnKBTUeZ8zmI+7k1AWgAO6H4AM6An//sunbMqcsMgZ5VV9w==", null, false, "3d170451-702c-42cb-acc5-a2ac0f515475", false, "User5" },
-                    { 7, null, 0, "fc3aae72-91d7-45a5-89c4-e1139d9dedf2", "User@user.com", false, "User", "6", false, null, "USER@USER.COM", "USER6", "AQAAAAEAACcQAAAAEDeyZ0VbOwnRaKT9REfgs0fWRs9TpLILTFAg33bQkO2nRNDou3CnR3K4Prea9tboqw==", null, false, "4bbf7c7f-9a2a-4af5-8e21-afe4a34db544", false, "User6" },
-                    { 8, null, 0, "c70518da-3f7e-4ea0-a69d-92510963fcd3", "User@user.com", false, "User", "7", false, null, "USER@USER.COM", "USER7", "AQAAAAEAACcQAAAAEPRCyqmZk2dmByrh9B1JSU/7FEwlBQtOteBxxtZfkTe4lGnZijt+XoRzgIv2sIxwbg==", null, false, "9b9183fd-ad76-41c6-bdf5-a37605c0730b", false, "User7" },
-                    { 9, null, 0, "530a2b6a-3777-4a39-bbaf-c64d0945eec0", "User@user.com", false, "User", "8", false, null, "USER@USER.COM", "USER8", "AQAAAAEAACcQAAAAEBFvBG2RmmIDzs1+G52rT7nUmwISheoUeC8ZKtFsZYWg+5D1AHtDV+BGprmOCADovw==", null, false, "affcf2c2-320f-44bc-ae04-dcf0dda3c5a8", false, "User8" },
-                    { 10, null, 0, "c906fa33-c7b6-4894-82f3-03c879414690", "User@user.com", false, "User", "9", false, null, "USER@USER.COM", "USER9", "AQAAAAEAACcQAAAAEMGz9VDVQRdXAAWd2NusMqwA9IG0gLHGkJru461xh0mpxPTPMDdnUtiSNAxqx3f0nA==", null, false, "499953bd-ea13-4aca-b037-5279b6c0c9e0", false, "User9" },
-                    { 11, null, 0, "6ea87cb5-f021-42a7-8b5a-24577ffe8615", "User@user.com", false, "User", "10", false, null, "USER@USER.COM", "USER10", "AQAAAAEAACcQAAAAEAnZvCuF9H89KkKqqhwqFNCaFqKVB9+oFWsuQPEYN9/i75RRAsUK3E8mztQ724Oo9w==", null, false, "015edbc9-4207-45c0-a804-2526c7f75974", false, "User10" },
-                    { 12, null, 0, "457eda89-4108-495d-a54b-d5c5112bdff6", "User@user.com", false, "User", "11", false, null, "USER@USER.COM", "USER11", "AQAAAAEAACcQAAAAENNQGayvdzaMbVwGdu4ra13XcK/oESKlDWUcn1zuOL6YMgZ1Eb1IR4LzhfevuP6XSA==", null, false, "596f303a-240d-41e1-8a4c-920901b3213c", false, "User11" }
+                    { 1, null, 0, "9b222408-5c99-400e-8e94-9b1658050beb", "Admin@admin.com", false, "Admin", "Admin", false, null, "ADMIN@ADMIN.COM", "ADMIN", "AQAAAAEAACcQAAAAEBjh4RUDhGuiMBGFU+kpJSAi/yT2yn5Z6+KsP0s6w3HOR3b0V8ayGHA0cv5ZOdYeyQ==", "01234567891", false, "d2a70803-8596-4697-a021-043ef30a7c67", false, "Admin" },
+                    { 2, null, 0, "48e132e3-021f-466c-aa6f-7c64447d84cb", "User@user.com", false, "User", "1", false, null, "USER@USER.COM", "USER1", "AQAAAAEAACcQAAAAEE9udvUCpYy537JCSCYTFm0g3+iIp+5LRpLkDre1Y033qoby0BT0cj46kXjkcaUW8g==", "01234567891", false, "9fecd57c-1228-48ba-9013-655fcd5f5a53", false, "User1" },
+                    { 3, null, 0, "2b2adcc6-6a66-447a-b842-6a24dc16ce7b", "User@user.com", false, "User", "2", false, null, "USER@USER.COM", "USER2", "AQAAAAEAACcQAAAAEFcpNXUNfeaAQYC33ECACLpPLbpzkMVmoPl99V6ZsM7qudrGpsog3ERhJn+/6A5spw==", "01234567891", false, "3298af63-3471-4ef2-af76-6a0caea78d6b", false, "User2" },
+                    { 4, null, 0, "755083be-b93a-4a45-a75f-c8f91406a6f0", "User@user.com", false, "User", "3", false, null, "USER@USER.COM", "USER3", "AQAAAAEAACcQAAAAEDs7Vzpe6uVbBV+dq3AOQWAPd8dez8nq3CoymcKUFPfAMrBpQ4YqJWVp3syFHP56JQ==", "01234567891", false, "1c172214-79e4-4368-b98e-60ed9d7d36d6", false, "User3" },
+                    { 5, null, 0, "6519711d-363e-4b7b-80f3-27d5705eabed", "User@user.com", false, "User", "4", false, null, "USER@USER.COM", "USER4", "AQAAAAEAACcQAAAAEKNJzCTBS9ZlQe5xqYnjJHoyUuyo5J08G91c4sQ5cv5H+jgo7qP45UeQvpEUG93fKw==", "01234567891", false, "5052bc64-e5c0-4a42-ac32-8d6bc8a7596b", false, "User4" },
+                    { 6, null, 0, "aa66a69a-d247-42be-81e7-526e981a44ca", "User@user.com", false, "User", "5", false, null, "USER@USER.COM", "USER5", "AQAAAAEAACcQAAAAEBylH4py/SQ+JfYMsthKjTK3jizDJYxKpyeknZ2mVHK83HvA6fqFDAaTKh/xYWBWCw==", "01234567891", false, "ae6d109e-2c90-4c83-b0fe-c0158b7c6c25", false, "User5" },
+                    { 7, null, 0, "9c7626bc-2576-407a-9c94-54167142ed90", "User@user.com", false, "User", "6", false, null, "USER@USER.COM", "USER6", "AQAAAAEAACcQAAAAEBMguJVdQWYHYdfnhTAS00zGefADyHThxsx7lAOnoGflaamHcM7cJkwAO4ZoCqMumQ==", "01234567891", false, "5e550e7d-5c68-4150-a4c0-5a913de37b63", false, "User6" },
+                    { 8, null, 0, "5041f17a-699c-40b7-a95b-96ac9b931d56", "User@user.com", false, "User", "7", false, null, "USER@USER.COM", "USER7", "AQAAAAEAACcQAAAAEPL5SXi/T/B4HrB1UjDShhUbtaEJM/KGjkfcd2g2dW1X+zQ1sru405lnyHuVYqCNqw==", "01234567891", false, "c86847d4-8742-43a7-8f97-c22722b7ae56", false, "User7" },
+                    { 9, null, 0, "76b94212-bbd4-4a9e-9371-135b97c1f09d", "User@user.com", false, "User", "8", false, null, "USER@USER.COM", "USER8", "AQAAAAEAACcQAAAAEMjjqTm7avtOCR3En1r8tDkF5k7r7oOqQF3VYCvbF85iK9WAy5cY7DrYep78DcadEw==", "01234567891", false, "0eafa0a0-c696-4cc5-b3e8-3b95db1a223a", false, "User8" },
+                    { 10, null, 0, "41c6597b-fcd3-4fde-8d04-303e11f17030", "User@user.com", false, "User", "9", false, null, "USER@USER.COM", "USER9", "AQAAAAEAACcQAAAAELEsuU4XPgJ6Rid2gL+R1bt+VrE4QKBT4w6BX9I4uKr/l9/biM8qAzFV1hBaaTMZPg==", "01234567891", false, "4d0b18a8-1566-4aa4-95b5-bf5e0ef70ef7", false, "User9" },
+                    { 11, null, 0, "dad3054f-3ca6-4c43-a298-84537b803049", "User@user.com", false, "User", "10", false, null, "USER@USER.COM", "USER10", "AQAAAAEAACcQAAAAEJYpkH3DBJwqfEjXGCb6aKZ39d4Fv6ecDMTUOavdy9l3PQoCnH7Au6GkhN1wqQYT4g==", "01234567891", false, "4eca306b-5176-4dc7-aa05-c4ac91fad169", false, "User10" },
+                    { 12, null, 0, "65a6e4e0-0072-4032-a3cd-3180c1fa3d76", "User@user.com", false, "User", "11", false, null, "USER@USER.COM", "USER11", "AQAAAAEAACcQAAAAEB5MNDNhY6YVPJACY72HbqsMnL2zUWyMpnq6t2n+nXGfJi4CPkqVZGxorlP2070e3Q==", "01234567891", false, "fa78c0b4-8395-4b72-b5fe-7c905922f90a", false, "User11" }
                 });
 
             migrationBuilder.InsertData(
