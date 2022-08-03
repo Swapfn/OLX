@@ -50,7 +50,9 @@ export class AddPostComponent implements OnInit {
   baseUrl = environment.apiUrl;
   token: string;
   categories: Category[];
-  subcategories: SubCategory[];
+  subcategories: SubCategory[] =[{categoryID: null,
+    subCategoryID: null,
+    subCategoryName:''}];
   locations: Location[];
   category1: Category={
     categoryID: null,
@@ -76,29 +78,6 @@ export class AddPostComponent implements OnInit {
     this.hasBaseDropzoneOver = e;
   }
 
-  // initializeUploader() {
-  //   this.uploader = new FileUploader({
-  //     url: this.baseUrl + 'EndpointBta3hom',
-  //     authToken: "Bearer "+ this.token,
-  //     isHTML5: true,
-  //     allowedFileType: ['image'],
-  //     removeAfterUpload: true,
-  //     autoUpload: false,
-  //     maxFileSize: 10*1024*1024
-  //   });
-
-  //   this.uploader.onAfterAddingFile = (file) => {
-  //     file.withCredentials = false;
-  //   }
-
-  //   this.uploader.onSuccessItem = (item , response , statues , headers) => {
-  //     if(response) {
-  //       const photo = JSON.parse(response);
-  //       this.post.photos.push(photo);
-  //     }
-  //   }
-  // }
-
   getCategories() {
     this.postService.getCategories().subscribe(categories => this.categories=categories);
   }
@@ -106,6 +85,10 @@ export class AddPostComponent implements OnInit {
   getCategoryByID() {
     this.postService.getCategoryById(this.post.categoryId.toString()).subscribe(category => this.category1=category);
     console.log(this.post.categoryId);
+  }
+
+  getSubCategoryByCategoryId() {
+    this.postService.getSubcategoryByCategoryId(this.post.categoryId.toString()).subscribe((subcategories: SubCategory[])=>this.subcategories=subcategories);
   }
 
   getLocations() {

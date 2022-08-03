@@ -35,7 +35,7 @@ export class PostService {
   }
 
   getSubcategoryById(id:number){
-    return this.http.get<SubCategory>(this.baseUrl+"/SubCategories"+id);
+    return this.http.get<SubCategory>(this.baseUrl+"/SubCategories/"+id);
   }
 
   getLocations() {
@@ -52,6 +52,18 @@ export class PostService {
 
   getMyUnvailabaleAds() {
     return this.http.get<Post[]>(this.baseUrl + "getunavailableposts/");
+  }
+
+  deletePost(postId: number) {
+    return this.http.delete(this.baseUrl + "posts/"+postId);
+  }
+
+  updatePost(postId: number, model:Post) {
+    return this.http.put(this.baseUrl + "posts/"+postId,model);
+  }
+
+  getSubcategoryByCategoryId(id:string){
+    return this.http.get<SubCategory[]>(this.baseUrl+"SubCategories/getByCategoryId/"+id);
   }
 
 

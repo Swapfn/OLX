@@ -24,6 +24,8 @@ export class ProfileEditComponent implements OnInit {
     confirmPassword: ''
   };  //The model containing data to be edited
   modalRef?: BsModalRef; //for the ngx-bootstrap modal
+  confirm : boolean;
+
   constructor(private modalService: BsModalService, private router: Router, private accountService: AccountService, private toast: ToastrService, private postService: PostService) {
     //this.accountService.currentUser$.pipe(take(1)).subscribe(token => this.Token=token);
   }
@@ -85,10 +87,18 @@ export class ProfileEditComponent implements OnInit {
         // this.cancel();
       },
       error: error => {
-        // this.toast.error(error.error.title);
-        // console.log(error);
+        this.toast.error("Enter the correct old password");
       }
     })
+  }
+
+  compare() {
+    if(this.changeModel.newPassword==this.changeModel.confirmNewPassword) {
+      this.confirm= true;
+    }
+    else {
+      this.confirm= false;
+    }
   }
 }
 

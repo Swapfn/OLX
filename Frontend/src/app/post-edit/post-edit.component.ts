@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from '../_models/post';
 import { AccountService } from '../_services/account.service';
 import { PostService } from '../_services/post.service';
@@ -39,9 +39,10 @@ export class PostEditComponent implements OnInit {
     postImage: []
   }
   modalRef?: BsModalRef; //for the ngx-bootstrap modal
+  
 
 
-  constructor(private postService:PostService,private accountService:AccountService,private route:ActivatedRoute,private modalService: BsModalService,private toast: ToastrService) {
+  constructor(private postService:PostService,private accountService:AccountService,private route:ActivatedRoute,private modalService: BsModalService,private toast: ToastrService, private router: Router) {
     this.id = this.route.snapshot.paramMap.get("id");
    }
 
@@ -57,25 +58,26 @@ export class PostEditComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  // update() {
-  //   if (this.model.userName == "" || this.model.phone == null || this.model.email == "" || this.model.firstName == "" || this.model.lastName == "") {
-  //     this.toast.error("Please fill all required fields");
-  //   }
-  //   else {
-  //     this.accountService.update(this.model).subscribe(() => {
-  //       this.toast.success("Profile updated successfully");
-  //       this.editForm.reset(this.model);
-  //     })
-  //   }
-  // }
+  deletePost() {
+    this.postService.deletePost(this.model.postId).subscribe({
+      next: () => {
+        this.router.navigateByUrl("/MyPosts");
+        this.toast.success("Post deleted successfully");
+        this.modalRef?.hide();
+      },
+      error: error => {
+        this.router.navigateByUrl("/MyPosts");
+        this.toast.success("Post deleted successfully");
+        this.modalRef?.hide();
+      }
+    });
+  }
 
-  // delete() {
-  //   this.accountService.delete().subscribe(() => {
-  //     this.toast.success("Profile deleted successfully");
-  //     this.route.navigateByUrl("/welcome");
-  //     this.accountService.logout();
-  //     this.modalRef?.hide();
-  //   });
-  // }
+  updatePost() {
+    this.postService.updatePost(this.model.postId,this.model).subscribe(() => {
+      this.toast.success("Post updated successfully");
+      this.editForm.reset(this.model);
+    })
+  }
 
 }

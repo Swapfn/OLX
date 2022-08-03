@@ -9,7 +9,7 @@ import { PostService } from '../_services/post.service';
   styleUrls: ['./my-posts.component.css']
 })
 export class MyPostsComponent implements OnInit {
-  available: boolean;
+  available: boolean=true;
   unavailable: boolean;
   AvailablePosts: Post[]= [];
   UnvailablePosts: Post[]= [];
