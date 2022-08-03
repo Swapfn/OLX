@@ -34,9 +34,15 @@ export class PostDetailsComponent implements OnInit {
     return `https://localhost:44355/${serverPath}`; 
   }
 
+  calculatePostDays(createdAt){
 
-
-
+    let Today = new Date();
+    let mydate=new Date(createdAt);
+    let difference = Today.getTime() - mydate.getTime();
+    let TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
+    return TotalDays;
+ 
+   }
 
   show:boolean=false
   showNumber(){
