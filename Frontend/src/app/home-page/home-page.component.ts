@@ -60,7 +60,6 @@ export class HomePageComponent implements OnInit {
    let mydate=new Date(createdAt);
    let difference = Today.getTime() - mydate.getTime();
    let TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
-   console.log(TotalDays);
    return TotalDays;
 
   }
