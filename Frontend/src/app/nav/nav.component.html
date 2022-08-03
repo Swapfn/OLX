@@ -66,39 +66,18 @@
 
 <div *ngIf="(accountService.currentUser$ | async)">
 
-    <nav class="navbar  navbar-expand-lg bg-light">
+    <nav class="navbar navbar-expand-lg bg-light">
 
-        <div class="container-fluid  mx-5">
+        <div class="container mx-lg-5 px-lg-5">
 
             <a class="navbar-brand d-flex align-bottom" routerLink="/home">
                 <img src="/assets/images/OLX-Symbol.png" alt="" width="48" height="26">
                 <p class="clone m-1 pt-1">Clone</p>
             </a>
 
-            <div style="width:32rem ;"></div>
 
-            <!-- <div class="d-flex">
-                <div class="location">
-                    <select class="form-select input-group mx-2" aria-label="Default select example"
-                        [(ngModel)]="locationSelectedValue" (change)="onlocationSelect($event.target)">   
-                        <option selected [value] = "0" >See Ads in all Egypt </option>
-                        <hr class="dropdown-divider">
-                         <option [value]="C.locationId"*ngFor="let C of locations">{{C.cityName}}</option>
-                    </select>
-                </div>
-                  
-                <div class="input-group mx-2">
-
-                    <input [(ngModel)]="searchValue" (input)="OnsearchText()" type="text" class="form-control"
-                        placeholder="Find Cars, Mobile phones and More">
-                    <button (click)="OnsearchText()" class="btn btn-outline backcolor" type="submit" id="button-addon2">
-                        <img src="/assets/images/search2.png" alt="" width="20" height="20">
-                    </button>
-
-                </div>
-            </div> -->
-
-            <ul class="navbar-nav">
+    
+            <ul class="d-flex">
 
                 <li class="nav-item dropdown">
 
