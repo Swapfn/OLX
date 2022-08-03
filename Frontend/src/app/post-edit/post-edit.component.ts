@@ -33,6 +33,7 @@ export class PostEditComponent implements OnInit {
     cityName: '',
     fullName: '',
     phoneNumber: 0,
+    aboutMe:'',
     minPrice: 0,
     maxPrice: 0,
     postImage: []

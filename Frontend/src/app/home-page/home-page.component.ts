@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Post } from '../_models/post';
 import { Pagination } from '../_models/pagination'; 
 import { AccountService } from '../_services/account.service';
@@ -6,6 +6,7 @@ import { PostService } from '../_services/post.service';
 import { Location } from '../_models/location';
 import { Category } from '../_models/category';
 import { SubCategory } from '../_models/subCategory';
+import { ChildActivationEnd } from '@angular/router';
 
 
 
@@ -27,6 +28,7 @@ export class HomePageComponent implements OnInit {
     this.loadPosts();
     this.getLocations();
     this.getAllCategories();
+   
 
   }
 
@@ -51,9 +53,18 @@ export class HomePageComponent implements OnInit {
   AllPosts:Post[];
   totalRecords:number;
 
-  Today = new Date();
 
- 
+  calculatePostDays(createdAt){
+
+   let Today = new Date();
+   let mydate=new Date(createdAt);
+   let difference = Today.getTime() - mydate.getTime();
+   let TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
+   console.log(TotalDays);
+   return TotalDays;
+
+  }
+
 
   loadPosts(){
     this.postService.getAllpagination(this.filter).subscribe((response: any) => {
@@ -61,6 +72,26 @@ export class HomePageComponent implements OnInit {
       this.AllPosts = response.results;
       this.totalRecords=response.totalRecords;  
     })
+    
+  }
+
+  reloadPosts(){
+    this.filter.searchObject.categoryId
+    =this.filter.searchObject.subCategoryId
+    =this.filter.searchObject.locationId
+    =this.filter.searchObject.minPrice
+    =this.filter.searchObject.maxPrice=0;
+    this.filter.searchObject.title=this.filter.searchObject.description ="";
+
+    this.categorySelectedName=this.subcategorySelectedName=this.searchValue="";
+    this.Max.nativeElement.value=this.Min.nativeElement.value="";
+    this.location.nativeElement.value=0;
+
+    this.postService.getAllpagination(this.filter).subscribe((response: any) => {
+      console.log(response);
+      this.AllPosts = response.results;
+      this.totalRecords=response.totalRecords;  
+    }) 
 
   }
 
@@ -75,6 +106,7 @@ export class HomePageComponent implements OnInit {
   //   console.log(i);
   //   this.postService.setItemsMaually(i);
   // }
+  
   pageChanged(event:any){
     this.filter.pageNumber=event.page;
     this.loadPosts();
@@ -113,24 +145,19 @@ export class HomePageComponent implements OnInit {
   }
 
 
-  // subcategorySelected:SubCategory;
-
-  // getSubcategoryById(){
-  //   this.postService.getSubcategoryById(this.subcategorySelectedId).subscribe(s=>this.subcategorySelected=s)
-  // }
-
 
   //________________________________category filter__________________________________________
 
 
   //________________________________location filter__________________________________________
 
+
+  @ViewChild('location') location:ElementRef;
+
   onlocationSelect(event){
-    this.filter.searchObject.locationId=this.locationSelectedValue;
+    this.filter.searchObject.locationId=event.value;
     this.loadPosts();
   }
-
-  locationSelectedValue:number;
 
   locations:Location[];
 
@@ -154,6 +181,9 @@ export class HomePageComponent implements OnInit {
 
 
   //________________________________Price filter___________________________________________
+
+  @ViewChild('Min') Min:ElementRef;
+  @ViewChild('Max') Max:ElementRef;
 
   OnPriceSet(Min,Max){
     
@@ -186,9 +216,6 @@ export class HomePageComponent implements OnInit {
   //   this.PostService.setItemsMaually(i);
     
   // }
-
-
- 
 
 
   Items=

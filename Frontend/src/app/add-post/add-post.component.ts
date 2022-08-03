@@ -39,6 +39,7 @@ export class AddPostComponent implements OnInit {
     cityName: '',
     fullName: null,
     phoneNumber: null,
+    aboutMe:'',
     minPrice: 0,
     maxPrice: 0,
     categoryId: null,

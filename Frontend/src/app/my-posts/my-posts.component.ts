@@ -52,4 +52,13 @@ export class MyPostsComponent implements OnInit {
     return `https://localhost:44355/${serverPath}`; 
   }
 
+
+  totalAds:number = this.AvailablePosts.length+this.UnvailablePosts.length
+  adsPerPage:number= 20;
+
+  // pageChanged(event:any){
+  //   this.filter.pageNumber=event.page;
+  //   this.loadPosts();
+  // }
+
 }

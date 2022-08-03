@@ -18,6 +18,7 @@ subCategoryName:string;
 cityName:string;
 fullName:string;
 phoneNumber:number;
+aboutMe: string,
 minPrice:number;
 maxPrice:number;
 postImage: PostImage[];
