@@ -44,21 +44,21 @@
 
           <div class="row">
             <div class="col light d-flex">
-              <p class="me-1">Price : </p>
+              <p class="me-1 fw-bold">Price: </p>
               <p> {{Post.price}}</p>
             </div>
             <div class="col light d-flex">
-              <p class="me-1">Price Type : </p>
+              <p class="me-1 fw-bold">Price Type: </p>
               <p>{{Post.isNegotiable ? 'Negotiable' : 'Not negotiable'}}</p>
             </div>
           </div>
           <div class="row">
             <div class="col light d-flex">
-              <p class="me-1">Type : </p>
+              <p class="me-1 fw-bold">Type: </p>
               <p>{{Post.subCategoryName}}</p>
             </div>
             <div class="col light d-flex">
-              <p class="me-1">Condition : </p>
+              <p class="me-1 fw-bold">Condition: </p>
               <p>{{Post.isNew ? 'New' : 'Used'}}</p>
             </div>
           </div>
@@ -121,7 +121,7 @@
             <img src="/assets/images/telephone-call.png" class="mx-3" alt="" width="20" height="20">
             <p *ngIf="!show" class="card-text"> ** **** ***** <a class='btn text-primary' (click)="showNumber()"> Show
                 number</a></p>
-            <a *ngIf="show" href="tel:{{Post.phoneNumber}}">01202073302{{Post.phoneNumber}}</a>
+            <a *ngIf="show" href="tel:{{Post.phoneNumber}}">01102073302{{Post.phoneNumber}}</a>
           </div>
 
         </div>

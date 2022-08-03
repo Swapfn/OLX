@@ -19,9 +19,7 @@
         </label>
     </div>
 </div>
-<div style="text-align: center;">
-    <button (click)="alltrue()" style="height: 50px;font-weight: 500;width: 150px;" type="button" class="btn btn-dark mt-3">View All({{AvailablePosts.length+UnvailablePosts.length}})</button>
-</div>
+
 
 <div *ngIf="(AvailablePosts.length>0) && (available)" class="global row row-cols-2 row-cols-md-4 g-4 m-3">
     <div *ngFor="let post of AvailablePosts" class="col">
