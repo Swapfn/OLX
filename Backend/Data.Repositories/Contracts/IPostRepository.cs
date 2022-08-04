@@ -8,6 +8,7 @@ namespace Data.Repositories.Contracts
     public interface IPostRepository : IRepository<Post>
     {
         public Post GetById(int id);
+        PagedResult<Post> GetMyPosts(FilterDTO<PostDTO> FilterObject);
         PagedResult<Post> GetAll(int PageNumber, int PageSize, List<string> includes, string SortBy, string SortDirection);
         PagedResult<Post> GetAll(FilterDTO<PostDTO> FilterObject);
         bool IsExist(int id);

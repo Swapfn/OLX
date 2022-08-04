@@ -15,7 +15,7 @@ namespace Mapper.Mappers
             post.CreatedAt = postDTO.CreatedAt;
             post.Price = postDTO.Price;
             post.IsNew = postDTO.IsNew;
-            post.IsAvailable = postDTO.IsAvailable;
+            post.IsAvailable = postDTO.IsAvailable == null ? true : postDTO.IsAvailable.Value;
             post.IsNegotiable = postDTO.IsNegotiable;
             post.SubCategoryId = postDTO.SubCategoryId == null ? 0 : postDTO.SubCategoryId.Value;
             post.UserID = postDTO.UserID == null ? 0 : postDTO.UserID.Value;

@@ -102,5 +102,20 @@ namespace Services
 
             return result;
         }
+        public PagedResult<PostDTO> GetMyPosts(FilterDTO<PostDTO> filterObject)
+        {
+            List<string> Includes = new List<string>();
+            Includes.Add("SubCategory");
+            Includes.Add("User");
+            Includes.Add("Location");
+            filterObject.Includes = Includes;
+            PagedResult<Post> posts = _postRepository.GetMyPosts(filterObject);
+
+            PagedResult<PostDTO> result = new PagedResult<PostDTO>();
+            result.TotalRecords = posts.TotalRecords;
+            result.Results = posts.Results.Select(x => _postMapper.MapToDTO(x)).ToList();
+
+            return result;
+        }
     }
 }
