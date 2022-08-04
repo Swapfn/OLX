@@ -20,6 +20,7 @@ import { AddPostComponent } from './add-post/add-post.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
 import { FooterComponent } from './footer/footer.component';
 import { PostEditComponent } from './post-edit/post-edit.component';
+import { ErrorComponent } from './error/error.component';
 
 
 
@@ -38,7 +39,8 @@ import { PostEditComponent } from './post-edit/post-edit.component';
     AddPostComponent,
     PostDetailsComponent,
     FooterComponent,
-    PostEditComponent
+    PostEditComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

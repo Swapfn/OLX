@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddPostComponent } from './add-post/add-post.component';
+import { ErrorComponent } from './error/error.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { HomeComponent } from './home/home.component';
 import { MyPostsComponent } from './my-posts/my-posts.component';
@@ -24,7 +25,7 @@ const routes: Routes = [
       { path: "Postdetails/:id", component: PostDetailsComponent },
     ]
   },
-  { path: "**", component: HomeComponent, pathMatch: "full" }
+  { path: "**", component: ErrorComponent, pathMatch: "full" }
 ];
 
 @NgModule({
