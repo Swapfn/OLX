@@ -10,6 +10,7 @@ export interface Pagination{
         maxPrice: number,
         title:string,
         description:string
+        isAvailable:boolean;
     },
     pageNumber: number,          //current page
     pageSize: number,            //items per page

@@ -41,7 +41,9 @@ export class HomePageComponent implements OnInit {
       minPrice: 0,
       maxPrice: 0,
       title:"",
-      description:""
+      description:"",
+      isAvailable:true
+      
     },
     pageNumber:1,
     pageSize:20,
