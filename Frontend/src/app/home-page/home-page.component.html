@@ -1,9 +1,9 @@
 <!-- ________________________Filter Nav_________________________________ -->
 
 
-<nav class="filters navbar navbar-expand-lg bg-light pb-2 my-0">
+<nav class="filters navbar navbar-expand-xl bg-light pb-2 my-0">
 
-  <div class="container flex-lg-wrap mx-lg-5">
+  <div class="container mx-lg-5">
 
     <!-- _____Categories list________ -->
 
@@ -34,22 +34,25 @@
 
     <!-- _____Categories list________ -->
 
-    <div class="d-flex" style="height: 30px;">
-      <div class="vr"></div>
-    </div>
+  
 
     <!-- _____Location filter________ -->
 
     <div class="container-fluid d-flex">
 
-      <div>
-        <select class="form-select input-group mx-2" aria-label="Default select example"
-          (change)="onlocationSelect($event.target)" #location >
-          <option selected [value]="0">See Ads in all Egypt </option>
-          <hr class="dropdown-divider">
-          <option [value]="C.locationId" *ngFor="let C of locations">{{C.cityName}}</option>
-        </select>
+      <div class="d-flex  mx-2" style="height: 30px;">
+        <div class="vr"></div>
       </div>
+
+
+      <select class="form-select input-group px-2 mx-2" aria-label="Default select example"
+        (change)="onlocationSelect($event.target)" #location>
+        <option selected disabled> Egypt </option>
+        <option [value]="0">See Ads in all Egypt </option>
+        <hr class="dropdown-divider">
+        <option [value]="C.locationId" *ngFor="let C of locations">{{C.cityName}}</option>
+      </select>
+
 
       <!-- ________Location filter________ -->
 
@@ -62,32 +65,42 @@
           <img src="/assets/images/search2.png" alt="" width="20" height="20">
         </button>
       </div>
+
+      <div class="d-flex mx-2" style="height: 30px;">
+        <div class="vr"></div>
+      </div>
+
     </div>
     <!-- _________ Search________ -->
 
-    <div class="d-flex" style="height: 30px;">
-      <div class="vr"></div>
-    </div>
+ 
 
     <!-- _____Price filter_______ -->
 
-    <form class="d-flex justify-content-around mx-3">
-      <div class="me-1">
-        <input type="number" min="10" step="10" name="filter.searchObject.minPrice" #Min placeholder="Min Price"
-          class="form-control">
-      </div>
+    <div class="container-fluid my-2 p-0">
 
-      <div class="mx-1">
-        <input type="number" min="10" step="10" name="filter.searchObject.maxPrice" #Max placeholder="Max Price"
-          class="form-control">
-      </div>
+      <form class="d-flex justify-content-center ">
 
-      <button (click)="OnPriceSet(Min.value,Max.value)" class="btn btn-outline backcolor" type="submit"
-        id="button-addon2">
-        <img src="/assets/images/search2.png" alt="" width="20" height="20">
-      </button>
+        <div class="me-1">
+          <input type="number" min="10" step="10" name="filter.searchObject.minPrice" #Min placeholder="Min Price"
+            class="form-control">
+        </div>
+  
+        <div class="mx-1">
+          <input type="number" min="10" step="10" name="filter.searchObject.maxPrice" #Max placeholder="Max Price"
+            class="form-control">
+        </div>
+  
+        <button (click)="OnPriceSet(Min.value,Max.value)" class="btn btn-outline backcolor" type="submit"
+          id="button-addon2">
+          <img src="/assets/images/search2.png" alt="" width="20" height="20">
+        </button>
+  
+      </form>
 
-    </form>
+    </div>
+
+  
     <!-- _____Price filter_______ -->
 
   </div>
@@ -171,13 +184,13 @@
               "></i>
             </div> -->
           </div>
-          <div class="d-flex align-items-center mb-5">
-            <h4 class="card-title ">{{ post.price }} EGP</h4>
+          <div class="d-flex flex-wrap align-items-center mb-5">
+            <h4 class="card-title text-nowrap">{{ post.price }} EGP</h4>
             <small class="card-text text-muted mx-2" *ngIf="post.isNegotiable">negotaitable</small>
           </div>
-          <p class="card-text d-flex justify-content-between">
+          <p class="card-text d-flex flex-wrap justify-content-between">
             <small class="text-muted">{{ post.cityName }},Egypt</small>
-            <small class="text-muted" >{{calculatePostDays(post.createdAt)}} Days ago</small>
+            <small class="text-muted">{{calculatePostDays(post.createdAt)}} Days ago</small>
           </p>
           <a href="#" routerLink="/Postdetails/{{post.postId}}" class=" stretched-link"></a>
         </div>
