@@ -1,0 +1,9 @@
+<div *ngIf="(accountService.currentUser$ | async)===null">
+    <button routerLink="/">Return to Home Page</button>
+</div>
+
+<div *ngIf="(accountService.currentUser$ | async)">
+    <button routerLink="/home">Return to Home Page</button>
+</div>
+
+

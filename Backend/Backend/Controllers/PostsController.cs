@@ -121,12 +121,31 @@ namespace WepAPI.Controllers
         [Route("")]
         public IActionResult GetAll(FilterDTO<PostDTO> filterObject)
         {
-            PagedResult<PostDTO> postDTO = _postService.GetAll(filterObject);
             //if no search is applied
             if (filterObject.SearchObject == null)
             {
                 filterObject.SearchObject = new PostDTO();
             }
+            PagedResult<PostDTO> postDTO = _postService.GetAll(filterObject);
+
+            return Ok(postDTO);
+        }
+
+        [HttpPost]
+        [Route("myPosts")]
+        public async Task<IActionResult> GetMyPosts(FilterDTO<PostDTO> filterObject)
+        {
+            //if no search is applied
+            if (filterObject.SearchObject == null)
+            {
+                filterObject.SearchObject = new PostDTO();
+            }
+
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            var user = await _userService.GetUserByIdAsync(identity);
+            filterObject.SearchObject.UserID = user.Id;
+            PagedResult<PostDTO> postDTO = _postService.GetAll(filterObject);
+
             return Ok(postDTO);
         }
     }
