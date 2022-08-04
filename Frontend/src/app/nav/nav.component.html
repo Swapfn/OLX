@@ -43,12 +43,12 @@
 
             <div class="d-flex align-items-center ">
                 <form #loginForm="ngForm" class="d-flex mx-5" (ngSubmit)="login()" autocomplete="off">
-                    <input required name="username" [(ngModel)]="model.username" class="form-control me-2" type="text"
+                    <input  required name="username" #username [(ngModel)]="model.username" class="form-control me-2" type="text"
                         placeholder="Username" id="username">
-                    <input required name="password" [(ngModel)]="model.password" class="form-control me-2" type="password"
+                    <input  required name="password" #password [(ngModel)]="model.password" class="form-control me-2" type="password"
                         placeholder="Password" id="password">
                     <button [disabled]="loginForm.invalid" class="btn btn-outline-dark" type="submit">Login</button>
-
+                    
                 </form>
 
                 <div>

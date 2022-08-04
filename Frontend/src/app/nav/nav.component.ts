@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef} from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
@@ -17,6 +17,8 @@ import { Location } from '../_models/location';
 export class NavComponent implements OnInit {
   model: any = {};
   currentUser$: Observable<Token>;
+
+ 
 
   constructor(public postService:PostService, public accountService: AccountService, private router: Router, private toast: ToastrService) {
     
@@ -45,6 +47,8 @@ export class NavComponent implements OnInit {
     this.model.username="";
     this.model.password="";
   }
+
+  
 
 
 
