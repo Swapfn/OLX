@@ -57,6 +57,7 @@ namespace Services
         }
         public void Update(int id, PostDTO postDTO)
         {
+
             _postRepository.Update(id, _postMapper.MapFromDTO(postDTO));
         }
         public void Delete(int id)
@@ -93,6 +94,7 @@ namespace Services
             Includes.Add("SubCategory");
             Includes.Add("User");
             Includes.Add("Location");
+            Includes.Add("PostImages");
             filterObject.Includes = Includes;
             PagedResult<Post> posts = _postRepository.GetAll(filterObject);
 
@@ -108,6 +110,8 @@ namespace Services
             Includes.Add("SubCategory");
             Includes.Add("User");
             Includes.Add("Location");
+            Includes.Add("PostImages");
+
             filterObject.Includes = Includes;
             PagedResult<Post> posts = _postRepository.GetMyPosts(filterObject);
 

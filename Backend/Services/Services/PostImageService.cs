@@ -17,20 +17,20 @@ namespace Services.Services
     public class PostImageService : IPostImageService
     {
         private readonly IPostImageRepository _postimageRepository;
-        private readonly IPostImageMapper _postimageMapper;
+        private readonly IPostMapper _postMapper;
         private readonly IUnitOfWork _unitOfWork;
 
-        public PostImageService(IPostImageRepository postimageRepository, IPostImageMapper postimageMapper, IUnitOfWork unitOfWork)
+        public PostImageService(IPostImageRepository postimageRepository, IPostMapper postMapper, IUnitOfWork unitOfWork)
         {
             _postimageRepository = postimageRepository;
-            _postimageMapper = postimageMapper;
+            _postMapper = postMapper;
             _unitOfWork = unitOfWork;
         }
         public PostImageDTO Add(PostImageDTO postimageDTO)
         {
-            var postimage = _postimageMapper.MapFromDTO(postimageDTO);
+            var postimage = _postMapper.MapPostImageFromDTO(postimageDTO);
             PostImage addedPostImage = _postimageRepository.Add(postimage);
-            PostImageDTO result = _postimageMapper.MapToDTO(addedPostImage);
+            PostImageDTO result = _postMapper.MapPostImageToDTO(addedPostImage);
             return result;
         }
 
@@ -43,20 +43,20 @@ namespace Services.Services
         public IEnumerable<PostImageDTO> GetAll()//all images of all posts
         {
             IEnumerable<PostImage> postimages = _postimageRepository.GetAll();
-            IEnumerable<PostImageDTO> postimagesDTO = postimages.Select(postimage => _postimageMapper.MapToDTO(postimage));
+            IEnumerable<PostImageDTO> postimagesDTO = postimages.Select(postimage => _postMapper.MapPostImageToDTO(postimage));
             return postimagesDTO;
         }
 
         public PostImageDTO GetById(int id)
         {
             PostImage postimage = _postimageRepository.GetById(id);
-            PostImageDTO postimageDTO = _postimageMapper.MapToDTO(postimage);
+            PostImageDTO postimageDTO = _postMapper.MapPostImageToDTO(postimage);
             return postimageDTO;
         }
 
         public void Update(int id, PostImageDTO postimageDTO)
         {
-            PostImage postimage = _postimageMapper.MapFromDTO(postimageDTO);
+            PostImage postimage = _postMapper.MapPostImageFromDTO(postimageDTO);
             _postimageRepository.Update(id, postimage);
         }
         public bool ImageExists(int id)
@@ -72,7 +72,7 @@ namespace Services.Services
         public IEnumerable<PostImageDTO> GetAll(int id)
         {
             IEnumerable<PostImage> postimages = _postimageRepository.GetAll(id);
-            IEnumerable<PostImageDTO> postimagesDTO = postimages.Select(postimage => _postimageMapper.MapToDTO(postimage));
+            IEnumerable<PostImageDTO> postimagesDTO = postimages.Select(postimage => _postMapper.MapPostImageToDTO(postimage));
             return postimagesDTO;
         }
 

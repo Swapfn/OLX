@@ -7,5 +7,8 @@ namespace Mapper.Contracts
     {
         Post MapFromDTO(PostDTO postDTO);
         PostDTO MapToDTO(Post post);
+
+        PostImage MapPostImageFromDTO(PostImageDTO postimageDTO);
+        PostImageDTO MapPostImageToDTO(PostImage postimage);
     }
 }
