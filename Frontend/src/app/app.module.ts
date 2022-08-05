@@ -50,7 +50,6 @@ import { ErrorComponent } from './error/error.component';
     FormsModule,
     SharedModule,
     
- 
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass:JwtInterceptor, multi:true}

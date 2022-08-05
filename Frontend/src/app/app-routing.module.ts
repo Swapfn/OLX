@@ -23,6 +23,7 @@ const routes: Routes = [
       { path: "PostEdit/:id", component: PostEditComponent },
       { path: "Addpost", component: AddPostComponent },
       { path: "Postdetails/:id", component: PostDetailsComponent },
+      
     ]
   },
   { path: "**", component: ErrorComponent, pathMatch: "full" }
