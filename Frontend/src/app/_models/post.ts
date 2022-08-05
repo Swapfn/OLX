@@ -21,5 +21,5 @@ phoneNumber:number;
 aboutMe: string,
 minPrice:number;
 maxPrice:number;
-PostImages: PostImage[];
+postImages: PostImage[];
 }

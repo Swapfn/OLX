@@ -43,7 +43,7 @@ export class AddPostComponent implements OnInit {
     minPrice: 0,
     maxPrice: 0,
     categoryId: null,
-    PostImages: []
+    postImages: []
   };
   uploader: FileUploader;
   hasBaseDropzoneOver = false;
@@ -99,7 +99,7 @@ export class AddPostComponent implements OnInit {
     for (var path of this.dbPaths) {
       let image: any={};
       image.imageURL = path;
-      this.post.PostImages.push(image);
+      this.post.postImages.push(image);
     }
     console.log(this.post);
     this.postService.addPost(this.post).subscribe({
@@ -146,7 +146,7 @@ export class AddPostComponent implements OnInit {
       this.http.post('https://localhost:44355/PostImage', this.post)
         .subscribe((event: any) => {
           if (event.type === HttpEventType.Response) {
-            this.post.PostImages.push(image);
+            this.post.postImages.push(image);
           }
         });
       // this.post.postImage.push(image);

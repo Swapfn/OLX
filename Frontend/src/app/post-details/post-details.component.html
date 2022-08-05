@@ -7,18 +7,17 @@
       <!-- ________________________________Slide show card________________________________________ -->
       <div class="card" style="width: 100%;">
 
+
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
 
-            
-            <div> <img active="true" [src]="createImgPath(Post)" class="c-img" /> </div>
-
-            <div class="carousel-item active" *ngFor="let ph of Post.PostImages let i = index"
-              [ngClass]="{'active': i == 0 }">
-              <!-- <img [src]="createImgPath(ph,i)" class="c-img" /> -->
+            <div class="carousel-item active" *ngFor="let _ of [].constructor(numberOfImages); let i=index" 
+            [ngClass]="{'active': i == 0 }" >
+              <img [src]="createImgPath(Post,i)" class="c-img"/> 
             </div>
 
           </div>
+          
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
             data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>

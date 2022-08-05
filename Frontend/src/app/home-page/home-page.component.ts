@@ -94,8 +94,8 @@ export class HomePageComponent implements OnInit {
   }
 
   imagepath:any;
-  createImgPath(serverPath: any){ 
-    this.imagepath = (serverPath.postImages[0].imageURL);
+  createImgPath(post: any){ 
+    this.imagepath = (post.postImages[0].imageURL);
     if(!this.imagepath.includes("webp"))
     {
       const re = /\\/gi;

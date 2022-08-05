@@ -21,18 +21,25 @@ export class PostDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadPost();
-    
+     
   }
 
   Post:Post;
+  numberOfImages:number;
 
   loadPost(){
-   this.PostService.getPost(this.id).subscribe(p=>{this.Post=p;});
+   this.PostService.getPost(this.id).subscribe(p=>{
+     this.Post=p;
+     this.numberOfImages = this.Post.postImages.length;
+     console.log(this.numberOfImages);
+    });
+
   }
 
+
   imagepath:any;
-  createImgPath(serverPath: any){ 
-    this.imagepath = (serverPath.postImages[0].imageURL);
+  createImgPath(post: any,i:number){ 
+    this.imagepath = (post.postImages[i].imageURL);
     if(!this.imagepath.includes("webp"))
     {
       const re = /\\/gi;
