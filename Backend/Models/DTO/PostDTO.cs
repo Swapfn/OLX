@@ -11,7 +11,7 @@ namespace Models.DTO
         public double Price { set; get; }
         public bool IsNew { set; get; }
         public bool IsNegotiable { set; get; }
-        public bool IsAvailable { get; set; }
+        public bool? IsAvailable { get; set; }
         public int? SubCategoryId { set; get; }
         public int? LocationId { set; get; }
         public int? UserID { set; get; }
@@ -23,6 +23,11 @@ namespace Models.DTO
         public int? minPrice { get; set; }
         public int? maxPrice { get; set; }
         public int? CategoryId { get; set; }
-        public List<PostImage>? PostImages { set; get; }
+        public List<PostImageDTO> PostImages { set; get; }
+
+        public PostDTO()
+        {
+            PostImages = new List<PostImageDTO>();
+        }
     }
 }

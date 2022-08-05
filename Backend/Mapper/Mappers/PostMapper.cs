@@ -15,11 +15,16 @@ namespace Mapper.Mappers
             post.CreatedAt = postDTO.CreatedAt;
             post.Price = postDTO.Price;
             post.IsNew = postDTO.IsNew;
-            post.IsAvailable = postDTO.IsAvailable;
+            post.IsAvailable = postDTO.IsAvailable == null ? true : postDTO.IsAvailable.Value;
             post.IsNegotiable = postDTO.IsNegotiable;
             post.SubCategoryId = postDTO.SubCategoryId == null ? 0 : postDTO.SubCategoryId.Value;
             post.UserID = postDTO.UserID == null ? 0 : postDTO.UserID.Value;
             post.LocationId = postDTO.LocationId == null ? 0 : postDTO.LocationId.Value;
+            if (postDTO.PostImages != null)
+            {
+                List<PostImage> postImages = postDTO.PostImages.Select(postImageDTO => MapPostImageFromDTO(postImageDTO)).ToList();
+                post.PostImages = postImages;
+            }
             return post;
         }
 
@@ -51,7 +56,30 @@ namespace Mapper.Mappers
             if (post.Location != null)
                 postDTO.CityName = post.Location.CityName;
 
+            if (post.PostImages != null)
+            {
+                List<PostImageDTO> postImageDTOs = post.PostImages.Select(postImage => MapPostImageToDTO(postImage)).ToList();
+                postDTO.PostImages = postImageDTOs;
+            }
             return postDTO;
+        }
+
+        public PostImage MapPostImageFromDTO(PostImageDTO postimageDTO)
+        {
+            PostImage postimage = new PostImage();
+            postimage.PostImageID = postimageDTO.PostImageID;
+            postimage.ImageURL = postimageDTO.ImageURL;
+            postimage.PostId = postimageDTO.PostId;
+            return postimage;
+        }
+
+        public PostImageDTO MapPostImageToDTO(PostImage postimage)
+        {
+            PostImageDTO postimageDTO = new PostImageDTO();
+            postimageDTO.PostImageID = postimage.PostImageID;
+            postimageDTO.ImageURL = postimage.ImageURL;
+            postimageDTO.PostId = postimage.PostId;
+            return postimageDTO;
         }
     }
 }

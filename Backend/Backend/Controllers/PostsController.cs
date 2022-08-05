@@ -144,7 +144,7 @@ namespace WepAPI.Controllers
             var identity = HttpContext.User.Identity as ClaimsIdentity;
             var user = await _userService.GetUserByIdAsync(identity);
             filterObject.SearchObject.UserID = user.Id;
-            PagedResult<PostDTO> postDTO = _postService.GetAll(filterObject);
+            PagedResult<PostDTO> postDTO = _postService.GetMyPosts(filterObject);
 
             return Ok(postDTO);
         }

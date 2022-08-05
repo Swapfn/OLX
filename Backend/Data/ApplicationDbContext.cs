@@ -46,6 +46,8 @@ namespace Data
             modelBuilder.ApplyConfiguration(new SubCategoryConfiguration());
             modelBuilder.ApplyConfiguration(new LocationConfiguration());
             modelBuilder.ApplyConfiguration(new PostsConfiguration());
+            modelBuilder.ApplyConfiguration(new ImagesConfiguration());
+
 
         }
         public void Commit()

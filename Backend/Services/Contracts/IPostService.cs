@@ -14,5 +14,6 @@ namespace Services
         void SavePost();
         string Validate(PostDTO postDTO);
         PagedResult<PostDTO> GetAll(FilterDTO<PostDTO> filterObject);
+        PagedResult<PostDTO> GetMyPosts(FilterDTO<PostDTO> filterObject);
     }
 }
