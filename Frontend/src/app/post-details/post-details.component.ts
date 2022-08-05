@@ -30,8 +30,19 @@ export class PostDetailsComponent implements OnInit {
    this.PostService.getPost(this.id).subscribe(p=>{this.Post=p;});
   }
 
-  createImgPath = (serverPath: any) => { 
-    return `https://localhost:44355/${serverPath}`; 
+  imagepath:any;
+  createImgPath(serverPath: any){ 
+    this.imagepath = (serverPath.postImages[0].imageURL);
+    if(!this.imagepath.includes("webp"))
+    {
+      const re = /\\/gi;
+      let newpath = this.imagepath.replace(re, "/");
+      let path = `https://localhost:44355/${newpath}`;
+      return path;
+    } else 
+    {
+      return this.imagepath;
+    } 
   }
 
   calculatePostDays(createdAt){

@@ -34,7 +34,7 @@
 
     <!-- _____Categories list________ -->
 
-  
+
 
     <!-- _____Location filter________ -->
 
@@ -73,7 +73,7 @@
     </div>
     <!-- _________ Search________ -->
 
- 
+
 
     <!-- _____Price filter_______ -->
 
@@ -85,22 +85,22 @@
           <input type="number" min="10" step="10" name="filter.searchObject.minPrice" #Min placeholder="Min Price"
             class="form-control">
         </div>
-  
+
         <div class="mx-1">
           <input type="number" min="10" step="10" name="filter.searchObject.maxPrice" #Max placeholder="Max Price"
             class="form-control">
         </div>
-  
+
         <button (click)="OnPriceSet(Min.value,Max.value)" class="btn btn-outline backcolor" type="submit"
           id="button-addon2">
           <img src="/assets/images/search2.png" alt="" width="20" height="20">
         </button>
-  
+
       </form>
 
     </div>
 
-  
+
     <!-- _____Price filter_______ -->
 
   </div>
@@ -160,18 +160,17 @@
 <div *ngIf="totalRecords != 0">
 
   <!-- ________________________Using API_________________________________ -->
-
   <div class="global row row-cols-2 row-cols-md-4 g-4 m-3">
-    <div *ngFor="let post of AllPosts" class="col">
+    <div *ngFor="let post of AllPosts " class="col">
+      <!-- <a class="btn btn-primary" (click)="createImgPath(post)">a</a> -->
       <div class="card h-100">
+        <!-- <div  class="card-img-wrapper">
+          <img src="{{post.PostImages[0].imageURL}}" class="card-img-top" alt="{{ post.title}}" />
+        </div>  -->
         <div class="card-img-wrapper">
-          <img *ngIf="post.PostImages==undefined" src="/assets/images/placeholder-rgb.jpg" class="card-img-top"
-            alt="{{ post.title}}" />
-
-          <img *ngIf="post.PostImages!=undefined" [src]="createImgPath(post.PostImages[0].imageURL)" class="card-img-top"
+          <img [src]="createImgPath(post)" class="card-img-top"
             alt="{{ post.title}}" />
         </div>
-
 
         <div class="card-body">
           <div class="d-flex align-items-start justify-content-between">

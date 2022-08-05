@@ -28,8 +28,6 @@ export class HomePageComponent implements OnInit {
     this.loadPosts();
     this.getLocations();
     this.getAllCategories();
-   
-
   }
 
 
@@ -73,7 +71,6 @@ export class HomePageComponent implements OnInit {
       this.AllPosts = response.results;
       this.totalRecords=response.totalRecords;  
     })
-    
   }
 
   reloadPosts(){
@@ -96,9 +93,21 @@ export class HomePageComponent implements OnInit {
 
   }
 
-  createImgPath = (serverPath: any) => { 
-    return `https://localhost:44355/${serverPath}`; 
+  imagepath:any;
+  createImgPath(serverPath: any){ 
+    this.imagepath = (serverPath.postImages[0].imageURL);
+    if(!this.imagepath.includes("webp"))
+    {
+      const re = /\\/gi;
+      let newpath = this.imagepath.replace(re, "/");
+      let path = `https://localhost:44355/${newpath}`;
+      return path;
+    } else 
+    {
+      return this.imagepath;
+    } 
   }
+
 
 
 
