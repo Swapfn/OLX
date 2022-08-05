@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Post } from '../_models/post';
 import { PostService } from '../_services/post.service';
+import { AdsPagination } from'../_models/AdsPagination';
+
 
 @Component({
   selector: 'app-my-posts',
@@ -13,29 +15,31 @@ export class MyPostsComponent implements OnInit {
   unavailable: boolean;
   AvailablePosts: Post[]= [];
   UnvailablePosts: Post[]= [];
+  AllPosts:Post[];
+  totalRecords:number;
+
+
+  Adsfilter:AdsPagination={
+    searchObject:{
+  
+      isAvailable:null
+      
+    },
+    pageNumber:1,
+    pageSize:20,
+    sortBy:"createdAt",
+    sortDirection:"dec"
+  }
 
   constructor(private http: HttpClient, private postService: PostService) { }
 
   ngOnInit(): void {
     this.getAvAds();
     this.getUnAvAds();
+    this.getAllMyAds()
   }
 
-  Items =
-    [
-      {
-        OwnerId: 1, Id: 12, type: "", title: "DeLonghi airfryer multifry FH1173 Digital", describtion: "", price: "5200", nego_Price: true, city: "Alexandria", area: "Agami",
-        photo: [
-          { src: "/assets/images/id1/airfryer.jpg" },
-          { src: "/assets/images/id1/3085.jpg" },
-          { src: "/assets/images/id1/3086.jpg" },
-          { src: "/assets/images/id1/3087.jpg" },
-          { src: "/assets/images/id1/3089.jpg" }
-        ]
-        , condition: "used", available: true
-      }
-    ]
-
+  
   getAvAds() {
     this.postService.getMyAvailableAds().subscribe(posts => this.AvailablePosts=posts);
   }
@@ -48,16 +52,23 @@ export class MyPostsComponent implements OnInit {
     this.available = this.unavailable = true;
   }
 
+  getAllMyAds(){
+    this.postService.getAllMyAds(this.Adsfilter).subscribe((response: any) => {
+      console.log(response);
+      this.AllPosts = response.results;
+      this.totalRecords=response.totalRecords;
+    })
+  }
+
   createImgPath = (serverPath: any) => { 
     return `https://localhost:44355/${serverPath}`; 
   }
 
 
-  totalAds:number = this.AvailablePosts.length+this.UnvailablePosts.length
-  adsPerPage:number= 20;
+ 
 
   // pageChanged(event:any){
-  //   this.filter.pageNumber=event.page;
+  //   this.Adsfilter.pageNumber=event.page;
   //   this.loadPosts();
   // }
 

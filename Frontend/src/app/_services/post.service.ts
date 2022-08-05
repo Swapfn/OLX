@@ -7,6 +7,7 @@ import { Post } from '../_models/post';
 import { Pagination } from '../_models/pagination';
 import { NavComponent } from '../nav/nav.component';
 import { SubCategory } from '../_models/subCategory';
+import { AdsPagination } from '../_models/AdsPagination';
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +55,10 @@ export class PostService {
     return this.http.get<Post[]>(this.baseUrl + "getunavailableposts/");
   }
 
+  getAllMyAds(adsfilter:AdsPagination){
+    return this.http.post(this.baseUrl+'Posts/myPosts',adsfilter);
+  }
+
   deletePost(postId: number) {
     return this.http.delete(this.baseUrl + "posts/"+postId);
   }
@@ -65,23 +70,6 @@ export class PostService {
   getSubcategoryByCategoryId(id:string){
     return this.http.get<SubCategory[]>(this.baseUrl+"SubCategories/getByCategoryId/"+id);
   }
-
-
-
-  //  Item:object;
-
-  //  setItemsMaually(I:object){
-  //   this.Item=I;
-  //   console.log("from set Service");
-  //   console.log(I);
-  //  }
-
-  //  getItemsMaually(){
-  //   console.log("from get Service");
-  //   return this.Item;
-  //   return this.http.get<Location[]>(this.baseUrl+'locations/');
-    
-  // }
 
   getAllpagination(filter:Pagination){
     return this.http.post(this.baseUrl+'Posts',filter);
