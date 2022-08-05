@@ -24,7 +24,7 @@
 <div *ngIf="(AvailablePosts.length>0) && (available)" class="global row row-cols-2 row-cols-md-4 g-4 m-3">
     <div *ngFor="let post of AvailablePosts" class="col">
         <div class="card h-100">
-            <!-- <img [src]="createImgPath(post.postImage[0].imageURL)" class="card-img-top" alt="{{post.title}}" /> -->
+            <!-- <img [src]="createImgPath(post.PostImages[0].imageURL)" class="card-img-top" alt="{{post.title}}" /> -->
             <div></div>
             <div class="card-body">
                 <div class="d-flex  align-items-start">
@@ -55,7 +55,7 @@
 <div *ngIf="(UnvailablePosts.length>0) && (unavailable)" class="global row row-cols-2 row-cols-md-4 g-4 m-3">
     <div *ngFor="let post of UnvailablePosts" class="col">
         <div class="unavailable card h-100">
-            <!-- <img [src]="createImgPath(post.postImage[0].imageURL)" class="card-img-top" alt="{{ post.title }}" /> -->
+            <!-- <img [src]="createImgPath(post.PostImages[0].imageURL)" class="card-img-top" alt="{{ post.title }}" /> -->
             <div></div>
             <div class="card-body">
                 <div class="d-flex align-items-start">

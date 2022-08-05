@@ -36,7 +36,7 @@ export class PostEditComponent implements OnInit {
     aboutMe:'',
     minPrice: 0,
     maxPrice: 0,
-    postImage: []
+    PostImages: []
   }
   modalRef?: BsModalRef; //for the ngx-bootstrap modal
   

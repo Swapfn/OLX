@@ -10,12 +10,12 @@
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
 
-            <div *ngIf="Post.postImage==undefined" class="carousel-item active">
+            <div *ngIf="Post.PostImages==undefined" class="carousel-item active">
               <img active="true" src="/assets/images/placeholder-rgb.jpg" class="c-img" />
             </div>
 
-            <div *ngIf="Post.postImage!=undefined">
-              <div class="carousel-item active" *ngFor="let ph of Post.postImage let i = index"
+            <div *ngIf="Post.PostImages!=undefined">
+              <div class="carousel-item active" *ngFor="let ph of Post.PostImages let i = index"
                 [ngClass]="{'active': i == 0 }">
                 <img [src]="createImgPath(ph.imageURL)" class="c-img" />
               </div>

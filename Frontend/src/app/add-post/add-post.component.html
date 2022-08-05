@@ -1,7 +1,7 @@
 <h5 style="text-align: center;" class="m-3 fw-bolder">POST YOUR AD</h5>
 <div class="container border mt-3">
     <h5 class="m-3 fw-bolder">INCLUDE SOME DETAILS</h5>
-    <form #AddPostForm="ngForm" (ngSubmit)="addPost()" class="d-flex flex-column mx-3">
+    <form #AddPostForm="ngForm" (ngSubmit)="onUpload()" class="d-flex flex-column mx-3">
         <h6>Ad title</h6>
         <input required name="title" [(ngModel)]="post.title" style="height: 50px;color: black;" maxlength="70"
             type="text">
@@ -82,8 +82,8 @@
         <hr>
         <div class="row mt-3">
             <input type="file" placeholder="Choose file" (change)="onFileSelected($event)" multiple>
-            <input type="button" class="btn btn-dark mt-3 ms-2"
-            style="height: 50px;font-weight: 500;width: 100px;border-radius: 3px;" value="upload" (click)="onUpload()">
+            <!-- <input type="button" class="btn btn-dark mt-3 ms-2"
+            style="height: 50px;font-weight: 500;width: 100px;border-radius: 3px;" value="upload" (click)="onUpload()"> -->
 
             <!-- <div class="col-md-3">
 
@@ -148,7 +148,8 @@
             </div> -->
 
             <div>
-                <button [disabled]="AddPostForm.invalid" type="submit" class="btn btn-dark mb-4"
+                <!-- <button [disabled]="AddPostForm.invalid" type="submit" class="btn btn-dark mb-4" -->
+                <button type="submit" class="btn btn-dark mb-4"
                     style="float: right;height: 50px;font-weight: 500;">Add Post</button>
             </div>
         </div>
