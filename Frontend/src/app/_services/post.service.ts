@@ -56,7 +56,7 @@ export class PostService {
   }
 
   getAllMyAds(adsfilter:AdsPagination){
-    return this.http.post(this.baseUrl+'Posts/myPosts',adsfilter);
+    return this.http.post(this.baseUrl+"Posts/myPosts",adsfilter);
   }
 
   deletePost(postId: number) {
